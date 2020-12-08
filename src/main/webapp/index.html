@@ -1,5 +1,23 @@
 <html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="resources/style.css">
+    <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.css">
+    <script src="resources/bootstrap/js/bootstrap.js"></script>
+    <script src="resources/jQuery/jquery-3.5.1.min.js"></script>
+    <title>欢迎使用Chiron喀戎在线作业管理</title>
+
+</head>
 <body>
-<h2>Hello World!</h2>
+    <div id="mainContent" class="container">
+        <h1>Chiron喀戎在线作业管理</h1>
+        <form>
+            <input name="group" type="radio" value="st">学生/教师
+            <input name="group" type="radio" value="ad">管理员<br>
+            账户名：<input id="username" name="username" type="text" placeholder="学号/教职工号"><br>
+            密码：<input id="password" name="password" type="text"><br>
+        </form>
+        <button type="button" class="btn btn-primary">登录</button><br>
+    </div>
 </body>
 </html>
