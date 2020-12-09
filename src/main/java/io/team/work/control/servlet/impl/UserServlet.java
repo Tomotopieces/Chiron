@@ -16,9 +16,7 @@ import java.io.IOException;
  */
 @WebServlet("user.do")
 public class UserServlet {
-    private static final AdminDao ADMIN_DAO = AdminDao.getInstance();
-    private static final TeacherDao TEACHER_DAO = TeacherDao.getInstance();
-    private static final StudentDao STUDENT_DAO = StudentDao.getInstance();
+    private static final UserDao USER_DAO = UserDao.getInstance();
 
     /**
      * 登录.
@@ -29,20 +27,16 @@ public class UserServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        UserDAO userDAO;
         String spacePage;
         Integer role = UserUtil.roleCheck(username);
         switch (role) {
             case UserUtil.ADMIN_ACCOUNT:
-                userDAO = ADMIN_DAO;
                 spacePage = UserUtil.ADMIN_SPACE;
                 break;
             case UserUtil.TEACHER_ACCOUNT:
-                userDAO = TEACHER_DAO;
                 spacePage = UserUtil.TEACHER_SPACE;
                 break;
             case UserUtil.STUDENT_ACCOUNT:
-                userDAO = STUDENT_DAO;
                 spacePage = UserUtil.STUDENT_SPACE;
                 break;
             default: // 非法用户名
@@ -50,8 +44,8 @@ public class UserServlet {
                 return;
         }
 
-        if (userDAO.login(username, password)) { // 如果登陆成功
-            request.getSession().setAttribute("user", userDAO.getUserByUsername(username));
+        if (USER_DAO.login(username, password)) { // 如果登陆成功
+            request.getSession().setAttribute("user", USER_DAO.getUserByUsername(username));
             response.sendRedirect("/Chiron/" + spacePage);
         } else {
             response.getWriter().write("Login failed");
@@ -92,6 +86,7 @@ public class UserServlet {
         String newPassword = request.getParameter("newPassword");
         User user = (User) request.getSession().getAttribute("user");
         user.setPassword(newPassword);
-
+        request.getSession().setAttribute("user", user);
+        USER_DAO.update(user.getId(), "password", newPassword);
     }
 }
