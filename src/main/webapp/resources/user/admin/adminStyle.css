@@ -1,0 +1,11 @@
+#classData,#teacherDate,#studentDate,#noticeDate,#messageDate{
+    text-align: center;
+    display: none;
+}
+#classData{
+    display: block;
+}
+.sulDiv{
+    float: left;
+    width: 20%;
+}
