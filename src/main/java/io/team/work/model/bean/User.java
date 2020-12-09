@@ -22,72 +22,64 @@ public class User {
         return id;
     }
 
-    public User setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
-        return this;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public User setUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
-        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public User setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
-        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public User setName(String name) {
+    public void setName(String name) {
         this.name = name;
-        return this;
     }
 
     public String getSex() {
         return sex;
     }
 
-    public User setSex(String sex) {
+    public void setSex(String sex) {
         this.sex = sex;
-        return this;
     }
 
     public Integer getAge() {
         return age;
     }
 
-    public User setAge(Integer age) {
+    public void setAge(Integer age) {
         this.age = age;
-        return this;
     }
 
     public String getClass_id() {
         return class_id;
     }
 
-    public User setClass_id(String class_id) {
+    public void setClass_id(String class_id) {
         this.class_id = class_id;
-        return this;
     }
 
     public Integer getType() {
         return type;
     }
 
-    public User setType(Integer type) {
+    public void setType(Integer type) {
         this.type = type;
-        return this;
     }
 
     @Override

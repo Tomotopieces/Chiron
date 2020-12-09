@@ -21,45 +21,40 @@ public class Homework {
         return id;
     }
 
-    public Homework setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
-        return this;
     }
 
     public Integer getTeacher_id() {
         return teacher_id;
     }
 
-    public Homework setTeacher_id(Integer teacher_id) {
+    public void setTeacher_id(Integer teacher_id) {
         this.teacher_id = teacher_id;
-        return this;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public Homework setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
-        return this;
     }
 
     public String getDescribe() {
         return describe;
     }
 
-    public Homework setDescribe(String describe) {
+    public void setDescribe(String describe) {
         this.describe = describe;
-        return this;
     }
 
     public String getEnd_time() {
         return end_time;
     }
 
-    public Homework setEnd_time(String end_time) {
+    public void setEnd_time(String end_time) {
         this.end_time = end_time;
-        return this;
     }
 
     @Override

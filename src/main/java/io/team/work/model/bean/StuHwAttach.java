@@ -18,36 +18,32 @@ public class StuHwAttach {
         return id;
     }
 
-    public StuHwAttach setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
-        return this;
     }
 
     public Integer getStu_hw_id() {
         return stu_hw_id;
     }
 
-    public StuHwAttach setStu_hw_id(Integer stu_hw_id) {
+    public void setStu_hw_id(Integer stu_hw_id) {
         this.stu_hw_id = stu_hw_id;
-        return this;
     }
 
     public String getType() {
         return type;
     }
 
-    public StuHwAttach setType(String type) {
+    public void setType(String type) {
         this.type = type;
-        return this;
     }
 
     public String getUrl() {
         return url;
     }
 
-    public StuHwAttach setUrl(String url) {
+    public void setUrl(String url) {
         this.url = url;
-        return this;
     }
 
     @Override

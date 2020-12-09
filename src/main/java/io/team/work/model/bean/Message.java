@@ -18,36 +18,32 @@ public class Message {
         return id;
     }
 
-    public Message setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
-        return this;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public Message setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
-        return this;
     }
 
     public String getContent() {
         return content;
     }
 
-    public Message setContent(String content) {
+    public void setContent(String content) {
         this.content = content;
-        return this;
     }
 
     public String getCreate_time() {
         return create_time;
     }
 
-    public Message setCreate_time(String create_time) {
+    public void setCreate_time(String create_time) {
         this.create_time = create_time;
-        return this;
     }
 
     @Override

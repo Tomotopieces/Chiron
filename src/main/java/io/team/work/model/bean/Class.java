@@ -17,27 +17,24 @@ public class Class {
         return id;
     }
 
-    public Class setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
-        return this;
     }
 
     public String getClassNo() {
         return classNo;
     }
 
-    public Class setClassNo(String classNo) {
+    public void setClassNo(String classNo) {
         this.classNo = classNo;
-        return this;
     }
 
     public String getClassName() {
         return className;
     }
 
-    public Class setClassName(String className) {
+    public void setClassName(String className) {
         this.className = className;
-        return this;
     }
 
     @Override
