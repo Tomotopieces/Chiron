@@ -17,17 +17,14 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#" style="color: black">Chiron喀戎</a>
-            <a class="navbar-brand" href="#" style="color: black">管理员界面</a>
         </div>
-
-
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">管理员姓名<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a id="adminInformation" href="#">修改密码</a></li>
-                        <li><a id="exit" href="#">退出</a></li>
+                        <li><a id="resetPasswordBtn" href="#">修改密码</a></li>
+                        <li><a id="exit" href="/Chiron">注销</a></li>
                     </ul>
                 </li>
             </ul>
@@ -47,91 +44,223 @@
 </div>
 
 <!--班级信息-->
-<div id="classData">
+<div id="classData" class="col-md-10">
     <h3>班级列表</h3>
     <ul style="list-style: none">
-        <li style="margin: 5px 0px">班级1<button type="button" class="btn btn-danger">删除</button></li>
-        <li style="margin: 5px 0px">班级2<button type="button" class="btn btn-danger">删除</button></li>
-        <li style="margin: 5px 0px">班级3<button type="button" class="btn btn-danger">删除</button></li>
+
+        <li>
+            <div class="row">
+                <div class="col-md-3">班级编号</div>
+                <div class="col-md-6">班级名称</div>
+                <div class="col-md-3">操作</div>
+            </div>
+        </li>
+        <li>
+            <div class="row">
+                <div class="col-md-3">c001</div>
+                <div class="col-md-6">班级1</div>
+                <div class="col-md-3">
+                    <button type="button" class="btn btn-danger">删除</button>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="row">
+                <div class="col-md-3">c002</div>
+                <div class="col-md-6">班级2</div>
+                <div class="col-md-3">
+                    <button type="button" class="btn btn-danger">删除</button>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="row">
+                <div class="col-md-3">c003</div>
+                <div class="col-md-6">班级3</div>
+                <div class="col-md-3">
+                    <button type="button" class="btn btn-danger">删除</button>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="col-md-1">
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-success">添加</button>
+                </div>
+            </div>
+        </li>
+        <li>
+            <nav aria-label="page navigation" class="col-md-9">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
     </ul>
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-            <li>
-                <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li>
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
 </div>
 
 <!--教师信息-->
-<div id="teacherDate">
+<div id="teacherDate" class="col-md-10">
     <h3>教师列表</h3>
     <ul style="list-style: none">
-        <li style="margin: 5px 0px">教师1<button type="button" class="btn btn-danger">删除</button></li>
-        <li style="margin: 5px 0px">教师2<button type="button" class="btn btn-danger">删除</button></li>
-        <li style="margin: 5px 0px">教师3<button type="button" class="btn btn-danger">删除</button></li>
+        <li>
+            <div class="row">
+                <div class="col-md-2">职工号</div>
+                <div class="col-md-2">姓名</div>
+                <div class="col-md-2">性别</div>
+                <div class="col-md-2">年龄</div>
+                <div class="col-md-4">操作</div>
+            </div>
+        </li>
+        <li>
+            <div class="row">
+                <div class="col-md-2">t001</div>
+                <div class="col-md-2">教师1</div>
+                <div class="col-md-2">男</div>
+                <div class="col-md-2">32</div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-danger">删除</button>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="row">
+                <div class="col-md-2">t002</div>
+                <div class="col-md-2">教师2</div>
+                <div class="col-md-2">男</div>
+                <div class="col-md-2">31</div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-danger">删除</button>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="row">
+                <div class="col-md-2">t003</div>
+                <div class="col-md-2">教师3</div>
+                <div class="col-md-2">男</div>
+                <div class="col-md-2">30</div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-danger">删除</button>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="col-md-1">
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-success">添加</button>
+                </div>
+            </div>
+            <nav aria-label="Page navigation"  class="col-md-9">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
     </ul>
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-            <li>
-                <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li>
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
 </div>
 
 <!--学生信息-->
-<div id="studentDate">
+<div id="studentDate" class="col-md-10">
     <h3>学生列表</h3>
     <ul style="list-style: none">
-        <li><div class="sulDiv col-md-2">学号</div><div class="sulDiv col-md-2">姓名</div><div class="sulDiv col-md-2">性别</div><div class="sulDiv col-md-2">年龄</div><div class="sulDiv col-md-2">操作</div></li>
-        <li><div class="sulDiv col-md-2">s001</div><div class="sulDiv col-md-2">张三</div><div class="sulDiv col-md-2">男</div><div class="sulDiv col-md-2">18</div><div class="sulDiv col-md-2"><button type="button" class="btn btn-danger">删除</button></div></li>
-        <li><div class="sulDiv col-md-2">s002</div><div class="sulDiv col-md-2">李四</div><div class="sulDiv col-md-2">男</div><div class="sulDiv col-md-2">17</div><div class="sulDiv col-md-2"><button type="button" class="btn btn-danger">删除</button></div></li>
-        <li><div class="sulDiv col-md-2">s003</div><div class="sulDiv col-md-2">王五</div><div class="sulDiv col-md-2">女</div><div class="sulDiv col-md-2">19</div><div class="sulDiv col-md-2"><button type="button" class="btn btn-danger">删除</button></div></li>
+        <li>
+            <div class="row">
+                <div class="col-md-2">学号</div>
+                <div class="col-md-2">姓名</div>
+                <div class="col-md-2">性别</div>
+                <div class="col-md-2">年龄</div>
+                <div class="col-md-4">操作</div>
+            </div>
+        </li>
+        <li>
+            <div class="row">
+                <div class="col-md-2">s001</div>
+                <div class="col-md-2">学生1</div>
+                <div class="col-md-2">男</div>
+                <div class="col-md-2">18</div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-danger">删除</button>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="row">
+                <div class="col-md-2">s002</div>
+                <div class="col-md-2">学生2</div>
+                <div class="col-md-2">男</div>
+                <div class="col-md-2">17</div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-danger">删除</button>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="row">
+                <div class="col-md-2">s003</div>
+                <div class="col-md-2">学生3</div>
+                <div class="col-md-2">男</div>
+                <div class="col-md-2">18</div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-danger">删除</button>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="col-md-1">
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-success">添加</button>
+                </div>
+            </div>
+            <nav aria-label="Page navigation"  class="col-md-9">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
     </ul>
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-            <li>
-                <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li>
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
 </div>
 
 <!--公告-->
@@ -192,5 +321,18 @@
     </nav>
 </div>
 
+<!--修改密码-->
+<div id="resetPassword">
+    <h3>修改密码</h3>
+    <div>
+        <form>
+            账户名：<input id="username" name="username" type="text"><br>
+            原密码：<input id="oldPassword" name="oldPassword" type="password"><br>
+            新密码：<input id="newPassword" name="newPassword" type="password"><br>
+            确认密码：<input id="rePassword" name="rePassword" type="password"><br>
+        </form>
+        <button type="button" class="btn btn-primary">修改</button><br>
+    </div>
+</div>
 </body>
 </html>

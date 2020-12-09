@@ -1,10 +1,16 @@
-#classData,#teacherDate,#studentDate,#noticeDate,#messageDate{
+#classData,#teacherDate,#studentDate,#noticeDate,#messageDate,#resetPassword{
     text-align: center;
     display: none;
 }
 #classData{
     display: block;
 }
-/*#sulDiv{*/
-/*    float: left;*/
-/*}*/
+#resetPassword *{
+    margin-top: 10px;
+}
+.row{
+    border-bottom: 1px solid black;
+}
+div{
+    padding: 5px;
+}
