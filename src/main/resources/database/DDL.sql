@@ -33,6 +33,7 @@ CREATE TABLE `NewTable` (
 `teacher_id`  int(255) NULL DEFAULT NULL COMMENT '布置作业教师ID' ,
 `title`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '作业名称' ,
 `describe`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '作业内容' ,
+`class_id`  int(11) NULL DEFAULT NULL ,
 `end_time`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '结束时间' ,
 PRIMARY KEY (`id`)
 )

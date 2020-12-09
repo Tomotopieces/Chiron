@@ -13,6 +13,7 @@ public class Homework {
     private String title;
     private String describe;
     private String end_time;
+    private Integer class_id;
 
     public Homework() {
     }
@@ -55,6 +56,14 @@ public class Homework {
 
     public void setEnd_time(String end_time) {
         this.end_time = end_time;
+    }
+
+    public Integer getClass_id() {
+        return class_id;
+    }
+
+    public void setClass_id(Integer class_id) {
+        this.class_id = class_id;
     }
 
     @Override
