@@ -5,12 +5,12 @@ package io.team.work.model.bean;
  * 日期: 2020/12/9 9:32
  * 描述:班级
  */
-public class Class {
+public class Clazz {
     private Integer id;
     private String classNo;
     private String className;
 
-    public Class() {
+    public Clazz() {
     }
 
     public Integer getId() {
