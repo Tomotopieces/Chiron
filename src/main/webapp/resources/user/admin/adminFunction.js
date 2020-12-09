@@ -5,7 +5,6 @@ window.onload = function(){
     var teacherData = document.getElementById("teacherDate");
     var studentBtn = document.getElementById("studentInformation");
     var studentData = document.getElementById("studentDate");
-
     var noticeBtn = document.getElementById("notice");
     var noticeData = document.getElementById("noticeDate");
     var messageBtn = document.getElementById("messageBoard");
