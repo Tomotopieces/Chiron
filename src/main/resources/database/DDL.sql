@@ -18,7 +18,7 @@ CREATE TABLE `NewTable` (
 `name`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '姓名' ,
 `sex`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '性别' ,
 `age`  int(3) NULL DEFAULT NULL COMMENT '年龄' ,
-`class_id`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所在班级' ,
+`class_id`  int(255) NULL DEFAULT NULL COMMENT '所在班级' ,
 `type`  int(11) NULL DEFAULT NULL COMMENT '0为管理员，1为教师，2为学生' ,
 PRIMARY KEY (`id`)
 )

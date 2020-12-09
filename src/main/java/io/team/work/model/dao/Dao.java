@@ -21,8 +21,9 @@ public interface Dao<T, ID> {
     //根据账号和密码查询
     T queryUserByNameAndPassword(T t);
     //根据user的id查询
-    T queryUserById(Long id);
+    T queryUserById(ID id);
     //根据user的类型查询
+    T queryUserByType(ID type);
     //分页
     List<T> queryUserByPage(Integer pageNo,  Integer pageSize);
     //计数

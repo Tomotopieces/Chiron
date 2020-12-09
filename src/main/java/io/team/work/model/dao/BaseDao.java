@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public abstract class BaseDao implements Dao{
+public abstract class BaseDao<T, ID> implements Dao<T, ID>{
     //等价于一阶段PrepareStatement语句执行平台
     private QueryRunner queryRunner = new QueryRunner();
 
@@ -79,10 +79,10 @@ public abstract class BaseDao implements Dao{
      * @param args
      * @return
      */
-    public Object queryForSingleValue(String sql, Object... args) {
+    public Long queryForSingleValue(String sql, Object... args) {
         Connection connection = JdbcUtils.getConnection();
         try {
-            return queryRunner.query(connection, sql, new ScalarHandler(), args);
+            return queryRunner.query(connection, sql, new ScalarHandler<>(), args);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

@@ -12,7 +12,7 @@ public class User {
     private String name;
     private String sex;
     private Integer age;
-    private String class_id;
+    private Integer class_id;
     private Integer type;
 
     public User() {
@@ -66,11 +66,11 @@ public class User {
         this.age = age;
     }
 
-    public String getClass_id() {
+    public Integer getClass_id() {
         return class_id;
     }
 
-    public void setClass_id(String class_id) {
+    public void setClass_id(Integer class_id) {
         this.class_id = class_id;
     }
 
