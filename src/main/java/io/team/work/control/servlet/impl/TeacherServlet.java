@@ -41,7 +41,7 @@ public class TeacherServlet extends BaseServlet {
      */
     public void getAssignedHomeworkList(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User teacher = (User) request.getSession().getAttribute(USER);
-        List<Homework> homeworkList = HOMEWORK_SERVICE.getHomeworkByTeacherId(teacher.getId());
+        List<Homework> homeworkList = HOMEWORK_SERVICE.listHomeworkByTeacherId(teacher.getId());
         response.getWriter().write(GSON.toJson(homeworkList));
     }
 
@@ -52,7 +52,7 @@ public class TeacherServlet extends BaseServlet {
      */
     public void getSubmittedHomeworkList(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User teacher = (User) request.getSession().getAttribute(USER);
-        List<StudentHomework> studentHomeworkList = STUDENT_HOMEWORK_SERVICE.getHomeworkByTeacherId(teacher.getId());
+        List<StudentHomework> studentHomeworkList = STUDENT_HOMEWORK_SERVICE.listHomeworkByTeacherId(teacher.getId());
         response.getWriter().write(GSON.toJson(studentHomeworkList));
     }
 
@@ -89,13 +89,13 @@ public class TeacherServlet extends BaseServlet {
     }
 
     /**
-     * 作业审阅.
+     * 作业评阅.
      * <p>
      * 动作函数.
      */
     public void reviewHomework(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String homeworkId = request.getParameter(REVIEW_HOMEWORK_ID);
         String reviewContent = request.getParameter(REVIEW_HOMEWORK_REVIEW_CONTENT);
-        writeResult(HOMEWORK_SERVICE.update(homeworkId, PROPERTY_REVIEW_CONTENT, reviewContent), response);
+        writeResult(STUDENT_HOMEWORK_SERVICE.update(homeworkId, PROPERTY_REVIEW_CONTENT, reviewContent), response);
     }
 }

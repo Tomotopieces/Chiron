@@ -33,7 +33,7 @@ public class StudentServlet extends BaseServlet {
      */
     public void getHomeworkList(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User student = (User) request.getSession().getAttribute(USER);
-        List<Homework> homeworkList = HOMEWORK_SERVICE.getHomeworkListByClassId(student.getClass_id());
+        List<Homework> homeworkList = HOMEWORK_SERVICE.listHomeworkByClassId(student.getClass_id());
         response.getWriter().write(GSON.toJson(homeworkList));
     }
 
@@ -44,7 +44,7 @@ public class StudentServlet extends BaseServlet {
      */
     public void getFinishedHomeworkList(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User student = (User) request.getSession().getAttribute(USER);
-        List<StudentHomework> studentHomeworkList = STUDENT_HOMEWORK_SERVICE.getHomeworkListByStudentId(student.getId());
+        List<StudentHomework> studentHomeworkList = STUDENT_HOMEWORK_SERVICE.listHomeworkByStudentId(student.getId());
         response.getWriter().write(GSON.toJson(studentHomeworkList));
     }
 

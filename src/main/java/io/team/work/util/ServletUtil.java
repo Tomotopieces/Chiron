@@ -35,41 +35,92 @@ public class ServletUtil {
     }
 
     /**
-     * 表单参数名.
+     * 请求参数名.
      */
     public static final class RequestParameterName {
         // 登录
+
         public static final String LOGIN_USERNAME = "username";
         public static final String LOGIN_PASSWORD = "password";
 
         // 重设密码
+
         public static final String RESET_PASSWORD_OLD_PASSWORD = "oldPassword";
         public static final String RESET_PASSWORD_NEW_PASSWORD = "newPassword";
 
-        // 审阅作业
+        // 评阅作业
+
         public static final String REVIEW_HOMEWORK_REVIEW_CONTENT = "reviewContent";
-        public static final String REVIEW_HOMEWORK_ID = "homeworkId";
+        public static final String REVIEW_HOMEWORK_ID = "reviewHomeworkId";
 
         // 布置作业
-        public static final String ASSIGN_HOMEWORK_TITLE = "title";
-        public static final String ASSIGN_HOMEWORK_DESCRIBE = "describe";
-        public static final String ASSIGN_HOMEWORK_END_TIME = "endTime";
-        public static final String ASSIGN_HOMEWORK_CLASS_ID = "classId";
+
+        public static final String ASSIGN_HOMEWORK_TITLE = "homeworkTitle";
+        public static final String ASSIGN_HOMEWORK_DESCRIBE = "homeworkDescribe";
+        public static final String ASSIGN_HOMEWORK_END_TIME = "homeworkEndTime";
+        public static final String ASSIGN_HOMEWORK_CLASS_ID = "homeworkClassId";
+
+        // 留言
+
+        public static final String MESSAGE_TITLE = "messageTitle";
+        public static final String MESSAGE_CONTENT = "messageContent";
+//        public static final String MESSAGE_CREATE_TIME = "createTime";
+
+        // 添加新用户
+
+        public static final String ADD_USER_TYPE = "type";
+        public static final String ADD_USER_USERNAME = "username";
+//        public static final String ADD_USER_PASSWORD = "password"; // 默认给123456或者000000
+        public static final String ADD_USER_NAME = "name";
+        public static final String ADD_USER_SEX = "sex";
+        public static final String ADD_USER_AGE = "age";
+        public static final String ADD_USER_CLASS = "class";
+
+        // 移除用户
+
+        public static final String REMOVE_USER_ID = "userId";
+
+        // 添加班级
+
+        public static final String ADD_CLASS_CLASS_NO = "classNo";
+        public static final String ADD_CLASS_CLASS_NAME = "className";
+
+        // 移除班级
+
+        public static final String REMOVE_CLASS_ID = "classId";
+
+        // 移除留言
+
+        public static final String REMOVE_MESSAGE_ID = "messageId";
+
+        // 添加公告
+
+        public static final String ADD_NOTICE_TITLE = "noticeTitle";
+        public static final String ADD_NOTICE_CONTENT = "noticeContent";
+//        public static final String ADD_NOTICE_CREATE_TIME = "createTime";
+
+        // 移除公告
+
+        public static final String REMOVE_NOTICE_ID = "noticeId";
+
+        // 更新公告
+
+        public static final String UPDATE_NOTICE_ID = "noticeId";
+        public static final String UPDATE_NOTICE_PROPERTY_NAME = "propertyName";
+        public static final String UPDATE_NOTICE_PROPERTY_VALUE = "propertyValue";
     }
 
     /**
      * 会话属性名.
      */
     public static final class SessionAttributeName {
-        // 会话属性
         public static final String USER = "user";
     }
 
     /**
-     * 相应信息.
+     * 回填通用信息.
      */
     public static final class ResponseMessage {
-        // 信息提示
         public static final String TRUE = "true";
         public static final String FALSE = "false";
         public static final String ILLEGAL_USERNAME = "非法用户名。";

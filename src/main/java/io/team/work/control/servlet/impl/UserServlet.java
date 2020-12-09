@@ -1,6 +1,8 @@
 package io.team.work.control.servlet.impl;
 
 import io.team.work.control.servlet.BaseServlet;
+import io.team.work.model.bean.Message;
+import io.team.work.model.bean.Notice;
 import io.team.work.model.bean.User;
 import io.team.work.util.UserUtil;
 
@@ -8,11 +10,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 
 import static io.team.work.util.BeanUtil.PROPERTY_PASSWORD;
+import static io.team.work.util.DateTimeUtil.DATE_TIME_FORMAT;
+import static io.team.work.util.ServletUtil.GSON;
 import static io.team.work.util.ServletUtil.PROJECT_PATH;
 import static io.team.work.util.ServletUtil.RequestParameterName.LOGIN_PASSWORD;
 import static io.team.work.util.ServletUtil.RequestParameterName.LOGIN_USERNAME;
+import static io.team.work.util.ServletUtil.RequestParameterName.MESSAGE_CONTENT;
+import static io.team.work.util.ServletUtil.RequestParameterName.MESSAGE_TITLE;
 import static io.team.work.util.ServletUtil.RequestParameterName.RESET_PASSWORD_NEW_PASSWORD;
 import static io.team.work.util.ServletUtil.RequestParameterName.RESET_PASSWORD_OLD_PASSWORD;
 import static io.team.work.util.ServletUtil.ResponseMessage.ILLEGAL_USERNAME;
@@ -21,7 +29,7 @@ import static io.team.work.util.ServletUtil.SessionAttributeName.USER;
 import static io.team.work.util.ServletUtil.writeResult;
 
 /**
- * 用户相关操作Servlet类.
+ * 用户基本操作Servlet类.
  *
  * @author Tomoto
  * <p>
@@ -30,6 +38,8 @@ import static io.team.work.util.ServletUtil.writeResult;
 @WebServlet("user.do")
 public class UserServlet extends BaseServlet {
     private static final UserService USER_SERVICE = UserService.getInstance();
+    private static final MessageService MESSAGE_SERVICE = MessageService.getInstance();
+    private static final NoticeService NOTICE_SERVICE = NoticeService.getInstance();
 
     /**
      * 登录.
@@ -105,16 +115,25 @@ public class UserServlet extends BaseServlet {
      * 动作函数.
      */
     public void leaveMessage(HttpServletRequest request, HttpServletResponse response) {
+        String title = request.getParameter(MESSAGE_TITLE);
+        String content = request.getParameter(MESSAGE_CONTENT);
 
+        Message message = new Message();
+        message.setTitle(title);
+        message.setContent(content);
+        message.setCreate_time(DATE_TIME_FORMAT.format(new Date()));
+
+        writeResult(MESSAGE_SERVICE.add(message), response);
     }
 
     /**
-     * 在留言板上回复.
+     * 获取所有留言.
      * <p>
      * 动作函数.
      */
-    public void replyMessage(HttpServletRequest request, HttpServletResponse response) {
-
+    public void getMessageList(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        List<Message> messageList = MESSAGE_SERVICE.listMessages();
+        response.getWriter().write(GSON.toJson(messageList));
     }
 
     /**
@@ -122,7 +141,8 @@ public class UserServlet extends BaseServlet {
      * <p>
      * 动作函数.
      */
-    public void viewBulletinBoard(HttpServletRequest request, HttpServletResponse response) {
-
+    public void getNoticeList(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        List<Notice> noticeList = NOTICE_SERVICE.listNotices();
+        response.getWriter().write(GSON.toJson(noticeList));
     }
 }
