@@ -97,8 +97,7 @@
             </div>
         </li>
         <li>
-            <div class="col-md-1"></div>
-            <nav aria-label="page navigation" class="col-md-9">
+            <nav aria-label="page navigation" class="col-md-9 col-md-offset-1">
                 <ul class="pagination">
                     <li>
                         <a href="#" aria-label="Previous">
@@ -155,7 +154,7 @@
         </li>
         <li>
             <div class="col-md-1">
-                <button type="button" class="btn btn-success">添加</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addMessage">添加留言</button>
             </div>
             <nav aria-label="Page navigation" class="col-md-9">
             <ul class="pagination">
@@ -178,6 +177,32 @@
         </nav>
         </li>
     </ul>
+</div>
+<!-- 添加留言 -->
+<div class="modal fade" id="addMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">添加留言</h4>
+            </div>
+            <form>
+                <div class="modal-body">
+                    标题：<input type="text" />
+                </div>
+                <div class="modal-body">
+                    <h5>留言内容：</h5>
+                    <textarea class="addMessageData"></textarea>
+                </div>
+            </form>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+
+            </div>
+        </div>
+    </div>
 </div>
 
 <!--公告-->
@@ -213,8 +238,7 @@
             </div>
         </li>
         <li>
-            <div class="col-md-1"></div>
-            <nav aria-label="page navigation" class="col-md-9">
+            <nav aria-label="page navigation" class="col-md-9 col-md-offset-1">
                 <ul class="pagination">
                     <li>
                         <a href="#" aria-label="Previous">

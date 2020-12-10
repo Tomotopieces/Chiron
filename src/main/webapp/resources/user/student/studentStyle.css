@@ -14,3 +14,10 @@ div{
 #resetPassword *{
     margin-top: 10px;
 }
+.addMessageData{
+    width: 100%;
+    resize: none;
+}
+a{
+    cursor: pointer;
+}

@@ -14,3 +14,14 @@ div{
 #resetPassword *{
     margin-top: 10px;
 }
+.addHomeworkData{
+    width: 100%;
+    resize: none;
+}
+.addMessageData{
+    width: 100%;
+    resize: none;
+}
+a{
+    cursor: pointer;
+}

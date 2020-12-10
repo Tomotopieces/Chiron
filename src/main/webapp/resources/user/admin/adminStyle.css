@@ -14,3 +14,11 @@
 div{
     padding: 5px;
 }
+.addNoticeData{
+    width: 100%;
+    resize: none;
+}
+a{
+    cursor: pointer;
+}
+
