@@ -1,24 +1,67 @@
 <html>
+
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="resources/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <title>欢迎使用Chiron喀戎在线作业管理</title>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script src="index.js"></script>
 </head>
+
 <body>
-    <div id="mainContent" class="container">
-        <h1>Chiron喀戎在线作业管理</h1>
-        <form>
-            <input name="group" type="radio" value="st">学生/教师
-            <input name="group" type="radio" value="ad">管理员<br>
-            账户名：<input id="username" name="username" type="text" placeholder="学号/教职工号"><br>
-            密码：<input id="password" name="password" type="text"><br>
-        </form>
-        <!--登录需要添加验证事件-->
-        <button type="button" class="btn btn-primary">登录</button><br>
+    <div id="mainContent">
+        <div id="backgroundImage"></div>
+        <div id="mainBlock">
+            <div id="centerBlock">
+                <h1 id="title">Chiron 喀戎在线作业管理</h1>
+                <h3 id="subtitle">登录 CHIRON</h3>
+                <div id="loginBlock" class="container">
+                    <form>
+                        <div id="typeSelector" class="form-group">
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-primary active">
+                                    <input type="radio" name="type" autocomplete="off" value="student" checked>学生
+                                </label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="type" autocomplete="off" value="teacher">教师
+                                </label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="type" autocomplete="off" value="admin">管理员
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                </div>
+                                <input id="username" name="username" class="form-control" type="text"
+                                    placeholder="学号/教职工号">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-lock"></span>
+                                </div>
+                                <input id="password" name="password" class="form-control" type="text" placeholder="密码">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button class="form-control btn btn-success .btn-full" type="button">登录</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
+
 </html>

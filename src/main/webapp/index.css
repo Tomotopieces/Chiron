@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+#mainContent {
+    display: none;
+}
+
+#mainBlock {
+    position: absolute;
+    top: 0%;
+    height: 100%;
+}
+
+#centerBlock {
+    background-color: rgba(0,0,0, 0.7);
+    /* position: absolute; */
+    width: 70%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#backgroundImage {
+    background-image: url("resources/images/login_bg.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#title {
+    margin-top: 0px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    padding-top: 15%;
+}
+
+#subtitle {
+    text-align: center;
+    color: white;
+    margin-top: 20px;
+}
+
+#loginBlock {
+    margin-top: 20px;
+    position: relative;
+    width: 35%;
+    background-color: #F6F8FA;
+    border: #EAECEF 1px solid;
+    border-radius: 5px;
+}
+
+form {
+    margin-top: 12px;
+}
+
+#typeSelector {
+    text-align: center;
+}

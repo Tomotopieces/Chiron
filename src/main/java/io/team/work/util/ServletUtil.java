@@ -5,6 +5,9 @@ import com.google.gson.Gson;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static io.team.work.util.ServletUtil.ResponseMessage.FALSE;
+import static io.team.work.util.ServletUtil.ResponseMessage.TRUE;
+
 /**
  * Servlet工具类.
  * <p>
@@ -17,6 +20,9 @@ import java.io.IOException;
 public class ServletUtil {
     public static final Gson GSON = new Gson();
 
+    private static final String STUDENT_HOMEWORK_SAVE_PATH = "/resources/studentHomework/";
+    private static final String HOMEWORK_SAVE_PATH = "/resources/homework/";
+
     // 项目路径
     public static final String PROJECT_PATH = "/Chiron";
 
@@ -27,11 +33,7 @@ public class ServletUtil {
      * @param response 一次请求Servlet的response
      */
     public static void writeResult(Boolean result, HttpServletResponse response) throws IOException {
-        if (result) {
-            response.getWriter().write(ResponseMessage.TRUE);
-        } else {
-            response.getWriter().write(ResponseMessage.FALSE);
-        }
+        response.getWriter().write(result ? TRUE : FALSE);
     }
 
     /**
@@ -40,6 +42,7 @@ public class ServletUtil {
     public static final class RequestParameterName {
         // 登录
 
+        public static final String LOGIN_TYPE = "type";
         public static final String LOGIN_USERNAME = "username";
         public static final String LOGIN_PASSWORD = "password";
 
