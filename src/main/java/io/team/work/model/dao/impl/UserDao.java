@@ -3,8 +3,12 @@ package io.team.work.model.dao.impl;
 
 import io.team.work.model.bean.User;
 import io.team.work.model.dao.BaseDao;
+import io.team.work.util.JdbcUtils;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -18,6 +22,8 @@ public class UserDao extends BaseDao<User, Integer> {
 
     private static final String TABLE_NAME = "User";
     private static final String PROPERTIES = "`username`, `password`, `name`, `sex`, `age`,`class_id`,`type`";
+    private static final String READ_BY_USERNAME =
+            "SELECT `id`, " + PROPERTIES + " FROM `" + TABLE_NAME + "` WHERE `username` = ?;";
 
     @Override
     protected String getTableName() {
@@ -52,6 +58,15 @@ public class UserDao extends BaseDao<User, Integer> {
     public User queryUserByNameAndPassword(User user) {
         String sql = "SELECT `id`,`username`,`password`,`name`,`sex`,`age`,`class_id`,`type` FROM `User` WHERE `username`=? AND `password`=?";
         return queryForOne(User.class, sql, user.getUsername(), user.getPassword());
+    }
+
+    public User queryByUsername(String username){
+        try (Connection connection= JdbcUtils.getConnection()){
+             return getQueryRunner().query(connection,READ_BY_USERNAME,new BeanHandler<>(User.class),username);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
