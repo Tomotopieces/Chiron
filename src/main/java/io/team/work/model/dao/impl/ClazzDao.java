@@ -2,7 +2,11 @@ package io.team.work.model.dao.impl;
 
 import io.team.work.model.bean.Clazz;
 import io.team.work.model.dao.BaseDao;
+import io.team.work.util.JdbcUtils;
 
+
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -11,6 +15,14 @@ import java.util.List;
  * 描述:班级
  */
 public class ClazzDao extends BaseDao<Clazz, Integer> {
+    private ClazzDao(){}
+
+    private static final String TABLE_NAME = "Clazz";
+
+    @Override
+    protected String getTableName() {
+        return TABLE_NAME;
+    }
 
     @Override
     public int insert(Clazz clazz) {
@@ -24,7 +36,10 @@ public class ClazzDao extends BaseDao<Clazz, Integer> {
         return update(sql, id);
     }
 
-    @Override
+
+
+
+
     public int update(Clazz clazz) {
         String sql = "UPDATE `Class` SET `classNo`=?,`className`=? WHERE `id`=?";
         return update(sql, clazz.getClassNo(), clazz.getClassName(), clazz.getId());
@@ -55,6 +70,8 @@ public class ClazzDao extends BaseDao<Clazz, Integer> {
         String sql = "SELECT COUNT(1) FROM `Class`";
         return Math.toIntExact(queryForSingleValue(sql));
     }
+
+
 
     private static class Instance {
         public static final ClazzDao INSTANCE = new ClazzDao();

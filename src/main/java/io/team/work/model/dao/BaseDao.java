@@ -10,9 +10,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public abstract class BaseDao<T, ID> implements Dao<T, ID>{
+public abstract class BaseDao<T, ID> implements Dao<T, ID> {
     //等价于一阶段PrepareStatement语句执行平台
-    private QueryRunner queryRunner = new QueryRunner();
+    protected QueryRunner queryRunner = new QueryRunner();
 
     /**
      * 查询返回单个JavaBean对象的sql语句
@@ -89,5 +89,23 @@ public abstract class BaseDao<T, ID> implements Dao<T, ID>{
             JdbcUtils.close(connection);
         }
         return null;
+    }
+
+    public <P> Integer update(Integer id, String attribute, P propertyValue) {
+        try (Connection connection = JdbcUtils.getConnection()) {
+            StringBuilder statement = new StringBuilder("UPDATE`").append(getTableName())
+                    .append("`SET`").append(attribute)
+                    .append("`=?WHERE`id`=?;");
+            return queryRunner.update(connection, statement.toString(), propertyValue, id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    protected abstract String getTableName();
+
+    protected QueryRunner getQueryRunner() {
+        return queryRunner;
     }
 }

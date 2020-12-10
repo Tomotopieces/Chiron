@@ -12,6 +12,15 @@ import java.util.List;
  * 描述:
  */
 public class NoticeDao extends BaseDao<Notice, Integer> {
+    private NoticeDao(){}
+
+    private static final String TABLE_NAME = "Notice";
+
+    @Override
+    protected String getTableName() {
+        return TABLE_NAME;
+    }
+
     @Override
     public int insert(Notice notice) {
         String sql = "INSERT INTO `Notice`(`title`,`content`,`create_time`) VALUES (?,?,?)";
@@ -24,7 +33,9 @@ public class NoticeDao extends BaseDao<Notice, Integer> {
         return update(sql, id);
     }
 
-    @Override
+
+
+
     public int update(Notice notice) {
         String sql = "UPDATE `Notice` SET `title`=?,`content`=?,`create_time`=? WHERE `id`=?";
         return update(sql, notice.getTitle(), notice.getContent(), notice.getCreate_time(), notice.getId());
@@ -53,6 +64,8 @@ public class NoticeDao extends BaseDao<Notice, Integer> {
         String sql = "SELECT COUNT(1) FROM `Notice`";
         return Math.toIntExact(queryForSingleValue(sql));
     }
+
+
 
     private static class Instance {
         public static final NoticeDao INSTANCE = new NoticeDao();

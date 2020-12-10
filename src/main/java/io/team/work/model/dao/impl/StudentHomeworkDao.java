@@ -11,9 +11,19 @@ import java.util.List;
  * 描述:学生作业
  */
 public class StudentHomeworkDao extends BaseDao<StudentHomework, Integer> {
+private StudentHomeworkDao(){}
+
+    private static final String TABLE_NAME = "Stu_hw";
+
+    @Override
+    protected String getTableName() {
+        return TABLE_NAME;
+    }
+
+
     @Override
     public int insert(StudentHomework studentHomework) {
-        String sql = "INSERT INTO `Stu_hw`(`hw_id`,`s_id`,`status`,`review_content`,`review_time`)";
+        String sql = "INSERT INTO `Stu_hw`(`hw_id`,`s_id`,`status`,`title`,`review_content`,`review_time`)";
         return update(sql, studentHomework.getHw_id(), studentHomework.getS_id(), studentHomework.getStatus(), studentHomework.getReview_content(), studentHomework.getReview_time());
     }
 
@@ -23,27 +33,29 @@ public class StudentHomeworkDao extends BaseDao<StudentHomework, Integer> {
         return update(sql, id);
     }
 
-    @Override
+
+
+
     public int update(StudentHomework studentHomework) {
-        String sql = "UPDATE `Stu_hw` SET `hw_id`=?,`s_id`=?,`status`=?,`review_content`,`review_time`=? WHERE id =?";
+        String sql = "UPDATE `Stu_hw` SET `hw_id`=?,`s_id`=?,`status`=?,`title`=?,`review_content`,`review_time`=? WHERE id =?";
         return update(sql, studentHomework.getHw_id(), studentHomework.getS_id(), studentHomework.getStatus(), studentHomework.getReview_content(), studentHomework.getReview_time(), studentHomework.getId());
     }
 
     @Override
     public List<StudentHomework> queryAll() {
-        String sql = "SELECT `id`,`hw_id`,`s_id`,`status`,`review_content`,`review_time` FROM `Stu_hw`";
+        String sql = "SELECT `id`,`hw_id`,`s_id`,`status`,`title`,`review_content`,`review_time` FROM `Stu_hw`";
         return queryForList(StudentHomework.class, sql);
     }
 
     @Override
     public StudentHomework queryById(Integer id) {
-        String sql = "SELECT `id`,`hw_id`,`s_id`,`status`,`review_content`,`review_time` FROM `Stu_hw` WHERE `id` = ?";
+        String sql = "SELECT `id`,`hw_id`,`s_id`,`status`,`title`,`review_content`,`review_time` FROM `Stu_hw` WHERE `id` = ?";
         return queryForOne(StudentHomework.class, sql, id);
     }
 
     @Override
     public List<StudentHomework> queryByPage(Integer pageNo, Integer pageSize) {
-        String sql = "SELECT `id`,`hw_id`,`s_id`,`status`,`review_content`,`review_time` FROM `Stu_hw`  LIMIT ?,?";
+        String sql = "SELECT `id`,`hw_id`,`s_id`,`status`,`title`,`review_content`,`review_time` FROM `Stu_hw`  LIMIT ?,?";
         return queryForList(StudentHomework.class, sql, pageNo, pageSize);
     }
 
@@ -52,6 +64,7 @@ public class StudentHomeworkDao extends BaseDao<StudentHomework, Integer> {
         String sql = "SELECT COUNT(1) FROM `Stu_hw`";
         return Math.toIntExact(queryForSingleValue(sql));
     }
+
 
     private static class Instance {
         public static final StudentHomeworkDao INSTANCE = new StudentHomeworkDao();

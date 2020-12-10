@@ -5,7 +5,7 @@ package io.team.work.model.bean;
  * 日期: 2020/12/9 9:43
  * 描述:作业附件
  */
-public class Homework_attach {
+public class HomeworkAttach {
     private Integer id;
     private Integer hw_id;
     private String title;
@@ -14,7 +14,7 @@ public class Homework_attach {
     private String create_time;
     private String create_man;
 
-    public Homework_attach() {
+    public HomeworkAttach() {
     }
 
     public Integer getId() {

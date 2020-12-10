@@ -63,6 +63,7 @@ CREATE TABLE `NewTable` (
 `id`  int(255) NOT NULL AUTO_INCREMENT ,
 `hw_id`  int(255) NULL DEFAULT NULL COMMENT '作业id' ,
 `s_id`  int(255) NULL DEFAULT NULL COMMENT '学生id（学生信息）' ,
+`title`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '学生作业名称' ,
 `status`  tinyint(255) NULL DEFAULT NULL COMMENT '审阅状态' ,
 `review_content`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '评阅意见（内容）' ,
 `review_time`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '评阅时间' ,
@@ -77,8 +78,9 @@ ROW_FORMAT=DYNAMIC
 CREATE TABLE `NewTable` (
 `id`  int(255) NOT NULL AUTO_INCREMENT ,
 `stu_hw_id`  int(255) NULL DEFAULT NULL ,
+`title`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标题' ,
 `type`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
-`url`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`url`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '路径' ,
 PRIMARY KEY (`id`)
 )
 ENGINE=InnoDB

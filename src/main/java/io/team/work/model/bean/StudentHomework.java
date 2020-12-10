@@ -10,6 +10,7 @@ public class StudentHomework {
     private Integer hw_id;
     private Integer s_id;
     private Boolean status;
+    private String title;
     private String review_time;
     private String review_content;
 
@@ -64,6 +65,14 @@ public class StudentHomework {
         this.review_content = review_content;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     @Override
     public String toString() {
         return "StudentHomework{" +
@@ -71,6 +80,7 @@ public class StudentHomework {
                 ", hw_id=" + hw_id +
                 ", s_id=" + s_id +
                 ", status=" + status +
+                ", title='" + title + '\'' +
                 ", review_time='" + review_time + '\'' +
                 ", review_content='" + review_content + '\'' +
                 '}';

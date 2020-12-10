@@ -74,6 +74,7 @@ public class Homework {
                 ", title='" + title + '\'' +
                 ", describe='" + describe + '\'' +
                 ", end_time='" + end_time + '\'' +
+                ", class_id=" + class_id +
                 '}';
     }
 }

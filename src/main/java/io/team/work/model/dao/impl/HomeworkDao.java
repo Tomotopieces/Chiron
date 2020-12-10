@@ -11,6 +11,17 @@ import java.util.List;
  * 描述:作业
  */
 public class HomeworkDao extends BaseDao<Homework, Integer> {
+    private HomeworkDao(){
+    }
+
+    private static final String TABLE_NAME = "Homework";
+
+    @Override
+    protected String getTableName() {
+        return TABLE_NAME;
+    }
+
+
     @Override
     public int insert(Homework homework) {
         String sql = "INSERT INTO `Homework`(`teacher_id`,`title`,`describe`,`class_id`,`end_time`) VALUES(?,?,?,?,?)";
@@ -23,7 +34,9 @@ public class HomeworkDao extends BaseDao<Homework, Integer> {
         return update(sql, id);
     }
 
-    @Override
+
+
+
     public int update(Homework homework) {
         String sql = "UPDATE `Homework` SET `teacher_id`=?,`title`=?,`describe`=?,`class_id`=?,`end_time`=? WHERE `id`=?";
         return update(sql, homework.getTeacher_id(), homework.getTitle(), homework.getDescribe(), homework.getClass_id(), homework.getEnd_time());
@@ -62,6 +75,8 @@ public class HomeworkDao extends BaseDao<Homework, Integer> {
         String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time` FROM `Homework` WHERE `class_id`=?";
         return queryForOne(Homework.class, sql, homework.getClass_id());
     }
+
+
 
     private static class Instance {
         public static final HomeworkDao INSTANCE = new HomeworkDao();

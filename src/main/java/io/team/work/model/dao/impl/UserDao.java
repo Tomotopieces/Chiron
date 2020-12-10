@@ -16,9 +16,17 @@ public class UserDao extends BaseDao<User, Integer> {
     private UserDao() {
     }
 
+    private static final String TABLE_NAME = "User";
+    private static final String PROPERTIES = "`username`, `password`, `name`, `sex`, `age`,`class_id`,`type`";
+
+    @Override
+    protected String getTableName() {
+        return TABLE_NAME;
+    }
+
     @Override
     public int insert(User user) {
-        String sql = "INSERT INTO `User`(`username`,`password`,`name`,`sex`,`age`,`class_id`,`type`) VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO `User`(" + PROPERTIES + ") VALUES(?,?,?,?,?,?,?)";
         return update(sql, user.getUsername(), user.getPassword(), user.getName(), user.getSex(), user.getAge(), user.getClass_id(), user.getType());
     }
 
@@ -28,7 +36,7 @@ public class UserDao extends BaseDao<User, Integer> {
         return update(sql, id);
     }
 
-    @Override
+
     public int update(User user) {
         String sql = "UPDATE `User` SET `username`=?,`password`=?,`name`=?,`sex`=?,`age`=?,`class_id`=?,`type` WHERE `id`=?";
         return update(sql, user.getUsername(), user.getPassword(), user.getName(), user.getSex(), user.getAge(), user.getClass_id(), user.getType(), user.getId());

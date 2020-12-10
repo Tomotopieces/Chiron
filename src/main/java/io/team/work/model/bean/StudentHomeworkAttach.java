@@ -5,13 +5,14 @@ package io.team.work.model.bean;
  * 日期: 2020/12/9 9:52
  * 描述:学生作业附件
  */
-public class StuHwAttach {
+public class StudentHomeworkAttach {
     private Integer id;
     private Integer stu_hw_id;
+    private String title;
     private String type;
     private String url;
 
-    public StuHwAttach() {
+    public StudentHomeworkAttach() {
     }
 
     public Integer getId() {
@@ -46,11 +47,20 @@ public class StuHwAttach {
         this.url = url;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     @Override
     public String toString() {
-        return "StuHwAttach{" +
+        return "StudentHomeworkAttach{" +
                 "id=" + id +
                 ", stu_hw_id=" + stu_hw_id +
+                ", title='" + title + '\'' +
                 ", type='" + type + '\'' +
                 ", url='" + url + '\'' +
                 '}';
