@@ -1,0 +1,16 @@
+#assignHomeworkData,#studentHomeworkData,#messageDate,#noticeDate,#resetPassword{
+    text-align: center;
+    display: none;
+}
+#assignHomeworkData{
+    display: block;
+}
+.row{
+    background-color: #e6e6e6;
+}
+div{
+    padding: 5px;
+}
+#resetPassword *{
+    margin-top: 10px;
+}
