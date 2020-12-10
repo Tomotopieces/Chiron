@@ -1,17 +1,18 @@
-window.onload = function(){
-    let classBtn = document.getElementById("classInformation");
-    let classData = document.getElementById("classData");
-    let teacherBtn = document.getElementById("teacherInformation");
-    let teacherData = document.getElementById("teacherDate");
-    let studentBtn = document.getElementById("studentInformation");
-    let studentData = document.getElementById("studentDate");
-    let noticeBtn = document.getElementById("notice");
-    let noticeData = document.getElementById("noticeDate");
-    let messageBtn = document.getElementById("messageBoard");
-    let messageData = document.getElementById("messageDate");
-    let resetPasswordBtn = document.getElementById("resetPasswordBtn");
-    let resetPassword = document.getElementById("resetPassword");
-    classBtn.onclick = function(){
+window.onload = function () {
+    let classBtn = document.getElementById("classInformation"),
+        classData = document.getElementById("classData"),
+        teacherBtn = document.getElementById("teacherInformation"),
+        teacherData = document.getElementById("teacherDate"),
+        studentBtn = document.getElementById("studentInformation"),
+        studentData = document.getElementById("studentDate"),
+        noticeBtn = document.getElementById("notice"),
+        noticeData = document.getElementById("noticeDate"),
+        messageBtn = document.getElementById("messageBoard"),
+        messageData = document.getElementById("messageDate"),
+        resetPasswordBtn = document.getElementById("resetPasswordBtn"),
+        resetPassword = document.getElementById("resetPassword"),
+        listColor = document.getElementsByClassName("listColor");
+    classBtn.onclick = function () {
         classData.style.display = "block";
         teacherData.style.display = "none";
         studentData.style.display = "none";
@@ -19,7 +20,7 @@ window.onload = function(){
         messageData.style.display = "none";
         resetPassword.style.display = "none";
     }
-    teacherBtn.onclick = function(){
+    teacherBtn.onclick = function () {
         classData.style.display = "none";
         teacherData.style.display = "block";
         studentData.style.display = "none";
@@ -27,7 +28,7 @@ window.onload = function(){
         messageData.style.display = "none";
         resetPassword.style.display = "none";
     }
-    studentBtn.onclick = function(){
+    studentBtn.onclick = function () {
         classData.style.display = "none";
         teacherData.style.display = "none";
         studentData.style.display = "block";
@@ -35,7 +36,7 @@ window.onload = function(){
         messageData.style.display = "none";
         resetPassword.style.display = "none";
     }
-    noticeBtn.onclick = function(){
+    noticeBtn.onclick = function () {
         classData.style.display = "none";
         teacherData.style.display = "none";
         studentData.style.display = "none";
@@ -43,7 +44,7 @@ window.onload = function(){
         messageData.style.display = "none";
         resetPassword.style.display = "none";
     }
-    messageBtn.onclick = function(){
+    messageBtn.onclick = function () {
         classData.style.display = "none";
         teacherData.style.display = "none";
         studentData.style.display = "none";
@@ -51,7 +52,7 @@ window.onload = function(){
         messageData.style.display = "block";
         resetPassword.style.display = "none";
     }
-    resetPasswordBtn.onclick = function(){
+    resetPasswordBtn.onclick = function () {
         classData.style.display = "none";
         teacherData.style.display = "none";
         studentData.style.display = "none";
@@ -59,4 +60,12 @@ window.onload = function(){
         messageData.style.display = "none";
         resetPassword.style.display = "block";
     }
+    for (let j = 0;j < listColor.length;j++){
+        for (var i = 0;i < listColor[j].children.length;i++){
+            if (i%2==1){
+                listColor[j].children[i].children[0].style.backgroundColor = "white"
+            }
+        }
+    }
+
 }
