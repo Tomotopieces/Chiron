@@ -17,7 +17,7 @@ public interface Dao<T, ID> {
     int delete(ID id);
 
     //更新
-    int update(T t);
+    <P> Integer update(ID id, String username, P propertyValue);
 
     //查询所有
     List<T> queryAll();
