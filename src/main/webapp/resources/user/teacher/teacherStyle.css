@@ -1,8 +1,8 @@
-#homeworkData,#messageDate,#resetPassword,#noticeDate{
+#assignHomeworkData,#studentHomeworkData,#messageDate,#noticeDate,#resetPassword{
     text-align: center;
     display: none;
 }
-#homeworkData{
+#assignHomeworkData{
     display: block;
 }
 .row{
@@ -13,6 +13,10 @@ div{
 }
 #resetPassword *{
     margin-top: 10px;
+}
+.addHomeworkData{
+    width: 100%;
+    resize: none;
 }
 .addMessageData{
     width: 100%;

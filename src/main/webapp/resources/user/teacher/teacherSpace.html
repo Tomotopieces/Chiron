@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>欢迎使用Chiron喀戎在线作业管理</title>
+    <link rel="stylesheet" href="teacherStyle.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -14,23 +15,326 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="#" style="color: black">Chiron喀戎</a>
         </div>
-
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a id="homeWorkInformation" href="#">作业信息</a></li>
-                <li><a id="messageBoard" href="#">留言信息</a></li>
-            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">管理员姓名<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">教师姓名<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a id="teacherInformation" href="#">修改信息</a></li>
-                        <li><a id="exit" href="#">退出</a></li>
+                        <li><a id="resetPasswordBtn" href="#">修改密码</a></li>
+                        <li><a id="exit" href="/Chiron">注销</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<!--侧边栏-->
+<div class="col-md-2 column">
+    <div class="list-group">
+        <a id="assignHomeWork" href="#" class="list-group-item">布置作业</a>
+        <a id="studentHomework" href="#" class="list-group-item">学生作业</a>
+        <a id="messageBoard" href="#" class="list-group-item">留言信息</a>
+        <a id="notice" href="#" class="list-group-item ">公告</a>
+    </div>
+</div>
+
+<!--布置作业-->
+<div id="assignHomeworkData" class="col-md-10">
+    <h3>布置作业列表</h3>
+    <ul class="listColor" style="list-style: none">
+        <li>
+            <div class="row">
+                <div class="col-md-2">作业标题</div>
+                <div class="col-md-3">作业描述</div>
+                <div class="col-md-3">作业附件</div>
+                <div class="col-md-2">结束时间</div>
+                <div class="col-md-2">操作</div>
+            </div>
+        </li>
+        <li>
+            <div class="row">
+                <div class="col-md-2">标题1</div>
+                <div class="col-md-3">描述1</div>
+                <div class="col-md-3"><a>附件1</a></div>
+                <div class="col-md-2">时间1</div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-danger">删除</button>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="row">
+                <div class="col-md-2">标题2</div>
+                <div class="col-md-3">描述2</div>
+                <div class="col-md-3"><a>附件2</a></div>
+                <div class="col-md-2">时间2</div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-danger">删除</button>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addHomework">上传作业</button>
+            </div>
+            <nav aria-label="page navigation" class="col-md-9">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+    </ul>
+</div>
+<!--布置作业-->
+<div class="modal fade" id="addHomework" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">布置作业</h4>
+            </div>
+            <form>
+                <div class="modal-body">
+                    作业标题：<input type="text" />
+                </div>
+                <div class="modal-body">
+                    <h5>作业描述：</h5>
+                    <textarea class="addHomeworkData"></textarea>
+                </div>
+                <div>
+                    <input type="file">
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--学生作业-->
+<div id="studentHomeworkData" class="col-md-10">
+    <h3>学生提交作业列表</h3>
+    <ul class="listColor" style="list-style: none">
+        <li>
+            <div class="row">
+                <div class="col-md-3">作业标题</div>
+                <div class="col-md-3">作业描述</div>
+                <div class="col-md-3">作业附件</div>
+                <div class="col-md-3">结束时间</div>
+            </div>
+        </li>
+        <li>
+            <div class="row">
+                <div class="col-md-3">标题1</div>
+                <div class="col-md-3">描述1</div>
+                <div class="col-md-3"><a>附件1</a></div>
+                <div class="col-md-3">时间1</div>
+            </div>
+        </li>
+        <li>
+            <div class="row">
+                <div class="col-md-3">标题2</div>
+                <div class="col-md-3">描述2</div>
+                <div class="col-md-3"><a>附件2</a></div>
+                <div class="col-md-3">时间2</div>
+            </div>
+        </li>
+        <li>
+            <nav aria-label="page navigation" class="col-md-9 col-md-offset-1">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+    </ul>
+</div>
+
+<!--留言信息-->
+<div id="messageDate" class="col-md-10">
+    <h3>留言列表</h3>
+    <ul class="listColor" style="list-style: none">
+        <li>
+            <div class="row">
+                <div class="col-md-2">标题</div>
+                <div class="col-md-8">留言内容</div>
+                <div class="col-md-2">发布时间</div>
+            </div>
+        </li>
+        <li>
+            <div class="row">
+                <div class="col-md-2">标题1</div>
+                <div class="col-md-8">内容1</div>
+                <div class="col-md-2">时间1</div>
+            </div>
+        </li>
+        <li>
+            <div class="row">
+                <div class="col-md-2">标题2</div>
+                <div class="col-md-8">内容2</div>
+                <div class="col-md-2">时间2</div>
+            </div>
+        </li>
+        <li>
+            <div class="row">
+                <div class="col-md-2">标题3</div>
+                <div class="col-md-8">内容3</div>
+                <div class="col-md-2">时间3</div>
+            </div>
+        </li>
+        <li>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addMessage">添加</button>
+            </div>
+            <nav aria-label="Page navigation" class="col-md-9">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+    </ul>
+</div>
+<!-- 添加留言 -->
+<div class="modal fade" id="addMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">添加留言</h4>
+            </div>
+            <form>
+                <div class="modal-body">
+                    标题：<input type="text" />
+                </div>
+                <div class="modal-body">
+                    <h5>留言内容：</h5>
+                    <textarea class="addMessageData"></textarea>
+                </div>
+            </form>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--公告-->
+<div id="noticeDate"  class="col-md-10">
+    <h3>公告列表</h3>
+    <ul class="listColor" style="list-style: none">
+        <li>
+            <div class="row">
+                <div class="col-md-2">标题</div>
+                <div class="col-md-8">公告内容</div>
+                <div class="col-md-2">创建时间</div>
+            </div>
+        </li>
+        <li>
+            <div class="row">
+                <div class="col-md-2">标题1</div>
+                <div class="col-md-8">内容1</div>
+                <div class="col-md-2">时间1</div>
+            </div>
+        </li>
+        <li>
+            <div class="row">
+                <div class="col-md-2">标题2</div>
+                <div class="col-md-8">内容2</div>
+                <div class="col-md-2">时间2</div>
+            </div>
+        </li>
+        <li>
+            <div class="row">
+                <div class="col-md-2">标题3</div>
+                <div class="col-md-8">内容3</div>
+                <div class="col-md-2">时间3</div>
+            </div>
+        </li>
+        <li>
+            <nav aria-label="page navigation" class="col-md-9 col-md-offset-1">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+    </ul>
+</div>
+
+<!--修改密码-->
+<div id="resetPassword" class="col-md-10">
+    <h3>修改密码</h3>
+    <div>
+        <form>
+            账户名：<input id="username" name="username" type="text"><br>
+            原密码：<input id="oldPassword" name="oldPassword" type="password"><br>
+            新密码：<input id="newPassword" name="newPassword" type="password"><br>
+            确认密码：<input id="rePassword" name="rePassword" type="password"><br>
+        </form>
+        <button type="button" class="btn btn-primary">修改</button><br>
+    </div>
+</div>
+
 </body>
 </html>
