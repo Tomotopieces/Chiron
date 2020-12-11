@@ -34,16 +34,16 @@
 <!--侧边栏-->
 <div class="col-md-2 column">
     <div class="list-group">
-        <a id="homeworkInformation" href="#" class="list-group-item">作业信息</a>
-        <a id="messageBoard" href="#" class="list-group-item">留言信息</a>
-        <a id="notice" href="#" class="list-group-item ">公告</a>
+        <a id="homeworkInformation" href="#" class="btn list-group-item">作业信息</a>
+        <a id="messageBoard" href="#" class="btn list-group-item">留言信息</a>
+        <a id="notice" href="#" class="btn list-group-item ">公告</a>
     </div>
 </div>
 
 <!--作业列表-->
-<div id="homeworkData" class="col-md-10">
+<div id="homeworkData" class="data col-md-10">
     <h3>作业列表</h3>
-    <ul class="listColor" style="list-style: none">
+    <ul class="listColor">
         <li>
             <div class="row">
                 <div class="col-md-1">发布教师</div>
@@ -60,7 +60,7 @@
         <li>
             <div class="row">
                 <div class="col-md-1">吴良航</div>
-                <div class="col-md-1">浩鲸高级开发工程师培训计划</div>
+                <div class="homeworkList col-md-1">浩鲸高级开发工程师培训计划</div>
                 <div class="col-md-1">描述1</div>
                 <div class="col-md-2"><a>教师附件1</a></div>
                 <div class="col-md-1">时间1</div>
@@ -121,9 +121,9 @@
 </div>
 
 <!--留言信息-->
-<div id="messageDate" class="col-md-10">
+<div id="messageDate" class="data col-md-10">
     <h3>留言列表</h3>
-    <ul class="listColor" style="list-style: none">
+    <ul id="messageDateList" class="listColor">
         <li>
             <div class="row">
                 <div class="col-md-2">标题</div>
@@ -131,52 +131,34 @@
                 <div class="col-md-2">发布时间</div>
             </div>
         </li>
-        <li>
-            <div class="row">
-                <div class="col-md-2">标题1</div>
-                <div class="col-md-8">内容1</div>
-                <div class="col-md-2">时间1</div>
-            </div>
-        </li>
-        <li>
-            <div class="row">
-                <div class="col-md-2">标题2</div>
-                <div class="col-md-8">内容2</div>
-                <div class="col-md-2">时间2</div>
-            </div>
-        </li>
-        <li>
-            <div class="row">
-                <div class="col-md-2">标题3</div>
-                <div class="col-md-8">内容3</div>
-                <div class="col-md-2">时间3</div>
-            </div>
-        </li>
+    </ul>
+    <ul class="listColor">
         <li>
             <div class="col-md-1">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addMessage">添加留言</button>
             </div>
             <nav aria-label="Page navigation" class="col-md-9">
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </li>
     </ul>
+
 </div>
 <!-- 添加留言 -->
 <div class="modal fade" id="addMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -206,9 +188,9 @@
 </div>
 
 <!--公告-->
-<div id="noticeDate"  class="col-md-10">
+<div id="noticeDate"  class="data col-md-10">
     <h3>公告列表</h3>
-    <ul class="listColor" style="list-style: none">
+    <ul class="listColor">
         <li>
             <div class="row">
                 <div class="col-md-2">标题</div>

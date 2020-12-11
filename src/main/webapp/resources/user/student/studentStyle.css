@@ -21,3 +21,16 @@ div{
 a{
     cursor: pointer;
 }
+/*超出部分隐藏*/
+.homeworkList{
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.homeworkList:hover{
+    overflow: visible;
+    white-space: normal;
+}
+.listColor{
+    list-style: none
+}
