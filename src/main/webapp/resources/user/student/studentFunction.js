@@ -13,8 +13,56 @@ let messageDate = [
         title: "第三个标题",
         text: "第三个内容",
         time: "第三个时间"
-    }
+    },
+    {
+        title: "第四个标题",
+        text: "第四个内容",
+        time: "第四个时间"
+    },
+    {
+        title: "第五个标题",
+        text: "第五个内容",
+        time: "第五个时间"
+    },
+    {
+        title: "第六个标题",
+        text: "第六个内容",
+        time: "第六个时间"
+    },
+    {
+        title: "第七个标题",
+        text: "第七个内容",
+        time: "第七个时间"
+    },
+    {
+        title: "第九个标题",
+        text: "第九个内容",
+        time: "第九个时间"
+    },
+    {
+        title: "第十个标题",
+        text: "第十个内容",
+        time: "第十个时间"
+    },
+    {
+        title: "第十一个标题",
+        text: "第十一个内容",
+        time: "第十一个时间"
+    },
+    {
+        title: "第十一个标题",
+        text: "第十一个内容",
+        time: "第十一个时间"
+    },
+    {
+        title: "第十一个标题",
+        text: "第十一个内容",
+        time: "第十一个时间"
+    },
+
 ]
+
+
 window.onload = function () {
     let homeworkBtn = document.getElementById("homeworkInformation"),
         homeworkData = document.getElementById("homeworkData"),
@@ -25,6 +73,8 @@ window.onload = function () {
         resetPasswordBtn = document.getElementById("resetPasswordBtn"),
         resetPassword = document.getElementById("resetPassword"),
         listColor = document.getElementsByClassName("listColor");
+
+    // 页面切换
     homeworkBtn.onclick = function () {
         homeworkData.style.display = "block";
         messageData.style.display = "none";
@@ -48,34 +98,64 @@ window.onload = function () {
             messageData.style.display = "none";
             noticeData.style.display = "none";
             resetPassword.style.display = "block";
-        }
-    for(let i = 0;i<messageDate.length;i++){
-        let li1 = document.createElement('li');
-        li1.innerHTML = '<div class="row"><div class="col-md-2">'+messageDate[i].title+'</div><div class="col-md-8">'+messageDate[i].text+'</div><div class="col-md-2">'+messageDate[i].time+'</div></div>'
-        document.getElementById("messageDateList").appendChild(li1);
-
     }
+
+
+    // 数据填入列表
+    for(let i = 0;i < 6;i++){
+        let messageDateLi = document.createElement('li');
+        messageDateLi.innerHTML = '<div class="row"><div class="col-md-2">' + messageDate[i].title + '</div><div class="col-md-8">' + messageDate[i].text + '</div><div class="col-md-2">' + messageDate[i].time + '</div></div>'
+        document.getElementById("messageDateList").appendChild(messageDateLi);
+    }
+
+    // 分页
+    let Page = messageDate.length/6;
+    if (messageDate.length%6 == 0){
+        for (let j = 1;j <= Page;j++){
+            let pageList = document.createElement('li');
+            pageList.innerHTML = '<a href="#" onclick="paging(' + j + ')">'+j+'</a>';
+            document.getElementById("messagePage").append(pageList);
+        }
+    }else {
+        for (let j = 1;j <= Math.ceil(Page);j++){
+            let pageList = document.createElement('li');
+            pageList.innerHTML = '<a href="#" onclick="paging(' + j + ')">'+j+'</a>';
+            document.getElementById("messagePage").appendChild(pageList);
+        }
+    }
+    let pageList = document.createElement('li');
+    pageList.innerHTML = '<a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>';
+    document.getElementById("messagePage").appendChild(pageList);
+
+    // 隔行换色
     for (let j = 0;j < listColor.length;j++){
         for (let i = 0;i < listColor[j].children.length;i++){
             if (i%2==1){
-                listColor[j].children[i].children[0].style.backgroundColor = "white"
+                listColor[j].children[i].children[0].style.backgroundColor = "white";
             }
         }
     }
-    // 鼠标移入出现弹窗
-    // homeworkBtn.onmouseover = function () {
-    //     console.log("11")
-    // }
-    // for (let i = 0;i < 3;i++){
-    //     btn[i].onclick = function () {
-    //         for (let j = 0;j < 3;j++){
-    //             if (j==i){
-    //                 data[j].style.display = "block";
-    //             }else{
-    //                 data[j].style.display = "none";
-    //             }
-    //         }
-    //     }
-    // }
-
 }
+// 点击换页
+function paging(page) {
+    // 删除<li>
+    for (let i = 0;i < 6;i++){
+        let messageUl = document.getElementById("messageDateList");
+        let messageLi = messageUl.querySelectorAll("li");
+        for (i = 1;i <= 6;i++){
+            messageLi[i].remove();
+        }
+    }
+    // 新增<li>
+    for(let j = page*6-6;j < page*6;j++){
+        let messageDateLi = document.createElement('li');
+        if (j%2==0){
+            messageDateLi.innerHTML = '<div class="row" style="background-color: white"><div class="col-md-2">' + messageDate[j].title + '</div><div class="col-md-8">' + messageDate[j].text + '</div><div class="col-md-2">' + messageDate[j].time + '</div></div>';
+        }else{
+            messageDateLi.innerHTML = '<div class="row"><div class="col-md-2">' + messageDate[j].title + '</div><div class="col-md-8">' + messageDate[j].text + '</div><div class="col-md-2">' + messageDate[j].time + '</div></div>';
+        }
+        document.getElementById("messageDateList").appendChild(messageDateLi);
+    }
+    console.log(1);
+}
+
