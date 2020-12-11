@@ -75,11 +75,25 @@ public class UserDao extends AbstractBaseDao<User, Integer> {
         return queryForOne(User.class, sql, id);
     }
 
-
-    public User queryByType(Integer type) {
+    /**
+     * 通过类型来查找老师的所有信息
+     * @param type 教师：1,学生：2
+     * @return
+     */
+    public List<User> queryByType(Integer type) {
         String sql = "SELECT `id`,`username`,`password`,`name`,`sex`,`age`,`class_id`,`type` FROM `User` WHERE `type`=?";
-        return queryForOne(User.class, sql, type);
+        return queryForList(User.class, sql, type);
     }
+
+//    /**
+//     * 通过类型来查找学生的所有信息
+//     * @param type=2,学生
+//     * @return
+//     */
+//    public User queryByType2(Integer type) {
+//        String sql = "SELECT `id`,`username`,`password`,`name`,`sex`,`age`,`class_id`,`type` FROM `User` WHERE `type`=2";
+//        return queryForOne(User.class, sql, type);
+//    }
 
     @Override
     public List<User> queryByPage(Integer pageNo, Integer pageSize) {

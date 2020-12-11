@@ -35,6 +35,8 @@ CREATE TABLE `NewTable` (
 `describe`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '作业内容' ,
 `class_id`  int(11) NULL DEFAULT NULL ,
 `end_time`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '结束时间' ,
+`attach_title`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '作业附件标题' ,
+`attach_url`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '作业附件路径' ,
 PRIMARY KEY (`id`)
 )
 ENGINE=InnoDB
@@ -42,22 +44,22 @@ DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
 AUTO_INCREMENT=1
 ROW_FORMAT=DYNAMIC
 ;
-# 作业附件
-CREATE TABLE `NewTable` (
-`id`  int(255) NOT NULL AUTO_INCREMENT ,
-`hw_id`  int(255) NULL DEFAULT NULL COMMENT '作业id' ,
-`title`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标题' ,
-`type`  varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '类型' ,
-`url`  varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '附件' ,
-`create_time`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建时间' ,
-`create_man`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人' ,
-PRIMARY KEY (`id`)
-)
-ENGINE=InnoDB
-DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
-AUTO_INCREMENT=1
-ROW_FORMAT=DYNAMIC
-;
+--# 作业附件
+--CREATE TABLE `NewTable` (
+--`id`  int(255) NOT NULL AUTO_INCREMENT ,
+--`hw_id`  int(255) NULL DEFAULT NULL COMMENT '作业id' ,
+--`title`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标题' ,
+--`type`  varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '类型' ,
+--`url`  varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '附件' ,
+--`create_time`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建时间' ,
+--`create_man`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人' ,
+--PRIMARY KEY (`id`)
+--)
+--ENGINE=InnoDB
+--DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+--AUTO_INCREMENT=1
+--ROW_FORMAT=DYNAMIC
+--;
 # 学生作业
 CREATE TABLE `NewTable` (
 `id`  int(255) NOT NULL AUTO_INCREMENT ,
@@ -67,6 +69,8 @@ CREATE TABLE `NewTable` (
 `status`  tinyint(255) NULL DEFAULT NULL COMMENT '审阅状态' ,
 `review_content`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '评阅意见（内容）' ,
 `review_time`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '评阅时间' ,
+`attach_title`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '作业附件标题' ,
+`attach_url`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文件保存路径' ,
 PRIMARY KEY (`id`)
 )
 ENGINE=InnoDB
@@ -74,20 +78,20 @@ DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
 AUTO_INCREMENT=1
 ROW_FORMAT=DYNAMIC
 ;
-# 学生作业附件
-CREATE TABLE `NewTable` (
-`id`  int(255) NOT NULL AUTO_INCREMENT ,
-`stu_hw_id`  int(255) NULL DEFAULT NULL ,
-`title`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标题' ,
-`type`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
-`url`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '路径' ,
-PRIMARY KEY (`id`)
-)
-ENGINE=InnoDB
-DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
-AUTO_INCREMENT=1
-ROW_FORMAT=DYNAMIC
-;
+--# 学生作业附件
+--CREATE TABLE `NewTable` (
+--`id`  int(255) NOT NULL AUTO_INCREMENT ,
+--`stu_hw_id`  int(255) NULL DEFAULT NULL ,
+--`title`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标题' ,
+--`type`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+--`url`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '路径' ,
+--PRIMARY KEY (`id`)
+--)
+--ENGINE=InnoDB
+--DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+--AUTO_INCREMENT=1
+--ROW_FORMAT=DYNAMIC
+--;
 # 公告
 CREATE TABLE `NewTable` (
 `id`  int(11) NULL DEFAULT NULL ,

@@ -1,7 +1,6 @@
 package io.team.work.model.bean;
 
 
-
 /**
  * 作者：liuxuhui
  * 日期: 2020/12/9 9:35
@@ -14,6 +13,8 @@ public class Homework {
     private String describe;
     private String end_time;
     private Integer class_id;
+    private String attach_title;
+    private String attach_url;
 
     public Homework() {
     }
@@ -66,6 +67,22 @@ public class Homework {
         this.class_id = class_id;
     }
 
+    public String getAttach_title() {
+        return attach_title;
+    }
+
+    public void setAttach_title(String attach_title) {
+        this.attach_title = attach_title;
+    }
+
+    public String getAttach_url() {
+        return attach_url;
+    }
+
+    public void setAttach_url(String attach_url) {
+        this.attach_url = attach_url;
+    }
+
     @Override
     public String toString() {
         return "Homework{" +
@@ -75,6 +92,8 @@ public class Homework {
                 ", describe='" + describe + '\'' +
                 ", end_time='" + end_time + '\'' +
                 ", class_id=" + class_id +
+                ", attach_title='" + attach_title + '\'' +
+                ", attach_url='" + attach_url + '\'' +
                 '}';
     }
 }

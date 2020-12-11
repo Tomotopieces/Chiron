@@ -1,7 +1,6 @@
 package io.team.work.model.service.impl;
 
 import io.team.work.model.bean.User;
-import io.team.work.model.dao.Dao;
 import io.team.work.model.dao.impl.UserDao;
 import io.team.work.model.service.AbstractBaseService;
 
@@ -40,8 +39,7 @@ public class UserService extends AbstractBaseService<User, Integer> {
      * @return 类型为教师的用户列表
      */
     public List<User> listTeachers() {
-        // todo
-        return null;
+        return userDao.queryByType(1);
     }
 
     /**
@@ -50,8 +48,7 @@ public class UserService extends AbstractBaseService<User, Integer> {
      * @return 类型为学生的用户列表
      */
     public List<User> listStudents() {
-        // todo
-        return null;
+        return userDao.queryByType(2);
     }
 
     /**

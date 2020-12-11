@@ -24,8 +24,8 @@ public class HomeworkDao extends AbstractBaseDao<Homework, Integer> {
 
     @Override
     public int insert(Homework homework) {
-        String sql = "INSERT INTO `Homework`(`teacher_id`,`title`,`describe`,`class_id`,`end_time`) VALUES(?,?,?,?,?)";
-        return update(sql, homework.getTeacher_id(), homework.getTitle(), homework.getDescribe(), homework.getClass_id(), homework.getEnd_time());
+        String sql = "INSERT INTO `Homework`(`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attach_title`,`attach_url`) VALUES(?,?,?,?,?,?,?)";
+        return update(sql, homework.getTeacher_id(), homework.getTitle(), homework.getDescribe(), homework.getClass_id(), homework.getEnd_time(),homework.getAttach_title(),homework.getAttach_url());
     }
 
     @Override
@@ -38,25 +38,25 @@ public class HomeworkDao extends AbstractBaseDao<Homework, Integer> {
 
 
     public int update(Homework homework) {
-        String sql = "UPDATE `Homework` SET `teacher_id`=?,`title`=?,`describe`=?,`class_id`=?,`end_time`=? WHERE `id`=?";
-        return update(sql, homework.getTeacher_id(), homework.getTitle(), homework.getDescribe(), homework.getClass_id(), homework.getEnd_time());
+        String sql = "UPDATE `Homework` SET `teacher_id`=?,`title`=?,`describe`=?,`class_id`=?,`end_time`=?,`attach_title`=?,`attach_url`=? WHERE `id`=?";
+        return update(sql, homework.getTeacher_id(), homework.getTitle(), homework.getDescribe(), homework.getClass_id(), homework.getEnd_time(),homework.getAttach_title(),homework.getAttach_url(),homework.getId());
     }
 
     @Override
     public List<Homework> queryAll() {
-        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time` FROM `Homework`";
+        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attach_title`,`attach_url` FROM `Homework`";
         return queryForList(Homework.class, sql);
     }
 
     @Override
     public Homework queryById(Integer id) {
-        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time` FROM `Homework` WHERE `id`=?";
+        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attach_title`,`attach_url` FROM `Homework` WHERE `id`=?";
         return queryForOne(Homework.class, sql, id);
     }
 
     @Override
     public List<Homework> queryByPage(Integer pageNo, Integer pageSize) {
-        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time` FROM `Homework` LIMIT ?,?";
+        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attach_title`,`attach_url` FROM `Homework` LIMIT ?,?";
         return queryForList(Homework.class, sql, pageNo, pageSize);
     }
 
@@ -66,14 +66,14 @@ public class HomeworkDao extends AbstractBaseDao<Homework, Integer> {
         return Math.toIntExact(queryForSingleValue(sql));
     }
 
-    public Homework queryByTeacherId(Homework homework) {
-        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time` FROM `Homework` WHERE `teacher_id`=?";
-        return queryForOne(Homework.class, sql, homework.getTeacher_id());
+    public List<Homework> queryByTeacherId(Integer teacher_id) {
+        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attach_title`,`attach_url` FROM `Homework` WHERE `teacher_id`=?";
+        return queryForList(Homework.class, sql, teacher_id);
     }
 
-    public Homework queryByClassId(Homework homework) {
-        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time` FROM `Homework` WHERE `class_id`=?";
-        return queryForOne(Homework.class, sql, homework.getClass_id());
+    public List<Homework> queryByClassId(Integer class_id) {
+        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attach_title`,`attach_url` FROM `Homework` WHERE `class_id`=?";
+        return queryForList(Homework.class, sql, class_id);
     }
 
 

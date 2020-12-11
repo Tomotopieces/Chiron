@@ -13,6 +13,8 @@ public class StudentHomework {
     private String title;
     private String review_time;
     private String review_content;
+    private String attach_title;
+    private String attach_url;
 
     public StudentHomework() {
     }
@@ -73,6 +75,22 @@ public class StudentHomework {
         this.title = title;
     }
 
+    public String getAttach_title() {
+        return attach_title;
+    }
+
+    public void setAttach_title(String attach_title) {
+        this.attach_title = attach_title;
+    }
+
+    public String getAttach_url() {
+        return attach_url;
+    }
+
+    public void setAttach_url(String attach_url) {
+        this.attach_url = attach_url;
+    }
+
     @Override
     public String toString() {
         return "StudentHomework{" +
@@ -83,6 +101,8 @@ public class StudentHomework {
                 ", title='" + title + '\'' +
                 ", review_time='" + review_time + '\'' +
                 ", review_content='" + review_content + '\'' +
+                ", attach_title='" + attach_title + '\'' +
+                ", attach_url='" + attach_url + '\'' +
                 '}';
     }
 }

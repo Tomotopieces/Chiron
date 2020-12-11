@@ -35,8 +35,7 @@ public class HomeworkService extends AbstractBaseService<Homework, Integer> {
      * @return 教师布置作业列表
      */
     public List<Homework> listByClassId(Integer classId) {
-        // todo
-        return null;
+        return homeworkDao.queryByClassId(classId);
     }
 
     /**
@@ -46,8 +45,7 @@ public class HomeworkService extends AbstractBaseService<Homework, Integer> {
      * @return 教师布置作业列表
      */
     public List<Homework> listByTeacherId(Integer teacherId) {
-        // todo
-        return null;
+        return homeworkDao.queryByTeacherId(teacherId);
     }
 
     private static final class Instance {
