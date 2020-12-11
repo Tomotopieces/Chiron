@@ -1,7 +1,9 @@
 package io.team.work.model.service.impl;
 
 import io.team.work.model.bean.User;
+import io.team.work.model.dao.Dao;
 import io.team.work.model.dao.impl.UserDao;
+import io.team.work.model.service.AbstractBaseService;
 
 import java.util.List;
 
@@ -12,50 +14,61 @@ import java.util.List;
  * <p>
  * 2020/12/10 10:01
  */
-public class UserService {
-    private  final UserDao userDao=UserDao.getInstance();
-    private UserService(){
-    }
-    public static UserService getInstance(){
-        return Instance.INSTANCE;
-    }
-    //增加用户
-    public Boolean addUser(User user){
-        return userDao.insert(user)==1;
-    }
-    //删除
-    public Boolean removeUser(Integer id){
-        return userDao.delete(id)==1;
-    }
-    //根据Id查询
-    public User getUserById(Integer id){
-        return userDao.queryById(id);
+public class UserService extends AbstractBaseService<User, Integer> {
+    private final UserDao userDao = UserDao.getInstance();
+
+    private UserService() {
     }
 
-   //根据用户名查询
+    public static UserService getInstance() {
+        return Instance.INSTANCE;
+    }
+
+    /**
+     * 根据用户名获取用户
+     *
+     * @param username 用户名
+     * @return 用户
+     */
     public User getUserByUsername(String username) {
         return userDao.queryByUsername(username);
     }
-    //登录
-    public Boolean login(String username,String password){
-      User user =  userDao.queryByUsername(username);
-        return user!=null&&user.getPassword().equals(password);
+
+    /**
+     * 获取所有教师用户
+     *
+     * @return 类型为教师的用户列表
+     */
+    public List<User> listTeachers() {
+        // todo
+        return null;
     }
-    //查询所有
-    public List<User> listUsers() {
-        return userDao.queryAll();
+
+    /**
+     * 获取所有学生用户
+     *
+     * @return 类型为学生的用户列表
+     */
+    public List<User> listStudents() {
+        // todo
+        return null;
     }
-    //分页查询
-    public List<User> getUsersByPage(Integer pageNo,Integer pageSize) {
-        return userDao.queryByPage(pageNo, pageSize);
+
+    /**
+     * 登录判断
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @return 登陆成功与否
+     */
+    public Boolean login(String username, String password) {
+        User user = userDao.queryByUsername(username);
+        return user != null && user.getPassword().equals(password);
     }
-    //每次只显示5页的分页
-    public List<User> getUsersByPage(Integer pageNo) {
-        return userDao.queryByPage(pageNo, 5);
-    }
-    //更新
-    public <P> Boolean updateUser(Integer id, String attribute, P propertyValue) {
-        return userDao.update(id, attribute, propertyValue) == 1;
+
+    @Override
+    protected UserDao getDao() {
+        return userDao;
     }
 
     private static final class Instance {

@@ -1,7 +1,7 @@
 package io.team.work.model.dao.impl;
 
 import io.team.work.model.bean.Homework;
-import io.team.work.model.dao.BaseDao;
+import io.team.work.model.dao.AbstractBaseDao;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * 日期: 2020/12/9 16:20
  * 描述:作业
  */
-public class HomeworkDao extends BaseDao<Homework, Integer> {
+public class HomeworkDao extends AbstractBaseDao<Homework, Integer> {
     private HomeworkDao(){
     }
 

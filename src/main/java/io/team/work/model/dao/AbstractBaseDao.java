@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public abstract class BaseDao<T, ID> implements Dao<T, ID> {
+public abstract class AbstractBaseDao<T, ID> implements Dao<T, ID> {
     //等价于一阶段PrepareStatement语句执行平台
     protected QueryRunner queryRunner = new QueryRunner();
 

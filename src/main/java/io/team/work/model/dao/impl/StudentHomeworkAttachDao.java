@@ -1,7 +1,7 @@
 package io.team.work.model.dao.impl;
 
 import io.team.work.model.bean.StudentHomeworkAttach;
-import io.team.work.model.dao.BaseDao;
+import io.team.work.model.dao.AbstractBaseDao;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * 日期: 2020/12/9 19:06
  * 描述:学生作业附件
  */
-public class StudentHomeworkAttachDao extends BaseDao<StudentHomeworkAttach, Integer> {
+public class StudentHomeworkAttachDao extends AbstractBaseDao<StudentHomeworkAttach, Integer> {
     private StudentHomeworkAttachDao(){}
 
     private static final String TABLE_NAME = "Stu_hw_attach";

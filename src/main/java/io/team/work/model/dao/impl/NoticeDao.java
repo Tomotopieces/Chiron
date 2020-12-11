@@ -1,8 +1,7 @@
 package io.team.work.model.dao.impl;
 
 import io.team.work.model.bean.Notice;
-import io.team.work.model.bean.User;
-import io.team.work.model.dao.BaseDao;
+import io.team.work.model.dao.AbstractBaseDao;
 
 import java.util.List;
 
@@ -11,7 +10,7 @@ import java.util.List;
  * 日期: 2020/12/9 20:12
  * 描述:
  */
-public class NoticeDao extends BaseDao<Notice, Integer> {
+public class NoticeDao extends AbstractBaseDao<Notice, Integer> {
     private NoticeDao(){}
 
     private static final String TABLE_NAME = "Notice";

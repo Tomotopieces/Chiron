@@ -1,7 +1,7 @@
 package io.team.work.model.dao.impl;
 
 import io.team.work.model.bean.Message;
-import io.team.work.model.dao.BaseDao;
+import io.team.work.model.dao.AbstractBaseDao;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * <p>
  * 2020/12/9 20:44
  */
-public class MessageDao extends BaseDao<Message, Integer> {
+public class MessageDao extends AbstractBaseDao<Message, Integer> {
 
     private MessageDao() {
     }

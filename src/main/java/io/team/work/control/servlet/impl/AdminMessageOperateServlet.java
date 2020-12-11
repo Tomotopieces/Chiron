@@ -1,13 +1,15 @@
 package io.team.work.control.servlet.impl;
 
-import io.team.work.control.servlet.BaseServlet;
+import io.team.work.control.servlet.AbstractBaseServlet;
+import io.team.work.model.service.impl.MessageService;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
+import static io.team.work.util.ServletUtil.*;
 import static io.team.work.util.ServletUtil.RequestParameterName.REMOVE_MESSAGE_ID;
-import static io.team.work.util.ServletUtil.writeResult;
 
 /**
  * 管理员留言板相关操作Servlet类.
@@ -17,7 +19,7 @@ import static io.team.work.util.ServletUtil.writeResult;
  * 2020/12/9 16:34
  */
 @WebServlet("/admin.message.do")
-public class AdminMessageOperateServlet extends BaseServlet {
+public class AdminMessageOperateServlet extends AbstractBaseServlet {
     private static final MessageService MESSAGE_SERVICE = MessageService.getInstance();
 
     /**
@@ -25,7 +27,9 @@ public class AdminMessageOperateServlet extends BaseServlet {
      * <p>
      * 动作函数
      */
-    public void removeMessage(HttpServletRequest request, HttpServletResponse response) {
-        writeResult(MESSAGE_SERVICE.remove(REMOVE_MESSAGE_ID));
+    public void removeMessage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().write(
+                ResponseDataWrapper.of(
+                        MESSAGE_SERVICE.remove(Integer.valueOf(request.getParameter(REMOVE_MESSAGE_ID)))));
     }
 }

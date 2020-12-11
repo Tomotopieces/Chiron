@@ -1,10 +1,12 @@
 package io.team.work.control.servlet.impl;
 
 import io.team.work.model.bean.Notice;
+import io.team.work.model.service.impl.NoticeService;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Date;
 
 import static io.team.work.util.DateTimeUtil.DATE_TIME_FORMAT;
@@ -14,7 +16,7 @@ import static io.team.work.util.ServletUtil.RequestParameterName.REMOVE_NOTICE_I
 import static io.team.work.util.ServletUtil.RequestParameterName.UPDATE_NOTICE_ID;
 import static io.team.work.util.ServletUtil.RequestParameterName.UPDATE_NOTICE_PROPERTY_NAME;
 import static io.team.work.util.ServletUtil.RequestParameterName.UPDATE_NOTICE_PROPERTY_VALUE;
-import static io.team.work.util.ServletUtil.writeResult;
+import static io.team.work.util.ServletUtil.ResponseDataWrapper;
 
 /**
  * 管理员公告板相关操作Servlet类.
@@ -32,7 +34,7 @@ public class AdminNoticeOperateServlet {
      * <p>
      * 动作函数.
      */
-    public void addNotice(HttpServletRequest request, HttpServletResponse response) {
+    public void addNotice(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String title = request.getParameter(ADD_NOTICE_TITLE);
         String content = request.getParameter(ADD_NOTICE_CONTENT);
 
@@ -41,7 +43,7 @@ public class AdminNoticeOperateServlet {
         notice.setContent(content);
         notice.setCreate_time(DATE_TIME_FORMAT.format(new Date()));
 
-        writeResult(NOTICE_SERVICE.add(notice));
+        response.getWriter().write(ResponseDataWrapper.of(NOTICE_SERVICE.add(notice)));
     }
 
     /**
@@ -49,8 +51,10 @@ public class AdminNoticeOperateServlet {
      * <p>
      * 动作函数.
      */
-    public void removeNotice(HttpServletRequest request, HttpServletResponse response) {
-        writeResult(NOTICE_SERVICE.remove(request.getParameter(REMOVE_NOTICE_ID)));
+    public void removeNotice(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().write(
+                ResponseDataWrapper.of(
+                        NOTICE_SERVICE.remove(Integer.valueOf(request.getParameter(REMOVE_NOTICE_ID)))));
     }
 
     /**
@@ -58,11 +62,12 @@ public class AdminNoticeOperateServlet {
      * <p>
      * 动作函数.
      */
-    public void updateNotice(HttpServletRequest request, HttpServletResponse response) {
+    public void updateNotice(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Integer noticeId = Integer.valueOf(request.getParameter(UPDATE_NOTICE_ID));
         String propertyName = request.getParameter(UPDATE_NOTICE_PROPERTY_NAME);
         String propertyValue = request.getParameter(UPDATE_NOTICE_PROPERTY_VALUE);
 
-        writeResult(NOTICE_SERVICE.update(noticeId, propertyName, propertyValue));
+        response.getWriter().write(
+                ResponseDataWrapper.of(NOTICE_SERVICE.update(noticeId, propertyName, propertyValue)));
     }
 }

@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <div id="mainContent">
+    <div id="mainContainer">
         <div id="backgroundImage"></div>
         <div id="mainBlock">
             <div id="centerBlock">
@@ -24,20 +24,21 @@
                 <h3 id="subtitle">登录 CHIRON</h3>
                 <div id="loginBlock" class="container">
                     <form>
-                        <div id="typeSelector" class="form-group">
-                            <div class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-primary active">
-                                    <input type="radio" name="type" autocomplete="off" value="student" checked>学生
-                                </label>
-                                <label class="btn btn-primary">
-                                    <input type="radio" name="type" autocomplete="off" value="teacher">教师
-                                </label>
-                                <label class="btn btn-primary">
-                                    <input type="radio" name="type" autocomplete="off" value="admin">管理员
-                                </label>
-                            </div>
-                        </div>
+<!--                        <div id="typeSelector" class="form-group">-->
+<!--                            <div class="btn-group" data-toggle="buttons">-->
+<!--                                <label class="btn btn-primary active">-->
+<!--                                    <input type="radio" name="type" autocomplete="off" value="student" checked>学生-->
+<!--                                </label>-->
+<!--                                <label class="btn btn-primary">-->
+<!--                                    <input type="radio" name="type" autocomplete="off" value="teacher">教师-->
+<!--                                </label>-->
+<!--                                <label class="btn btn-primary">-->
+<!--                                    <input type="radio" name="type" autocomplete="off" value="admin">管理员-->
+<!--                                </label>-->
+<!--                            </div>-->
+<!--                        </div>-->
                         <div class="form-group">
+                            <label for="username">&nbsp;&nbsp;账户</label>
                             <div class="input-group">
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-user"></span>
@@ -47,6 +48,7 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="password">&nbsp;&nbsp;密码</label>
                             <div class="input-group">
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-lock"></span>

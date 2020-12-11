@@ -1,9 +1,11 @@
 package io.team.work.control.servlet.impl;
 
-import io.team.work.control.servlet.BaseServlet;
+import io.team.work.control.servlet.AbstractBaseServlet;
 import io.team.work.model.bean.Homework;
 import io.team.work.model.bean.StudentHomework;
 import io.team.work.model.bean.User;
+import io.team.work.model.service.impl.HomeworkService;
+import io.team.work.model.service.impl.StudentHomeworkService;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,15 +14,14 @@ import java.io.IOException;
 import java.util.List;
 
 import static io.team.work.util.BeanUtil.PROPERTY_REVIEW_CONTENT;
-import static io.team.work.util.ServletUtil.GSON;
 import static io.team.work.util.ServletUtil.RequestParameterName.ASSIGN_HOMEWORK_CLASS_ID;
 import static io.team.work.util.ServletUtil.RequestParameterName.ASSIGN_HOMEWORK_DESCRIBE;
 import static io.team.work.util.ServletUtil.RequestParameterName.ASSIGN_HOMEWORK_END_TIME;
 import static io.team.work.util.ServletUtil.RequestParameterName.ASSIGN_HOMEWORK_TITLE;
 import static io.team.work.util.ServletUtil.RequestParameterName.REVIEW_HOMEWORK_ID;
 import static io.team.work.util.ServletUtil.RequestParameterName.REVIEW_HOMEWORK_REVIEW_CONTENT;
+import static io.team.work.util.ServletUtil.ResponseDataWrapper;
 import static io.team.work.util.ServletUtil.SessionAttributeName.USER;
-import static io.team.work.util.ServletUtil.writeResult;
 
 /**
  * 教师相关操作Servlet类.
@@ -30,7 +31,7 @@ import static io.team.work.util.ServletUtil.writeResult;
  * 2020/12/9 9:14
  */
 @WebServlet("/teacher.do")
-public class TeacherServlet extends BaseServlet {
+public class TeacherServlet extends AbstractBaseServlet {
     private static final HomeworkService HOMEWORK_SERVICE = HomeworkService.getInstance();
     private static final StudentHomeworkService STUDENT_HOMEWORK_SERVICE = StudentHomeworkService.getInstance();
 
@@ -41,8 +42,8 @@ public class TeacherServlet extends BaseServlet {
      */
     public void getAssignedHomeworkList(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User teacher = (User) request.getSession().getAttribute(USER);
-        List<Homework> homeworkList = HOMEWORK_SERVICE.listHomeworkByTeacherId(teacher.getId());
-        response.getWriter().write(GSON.toJson(homeworkList));
+        List<Homework> homeworkList = HOMEWORK_SERVICE.listByTeacherId(teacher.getId());
+        response.getWriter().write(ResponseDataWrapper.of(homeworkList));
     }
 
     /**
@@ -52,8 +53,8 @@ public class TeacherServlet extends BaseServlet {
      */
     public void getSubmittedHomeworkList(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User teacher = (User) request.getSession().getAttribute(USER);
-        List<StudentHomework> studentHomeworkList = STUDENT_HOMEWORK_SERVICE.listHomeworkByTeacherId(teacher.getId());
-        response.getWriter().write(GSON.toJson(studentHomeworkList));
+        List<StudentHomework> studentHomeworkList = STUDENT_HOMEWORK_SERVICE.listByTeacherId(teacher.getId());
+        response.getWriter().write(ResponseDataWrapper.of(studentHomeworkList));
     }
 
     /**
@@ -76,7 +77,7 @@ public class TeacherServlet extends BaseServlet {
         homework.setEnd_time(endTime);
         homework.setClass_id(classId);
 
-        writeResult(HOMEWORK_SERVICE.add(homework), response);
+        response.getWriter().write(ResponseDataWrapper.of(HOMEWORK_SERVICE.add(homework)));
     }
 
     /**
@@ -85,7 +86,9 @@ public class TeacherServlet extends BaseServlet {
      * 动作函数.
      */
     public void deleteHomework(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        writeResult(HOMEWORK_SERVICE.remove(request.getParameter(REVIEW_HOMEWORK_ID)), response);
+        response.getWriter().write(
+                ResponseDataWrapper.of(
+                        HOMEWORK_SERVICE.remove(Integer.valueOf(request.getParameter(REVIEW_HOMEWORK_ID)))));
     }
 
     /**
@@ -94,8 +97,11 @@ public class TeacherServlet extends BaseServlet {
      * 动作函数.
      */
     public void reviewHomework(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String homeworkId = request.getParameter(REVIEW_HOMEWORK_ID);
+        int homeworkId = Integer.parseInt(request.getParameter(REVIEW_HOMEWORK_ID));
         String reviewContent = request.getParameter(REVIEW_HOMEWORK_REVIEW_CONTENT);
-        writeResult(STUDENT_HOMEWORK_SERVICE.update(homeworkId, PROPERTY_REVIEW_CONTENT, reviewContent), response);
+        response.getWriter().write(
+                ResponseDataWrapper.of(
+                        STUDENT_HOMEWORK_SERVICE.update(
+                                homeworkId, PROPERTY_REVIEW_CONTENT, reviewContent)));
     }
 }

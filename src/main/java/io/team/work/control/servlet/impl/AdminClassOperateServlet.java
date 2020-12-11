@@ -1,18 +1,18 @@
 package io.team.work.control.servlet.impl;
 
-import io.team.work.control.servlet.BaseServlet;
+import io.team.work.control.servlet.AbstractBaseServlet;
 import io.team.work.model.bean.Clazz;
+import io.team.work.model.service.impl.ClazzService;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static io.team.work.util.ServletUtil.GSON;
 import static io.team.work.util.ServletUtil.RequestParameterName.ADD_CLASS_CLASS_NAME;
 import static io.team.work.util.ServletUtil.RequestParameterName.ADD_CLASS_CLASS_NO;
 import static io.team.work.util.ServletUtil.RequestParameterName.REMOVE_CLASS_ID;
-import static io.team.work.util.ServletUtil.writeResult;
+import static io.team.work.util.ServletUtil.ResponseDataWrapper;
 
 /**
  * 管理员班级相关操作Servlet类.
@@ -22,15 +22,15 @@ import static io.team.work.util.ServletUtil.writeResult;
  * 2020/12/9 16:32
  */
 @WebServlet("/admin.class.do")
-public class AdminClassOperateServlet extends BaseServlet {
-    private static final ClassService CLASS_SERVICE = ClassService.getInstance();
+public class AdminClassOperateServlet extends AbstractBaseServlet {
+    private static final ClazzService CLAZZ_SERVICE = ClazzService.getInstance();
 
     /**
      * 添加新班级.
      * <p>
      * 动作函数.
      */
-    public void addClass(HttpServletRequest request, HttpServletResponse response) {
+    public void addClass(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String classNo = request.getParameter(ADD_CLASS_CLASS_NO);
         String className = request.getParameter(ADD_CLASS_CLASS_NAME);
 
@@ -38,7 +38,7 @@ public class AdminClassOperateServlet extends BaseServlet {
         clazz.setClassNo(classNo);
         clazz.setClassName(className);
 
-        writeResult(CLASS_SERVICE.add(clazz));
+        response.getWriter().write(ResponseDataWrapper.of(CLAZZ_SERVICE.add(clazz)));
     }
 
     /**
@@ -46,8 +46,10 @@ public class AdminClassOperateServlet extends BaseServlet {
      * <p>
      * 动作函数.
      */
-    public void removeClass(HttpServletRequest request, HttpServletResponse response) {
-        writeResult(CLASS_SERVICE.remove(request.getParameter(REMOVE_CLASS_ID)));
+    public void removeClass(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().write(
+                ResponseDataWrapper.of(
+                        CLAZZ_SERVICE.remove(Integer.valueOf(request.getParameter(REMOVE_CLASS_ID)))));
     }
 
     /**
@@ -56,6 +58,6 @@ public class AdminClassOperateServlet extends BaseServlet {
      * 动作函数.
      */
     public void getClasses(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.getWriter().write(GSON.toJson(CLASS_SERVICE.listClasses()));
+        response.getWriter().write(ResponseDataWrapper.of(CLAZZ_SERVICE.list()));
     }
 }

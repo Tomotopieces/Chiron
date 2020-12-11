@@ -1,9 +1,13 @@
 package io.team.work.control.servlet.impl;
 
-import io.team.work.control.servlet.BaseServlet;
+import io.team.work.control.servlet.AbstractBaseServlet;
 import io.team.work.model.bean.Message;
 import io.team.work.model.bean.Notice;
 import io.team.work.model.bean.User;
+import io.team.work.model.service.impl.MessageService;
+import io.team.work.model.service.impl.NoticeService;
+import io.team.work.model.service.impl.UserService;
+import io.team.work.util.ServletUtil.ResponseDataWrapper;
 import io.team.work.util.UserUtil;
 
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +19,6 @@ import java.util.List;
 
 import static io.team.work.util.BeanUtil.PROPERTY_PASSWORD;
 import static io.team.work.util.DateTimeUtil.DATE_TIME_FORMAT;
-import static io.team.work.util.ServletUtil.GSON;
 import static io.team.work.util.ServletUtil.PROJECT_PATH;
 import static io.team.work.util.ServletUtil.RequestParameterName.LOGIN_PASSWORD;
 import static io.team.work.util.ServletUtil.RequestParameterName.LOGIN_USERNAME;
@@ -26,7 +29,6 @@ import static io.team.work.util.ServletUtil.RequestParameterName.RESET_PASSWORD_
 import static io.team.work.util.ServletUtil.ResponseMessage.ILLEGAL_USERNAME;
 import static io.team.work.util.ServletUtil.ResponseMessage.WRONG_USERNAME_OR_PASSWORD;
 import static io.team.work.util.ServletUtil.SessionAttributeName.USER;
-import static io.team.work.util.ServletUtil.writeResult;
 
 /**
  * 用户基本操作Servlet类.
@@ -36,7 +38,7 @@ import static io.team.work.util.ServletUtil.writeResult;
  * 2020/12/8 15:43
  */
 @WebServlet("user.do")
-public class UserServlet extends BaseServlet {
+public class UserServlet extends AbstractBaseServlet {
     private static final UserService USER_SERVICE = UserService.getInstance();
     private static final MessageService MESSAGE_SERVICE = MessageService.getInstance();
     private static final NoticeService NOTICE_SERVICE = NoticeService.getInstance();
@@ -50,28 +52,17 @@ public class UserServlet extends BaseServlet {
         String username = request.getParameter(LOGIN_USERNAME);
         String password = request.getParameter(LOGIN_PASSWORD);
 
-        String spacePage;
-        Integer role = UserUtil.roleCheck(username);
-        switch (role) { // 通过类型来决定重定向的地址
-            case UserUtil.ADMIN_ACCOUNT:
-                spacePage = UserUtil.ADMIN_SPACE;
-                break;
-            case UserUtil.TEACHER_ACCOUNT:
-                spacePage = UserUtil.TEACHER_SPACE;
-                break;
-            case UserUtil.STUDENT_ACCOUNT:
-                spacePage = UserUtil.STUDENT_SPACE;
-                break;
-            default: // 非法用户名
-                response.getWriter().write(ILLEGAL_USERNAME);
-                return;
+        String spacePage = UserUtil.getSpace(UserUtil.getType(username));
+        if (spacePage == null) {
+            response.getWriter().write(ResponseDataWrapper.of(false, ILLEGAL_USERNAME));
         }
+        String spacePath = PROJECT_PATH + spacePage;
 
         if (USER_SERVICE.login(username, password)) { // 如果登陆成功
             request.getSession().setAttribute(USER, USER_SERVICE.getUserByUsername(username));
-            response.sendRedirect(PROJECT_PATH + spacePage);
+            response.getWriter().write(ResponseDataWrapper.of(spacePath));
         } else {
-            response.getWriter().write(WRONG_USERNAME_OR_PASSWORD);
+            response.getWriter().write(ResponseDataWrapper.of(false, WRONG_USERNAME_OR_PASSWORD));
         }
     }
 
@@ -82,7 +73,7 @@ public class UserServlet extends BaseServlet {
      */
     public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.getSession().invalidate();
-        response.sendRedirect(PROJECT_PATH);
+        response.getWriter().write(ResponseDataWrapper.of(true));
     }
 
     /**
@@ -93,7 +84,8 @@ public class UserServlet extends BaseServlet {
     public void passwordCheck(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String password = request.getParameter(RESET_PASSWORD_OLD_PASSWORD);
         User user = (User) request.getSession().getAttribute(USER);
-        writeResult(user.getPassword().equals(password), response);
+
+        response.getWriter().write(ResponseDataWrapper.of(true, user.getPassword().equals(password)));
     }
 
     /**
@@ -101,12 +93,15 @@ public class UserServlet extends BaseServlet {
      * <p>
      * 动作函数
      */
-    public void resetPassword(HttpServletRequest request, HttpServletResponse response) {
+    public void resetPassword(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String newPassword = request.getParameter(RESET_PASSWORD_NEW_PASSWORD);
         User user = (User) request.getSession().getAttribute(USER);
+
         user.setPassword(newPassword);
         request.getSession().setAttribute(USER, user);
-        USER_SERVICE.update(user.getId(), PROPERTY_PASSWORD, newPassword);
+
+        response.getWriter().write(
+                ResponseDataWrapper.of(USER_SERVICE.update(user.getId(), PROPERTY_PASSWORD, newPassword)));
     }
 
     /**
@@ -114,7 +109,7 @@ public class UserServlet extends BaseServlet {
      * <p>
      * 动作函数.
      */
-    public void leaveMessage(HttpServletRequest request, HttpServletResponse response) {
+    public void leaveMessage(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String title = request.getParameter(MESSAGE_TITLE);
         String content = request.getParameter(MESSAGE_CONTENT);
 
@@ -123,7 +118,7 @@ public class UserServlet extends BaseServlet {
         message.setContent(content);
         message.setCreate_time(DATE_TIME_FORMAT.format(new Date()));
 
-        writeResult(MESSAGE_SERVICE.add(message), response);
+        response.getWriter().write(ResponseDataWrapper.of(MESSAGE_SERVICE.add(message)));
     }
 
     /**
@@ -132,8 +127,8 @@ public class UserServlet extends BaseServlet {
      * 动作函数.
      */
     public void getMessageList(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        List<Message> messageList = MESSAGE_SERVICE.listMessages();
-        response.getWriter().write(GSON.toJson(messageList));
+        List<Message> messageList = MESSAGE_SERVICE.list();
+        response.getWriter().write(ResponseDataWrapper.of(messageList));
     }
 
     /**
@@ -142,7 +137,7 @@ public class UserServlet extends BaseServlet {
      * 动作函数.
      */
     public void getNoticeList(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        List<Notice> noticeList = NOTICE_SERVICE.listNotices();
-        response.getWriter().write(GSON.toJson(noticeList));
+        List<Notice> noticeList = NOTICE_SERVICE.list();
+        response.getWriter().write(ResponseDataWrapper.of(noticeList));
     }
 }

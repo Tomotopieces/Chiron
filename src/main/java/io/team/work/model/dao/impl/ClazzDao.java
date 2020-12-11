@@ -1,12 +1,9 @@
 package io.team.work.model.dao.impl;
 
 import io.team.work.model.bean.Clazz;
-import io.team.work.model.dao.BaseDao;
-import io.team.work.util.JdbcUtils;
+import io.team.work.model.dao.AbstractBaseDao;
 
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -14,7 +11,7 @@ import java.util.List;
  * 日期: 2020/12/9 15:37
  * 描述:班级
  */
-public class ClazzDao extends BaseDao<Clazz, Integer> {
+public class ClazzDao extends AbstractBaseDao<Clazz, Integer> {
     private ClazzDao(){}
 
     private static final String TABLE_NAME = "Clazz";

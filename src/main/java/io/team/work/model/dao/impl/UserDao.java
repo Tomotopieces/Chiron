@@ -2,7 +2,7 @@ package io.team.work.model.dao.impl;
 
 
 import io.team.work.model.bean.User;
-import io.team.work.model.dao.BaseDao;
+import io.team.work.model.dao.AbstractBaseDao;
 import io.team.work.util.JdbcUtils;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 
@@ -16,7 +16,7 @@ import java.util.List;
  * 日期: 2020/12/9 14:17
  * 描述:用户
  */
-public class UserDao extends BaseDao<User, Integer> {
+public class UserDao extends AbstractBaseDao<User, Integer> {
     private UserDao() {
     }
 

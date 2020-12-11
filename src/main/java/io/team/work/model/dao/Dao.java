@@ -30,5 +30,4 @@ public interface Dao<T, ID> {
 
     //计数
     Integer CountAll();
-
 }

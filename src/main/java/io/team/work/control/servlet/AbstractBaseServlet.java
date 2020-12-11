@@ -19,7 +19,7 @@ import java.lang.reflect.Method;
  * <p>
  * 2020/12/8 15:36
  */
-public class BaseServlet extends HttpServlet {
+public class AbstractBaseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req, resp);

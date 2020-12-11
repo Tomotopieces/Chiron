@@ -6,7 +6,7 @@ html, body {
     height: 100%;
 }
 
-#mainContent {
+#mainContainer {
     display: none;
 }
 
@@ -18,7 +18,6 @@ html, body {
 
 #centerBlock {
     background-color: rgba(0,0,0, 0.7);
-    /* position: absolute; */
     width: 70%;
     height: 100%;
     margin: 0 auto;

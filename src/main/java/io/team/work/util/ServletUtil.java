@@ -19,22 +19,20 @@ import static io.team.work.util.ServletUtil.ResponseMessage.TRUE;
  */
 public class ServletUtil {
     public static final Gson GSON = new Gson();
-
+    // 项目路径
+    public static final String PROJECT_PATH = "/Chiron";
     private static final String STUDENT_HOMEWORK_SAVE_PATH = "/resources/studentHomework/";
     private static final String HOMEWORK_SAVE_PATH = "/resources/homework/";
 
-    // 项目路径
-    public static final String PROJECT_PATH = "/Chiron";
-
-    /**
-     * 将返回值为Boolean类型的DAO函数的return值通过response的writer输出.
-     *
-     * @param result   DAO操作结果
-     * @param response 一次请求Servlet的response
-     */
-    public static void writeResult(Boolean result, HttpServletResponse response) throws IOException {
-        response.getWriter().write(result ? TRUE : FALSE);
-    }
+//    /**
+//     * 将返回值为Boolean类型的DAO函数的return值通过response的writer输出.
+//     *
+//     * @param result   DAO操作结果
+//     * @param response 一次请求Servlet的response
+//     */
+//    public static void writeResult(Boolean result, HttpServletResponse response) throws IOException {
+//        response.getWriter().write(result ? TRUE : FALSE);
+//    }
 
     /**
      * 请求参数名.
@@ -42,7 +40,7 @@ public class ServletUtil {
     public static final class RequestParameterName {
         // 登录
 
-        public static final String LOGIN_TYPE = "type";
+        //        public static final String LOGIN_TYPE = "type";
         public static final String LOGIN_USERNAME = "username";
         public static final String LOGIN_PASSWORD = "password";
 
@@ -73,7 +71,7 @@ public class ServletUtil {
 
         public static final String ADD_USER_TYPE = "type";
         public static final String ADD_USER_USERNAME = "username";
-//        public static final String ADD_USER_PASSWORD = "password"; // 默认给123456或者000000
+        //        public static final String ADD_USER_PASSWORD = "password"; // 默认给123456或者000000
         public static final String ADD_USER_NAME = "name";
         public static final String ADD_USER_SEX = "sex";
         public static final String ADD_USER_AGE = "age";
@@ -127,6 +125,51 @@ public class ServletUtil {
         public static final String TRUE = "true";
         public static final String FALSE = "false";
         public static final String ILLEGAL_USERNAME = "非法用户名。";
+        public static final String ILLEGAL_USER_TYPE = "非法用户类型。";
         public static final String WRONG_USERNAME_OR_PASSWORD = "账户不存在或密码不正确。";
+    }
+
+    /**
+     * 响应数据包装类.
+     * <p>
+     * 将操作结果与其他数据包装起来.
+     */
+    public static class ResponseDataWrapper {
+        private final Boolean result;
+        private final Object data;
+
+        private ResponseDataWrapper(boolean result, Object data) {
+            this.result = result;
+            this.data = data;
+        }
+
+        /**
+         * 只有结果, 数据为 null.
+         *
+         * @param result 结果
+         * @return 包装后JSON
+         */
+        public static String of(boolean result) {
+            return GSON.toJson(new ResponseDataWrapper(result, null));
+        }
+
+        /**
+         * @param result 结果
+         * @param data   数据
+         * @return 包装后JSON
+         */
+        public static String of(boolean result, Object data) {
+            return GSON.toJson(new ResponseDataWrapper(result, data));
+        }
+
+        /**
+         * 结果为 true.
+         *
+         * @param data 数据
+         * @return 包装后JSON
+         */
+        public static String of(Object data) {
+            return GSON.toJson(new ResponseDataWrapper(true, data));
+        }
     }
 }

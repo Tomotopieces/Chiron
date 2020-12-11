@@ -1,3 +1,3 @@
 $(() => {
-    $('#mainContent').fadeIn('slow');
+    $('#mainContainer').fadeIn('slow');
 });
