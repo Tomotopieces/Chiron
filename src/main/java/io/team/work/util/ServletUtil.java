@@ -2,12 +2,6 @@ package io.team.work.util;
 
 import com.google.gson.Gson;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
-import static io.team.work.util.ServletUtil.ResponseMessage.FALSE;
-import static io.team.work.util.ServletUtil.ResponseMessage.TRUE;
-
 /**
  * Servlet工具类.
  * <p>
@@ -117,12 +111,9 @@ public class ServletUtil {
      * 回填通用信息.
      */
     public static final class ResponseMessage {
-        public static final String TRUE = "true";
-        public static final String FALSE = "false";
-        public static final String ILLEGAL_USERNAME = "非法用户名。";
-        public static final String ILLEGAL_USER_TYPE = "非法用户类型。";
-        public static final String WRONG_USERNAME_OR_PASSWORD = "账户不存在或密码不正确。";
-        public static final String FILE_UPLOAD_FAILED = "文件上传失败。";
+        public static final String ILLEGAL_USERNAME = "非法用户名";
+        public static final String WRONG_USERNAME_OR_PASSWORD = "账户或密码错误";
+        public static final String FILE_UPLOAD_FAILED = "文件上传失败";
     }
 
     /**

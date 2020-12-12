@@ -13,7 +13,7 @@ import java.util.List;
 public class NoticeDao extends AbstractBaseDao<Notice, Integer> {
     private NoticeDao(){}
 
-    private static final String TABLE_NAME = "Notice";
+    private static final String TABLE_NAME = "T_notice";
 
     @Override
     protected String getTableName() {
@@ -22,13 +22,13 @@ public class NoticeDao extends AbstractBaseDao<Notice, Integer> {
 
     @Override
     public int insert(Notice notice) {
-        String sql = "INSERT INTO `Notice`(`title`,`content`,`create_time`) VALUES (?,?,?)";
+        String sql = "INSERT INTO `T_notice`(`title`,`content`,`create_time`) VALUES (?,?,?)";
         return update(sql, notice.getTitle(), notice.getContent(), notice.getCreate_time());
     }
 
     @Override
     public int delete(Integer id) {
-        String sql = "DELETE FROM `Notice` WHERE `id`=?";
+        String sql = "DELETE FROM `T_notice` WHERE `id`=?";
         return update(sql, id);
     }
 
@@ -36,31 +36,31 @@ public class NoticeDao extends AbstractBaseDao<Notice, Integer> {
 
 
     public int update(Notice notice) {
-        String sql = "UPDATE `Notice` SET `title`=?,`content`=?,`create_time`=? WHERE `id`=?";
+        String sql = "UPDATE `T_notice` SET `title`=?,`content`=?,`create_time`=? WHERE `id`=?";
         return update(sql, notice.getTitle(), notice.getContent(), notice.getCreate_time(), notice.getId());
     }
 
     @Override
     public List<Notice> queryAll() {
-        String sql = "SELECT `id`,`title`,`content`,`create_time` FROM `Notice`";
+        String sql = "SELECT `id`,`title`,`content`,`create_time` FROM `T_notice`";
         return queryForList(Notice.class, sql);
     }
 
     @Override
     public Notice queryById(Integer id) {
-        String sql = "SELECT `id`,`title`,`content`,`create_time` FROM `Notice` WHERE `id`=?";
+        String sql = "SELECT `id`,`title`,`content`,`create_time` FROM `T_notice` WHERE `id`=?";
         return queryForOne(Notice.class, sql, id);
     }
 
     @Override
     public List<Notice> queryByPage(Integer pageNo, Integer pageSize) {
-        String sql = "SELECT `id`,`title`,`content`,`create_time` FROM `Notice` LIMIT ?,?";
+        String sql = "SELECT `id`,`title`,`content`,`create_time` FROM `T_notice` LIMIT ?,?";
         return queryForList(Notice.class, sql, pageNo, pageSize);
     }
 
     @Override
     public Integer CountAll() {
-        String sql = "SELECT COUNT(1) FROM `Notice`";
+        String sql = "SELECT COUNT(1) FROM `T_notice`";
         return Math.toIntExact(queryForSingleValue(sql));
     }
 

@@ -14,7 +14,7 @@ public class HomeworkDao extends AbstractBaseDao<Homework, Integer> {
     private HomeworkDao(){
     }
 
-    private static final String TABLE_NAME = "Homework";
+    private static final String TABLE_NAME = "T_homework";
 
     @Override
     protected String getTableName() {
@@ -24,13 +24,13 @@ public class HomeworkDao extends AbstractBaseDao<Homework, Integer> {
 
     @Override
     public int insert(Homework homework) {
-        String sql = "INSERT INTO `Homework`(`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attach_title`,`attach_url`) VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO `T_homework`(`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attach_title`,`attach_url`) VALUES(?,?,?,?,?,?,?)";
         return update(sql, homework.getTeacher_id(), homework.getTitle(), homework.getDescribe(), homework.getClass_id(), homework.getEnd_time(),homework.getAttach_title(),homework.getAttach_url());
     }
 
     @Override
     public int delete(Integer id) {
-        String sql = "DELETE FROM `Homework` WHERE `id`=?";
+        String sql = "DELETE FROM `T_homework` WHERE `id`=?";
         return update(sql, id);
     }
 
@@ -38,41 +38,41 @@ public class HomeworkDao extends AbstractBaseDao<Homework, Integer> {
 
 
     public int update(Homework homework) {
-        String sql = "UPDATE `Homework` SET `teacher_id`=?,`title`=?,`describe`=?,`class_id`=?,`end_time`=?,`attach_title`=?,`attach_url`=? WHERE `id`=?";
+        String sql = "UPDATE `T_homework` SET `teacher_id`=?,`title`=?,`describe`=?,`class_id`=?,`end_time`=?,`attach_title`=?,`attach_url`=? WHERE `id`=?";
         return update(sql, homework.getTeacher_id(), homework.getTitle(), homework.getDescribe(), homework.getClass_id(), homework.getEnd_time(),homework.getAttach_title(),homework.getAttach_url(),homework.getId());
     }
 
     @Override
     public List<Homework> queryAll() {
-        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attach_title`,`attach_url` FROM `Homework`";
+        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attach_title`,`attach_url` FROM `T_homework`";
         return queryForList(Homework.class, sql);
     }
 
     @Override
     public Homework queryById(Integer id) {
-        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attach_title`,`attach_url` FROM `Homework` WHERE `id`=?";
+        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attach_title`,`attach_url` FROM `T_homework` WHERE `id`=?";
         return queryForOne(Homework.class, sql, id);
     }
 
     @Override
     public List<Homework> queryByPage(Integer pageNo, Integer pageSize) {
-        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attach_title`,`attach_url` FROM `Homework` LIMIT ?,?";
+        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attach_title`,`attach_url` FROM `T_homework` LIMIT ?,?";
         return queryForList(Homework.class, sql, pageNo, pageSize);
     }
 
     @Override
     public Integer CountAll() {
-        String sql = "SELECT COUNT(1) FROM `Homework`";
+        String sql = "SELECT COUNT(1) FROM `T_homework`";
         return Math.toIntExact(queryForSingleValue(sql));
     }
 
     public List<Homework> queryByTeacherId(Integer teacher_id) {
-        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attach_title`,`attach_url` FROM `Homework` WHERE `teacher_id`=?";
+        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attach_title`,`attach_url` FROM `T_homework` WHERE `teacher_id`=?";
         return queryForList(Homework.class, sql, teacher_id);
     }
 
     public List<Homework> queryByClassId(Integer class_id) {
-        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attach_title`,`attach_url` FROM `Homework` WHERE `class_id`=?";
+        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attach_title`,`attach_url` FROM `T_homework` WHERE `class_id`=?";
         return queryForList(Homework.class, sql, class_id);
     }
 

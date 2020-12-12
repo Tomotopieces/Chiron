@@ -42,7 +42,7 @@ import static io.team.work.util.ServletUtil.SessionAttributeName.USER;
  * <p>
  * 2020/12/8 15:43
  */
-@WebServlet("user.do")
+@WebServlet("/user.do")
 public class UserServlet extends AbstractBaseServlet {
     private static final UserService USER_SERVICE = UserService.getInstance();
     private static final MessageService MESSAGE_SERVICE = MessageService.getInstance();
@@ -62,6 +62,7 @@ public class UserServlet extends AbstractBaseServlet {
         String spacePage = UserUtil.getSpace(UserUtil.getType(username));
         if (spacePage == null) {
             response.getWriter().write(ResponseDataWrapper.of(false, ILLEGAL_USERNAME));
+            return;
         }
         String spacePath = PROJECT_PATH + spacePage;
 

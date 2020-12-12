@@ -19,9 +19,9 @@ public class UserUtil {
     public static final String STUDENT_TYPE = "student";
 
     // 用户主页
-    public static final String ADMIN_SPACE = "adminSpace.html";
-    public static final String TEACHER_SPACE = "teacherSpace.html";
-    public static final String STUDENT_SPACE = "studentSpace.html";
+    public static final String ADMIN_SPACE = "/user/admin/adminSpace.html";
+    public static final String TEACHER_SPACE = "/user/teacher/teacherSpace.html";
+    public static final String STUDENT_SPACE = "/user/student/studentSpace.html";
 
     private static final Map<Integer, String> NUMBER_TYPE_MAP = new HashMap<>();
     private static final Map<Character, String> CHARACTER_TYPE_MAP = new HashMap<>();

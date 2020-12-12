@@ -14,7 +14,7 @@ import java.util.List;
 public class ClazzDao extends AbstractBaseDao<Clazz, Integer> {
     private ClazzDao(){}
 
-    private static final String TABLE_NAME = "Clazz";
+    private static final String TABLE_NAME = "T_class";
 
     @Override
     protected String getTableName() {
@@ -23,13 +23,13 @@ public class ClazzDao extends AbstractBaseDao<Clazz, Integer> {
 
     @Override
     public int insert(Clazz clazz) {
-        String sql = "INSERT INTO `Class`(`classNo`,`className`) VALUES(?,?)";
+        String sql = "INSERT INTO `T_class`(`classNo`,`className`) VALUES(?,?)";
         return update(sql, clazz.getClassNo(), clazz.getClassName());
     }
 
     @Override
     public int delete(Integer id) {
-        String sql = "DELETE FROM `Class` WHERE `id`=?";
+        String sql = "DELETE FROM `T_class` WHERE `id`=?";
         return update(sql, id);
     }
 
@@ -38,33 +38,33 @@ public class ClazzDao extends AbstractBaseDao<Clazz, Integer> {
 
 
     public int update(Clazz clazz) {
-        String sql = "UPDATE `Class` SET `classNo`=?,`className`=? WHERE `id`=?";
+        String sql = "UPDATE `T_class` SET `classNo`=?,`className`=? WHERE `id`=?";
         return update(sql, clazz.getClassNo(), clazz.getClassName(), clazz.getId());
     }
 
     @Override
     public List<Clazz> queryAll() {
-        String sql = "SELECT `id`, `classNo`,`className` FROM `Class`";
+        String sql = "SELECT `id`, `classNo`,`className` FROM `T_class`";
         return queryForList(Clazz.class, sql);
     }
 
 
     @Override
     public Clazz queryById(Integer id) {
-        String sql = "SELECT `classNo`,`className` FROM `Class` WHERE `id`=?";
+        String sql = "SELECT `classNo`,`className` FROM `T_class` WHERE `id`=?";
         return queryForOne(Clazz.class, sql, id);
     }
 
 
     @Override
     public List<Clazz> queryByPage(Integer pageNo, Integer pageSize) {
-        String sql = "SELECT `classNo`,`className` FROM `Class` LIMIT ?, ?";
+        String sql = "SELECT `classNo`,`className` FROM `T_class` LIMIT ?, ?";
         return queryForList(Clazz.class, sql, pageNo, pageSize);
     }
 
     @Override
     public Integer CountAll() {
-        String sql = "SELECT COUNT(1) FROM `Class`";
+        String sql = "SELECT COUNT(1) FROM `T_class`";
         return Math.toIntExact(queryForSingleValue(sql));
     }
 

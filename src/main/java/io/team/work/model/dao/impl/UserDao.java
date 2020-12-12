@@ -20,7 +20,7 @@ public class UserDao extends AbstractBaseDao<User, Integer> {
     private UserDao() {
     }
 
-    private static final String TABLE_NAME = "User";
+    private static final String TABLE_NAME = "T_user";
     private static final String PROPERTIES = "`username`, `password`, `name`, `sex`, `age`,`class_id`,`type`";
     private static final String READ_BY_USERNAME =
             "SELECT `id`, " + PROPERTIES + " FROM `" + TABLE_NAME + "` WHERE `username` = ?;";
@@ -32,31 +32,31 @@ public class UserDao extends AbstractBaseDao<User, Integer> {
 
     @Override
     public int insert(User user) {
-        String sql = "INSERT INTO `User`(" + PROPERTIES + ") VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO `T_user`(" + PROPERTIES + ") VALUES(?,?,?,?,?,?,?)";
         return update(sql, user.getUsername(), user.getPassword(), user.getName(), user.getSex(), user.getAge(), user.getClass_id(), user.getType());
     }
 
     @Override
     public int delete(Integer id) {
-        String sql = "DELETE FROM `User` WHERE id=?";
+        String sql = "DELETE FROM `T_user` WHERE id=?";
         return update(sql, id);
     }
 
 
     public int update(User user) {
-        String sql = "UPDATE `User` SET `username`=?,`password`=?,`name`=?,`sex`=?,`age`=?,`class_id`=?,`type` WHERE `id`=?";
+        String sql = "UPDATE `T_user` SET `username`=?,`password`=?,`name`=?,`sex`=?,`age`=?,`class_id`=?,`type` WHERE `id`=?";
         return update(sql, user.getUsername(), user.getPassword(), user.getName(), user.getSex(), user.getAge(), user.getClass_id(), user.getType(), user.getId());
     }
 
     @Override
     public List<User> queryAll() {
-        String sql = "SELECT `id`,`username`,`password`,`name`,`sex`,`age`,`class_id`,`type` FROM `User`";
+        String sql = "SELECT `id`,`username`,`password`,`name`,`sex`,`age`,`class_id`,`type` FROM `T_user`";
         return queryForList(User.class, sql);
     }
 
 
     public User queryUserByNameAndPassword(User user) {
-        String sql = "SELECT `id`,`username`,`password`,`name`,`sex`,`age`,`class_id`,`type` FROM `User` WHERE `username`=? AND `password`=?";
+        String sql = "SELECT `id`,`username`,`password`,`name`,`sex`,`age`,`class_id`,`type` FROM `T_user` WHERE `username`=? AND `password`=?";
         return queryForOne(User.class, sql, user.getUsername(), user.getPassword());
     }
 
@@ -71,17 +71,17 @@ public class UserDao extends AbstractBaseDao<User, Integer> {
 
     @Override
     public User queryById(Integer id) {
-        String sql = "SELECT `id`,`username`,`password`,`name`,`sex`,`age`,`class_id`,`type` FROM `User` WHERE `id`=?";
+        String sql = "SELECT `id`,`username`,`password`,`name`,`sex`,`age`,`class_id`,`type` FROM `T_user` WHERE `id`=?";
         return queryForOne(User.class, sql, id);
     }
 
     /**
-     * 通过类型来查找老师的所有信息
+     * 通过类型来查找所有信息
      * @param type 教师：1,学生：2
      * @return
      */
     public List<User> queryByType(Integer type) {
-        String sql = "SELECT `id`,`username`,`password`,`name`,`sex`,`age`,`class_id`,`type` FROM `User` WHERE `type`=?";
+        String sql = "SELECT `id`,`username`,`password`,`name`,`sex`,`age`,`class_id`,`type` FROM `T_user` WHERE `type`=?";
         return queryForList(User.class, sql, type);
     }
 
@@ -97,13 +97,13 @@ public class UserDao extends AbstractBaseDao<User, Integer> {
 
     @Override
     public List<User> queryByPage(Integer pageNo, Integer pageSize) {
-        String sql = "SELECT `id`,`username`,`password`,`name`,`sex`,`age`,`class_id`,`type` FROM `User` LIMIT ?, ?";
+        String sql = "SELECT `id`,`username`,`password`,`name`,`sex`,`age`,`class_id`,`type` FROM `T_user` LIMIT ?, ?";
         return queryForList(User.class, sql, pageNo, pageSize);
     }
 
     @Override
     public Integer CountAll() {
-        String sql = "SELECT COUNT(1) FROM `User`";
+        String sql = "SELECT COUNT(1) FROM `T_user`";
         return Math.toIntExact(queryForSingleValue(sql));
     }
 

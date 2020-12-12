@@ -17,7 +17,7 @@ public class MessageDao extends AbstractBaseDao<Message, Integer> {
     private MessageDao() {
     }
 
-    private static final String TABLE_NAME = "Message";
+    private static final String TABLE_NAME = "T_message";
 
     @Override
     protected String getTableName() {
@@ -26,43 +26,43 @@ public class MessageDao extends AbstractBaseDao<Message, Integer> {
 
     @Override
     public int insert(Message message) {
-        String sql = "INSERT INTO `Message`(`title`,`content`,`create_time`) VALUES(?,?,?)";
+        String sql = "INSERT INTO `T_message`(`title`,`content`,`create_time`) VALUES(?,?,?)";
         return update(sql, message.getTitle(), message.getContent(), message.getCreate_time());
     }
 
     @Override
     public int delete(Integer id) {
-        String sql = "DELETE FROM `Message` WHERE `id`=?";
+        String sql = "DELETE FROM `T_message` WHERE `id`=?";
         return update(sql, id);
     }
 
 
     public int update(Message message) {
-        String sql = "UPDATE `Message` SET `title`=?,`content`=?,`create_time`=? WHERE `id`=?";
+        String sql = "UPDATE `T_message` SET `title`=?,`content`=?,`create_time`=? WHERE `id`=?";
         return update(sql, message.getTitle(), message.getContent(), message.getCreate_time(), message.getId());
     }
 
     @Override
     public List<Message> queryAll() {
-        String sql = "SELECT `id`,`title`,`content`,`create_time` FROM `Message`";
+        String sql = "SELECT `id`,`title`,`content`,`create_time` FROM `T_message`";
         return queryForList(Message.class, sql);
     }
 
     @Override
     public Message queryById(Integer id) {
-        String sql = "SELECT `id`,`title`,`content`,`create_time` FROM `Message` WHERE `id`=?";
+        String sql = "SELECT `id`,`title`,`content`,`create_time` FROM `T_message` WHERE `id`=?";
         return queryForOne(Message.class, sql, id);
     }
 
     @Override
     public List<Message> queryByPage(Integer pageNo, Integer pageSize) {
-        String sql = "SELECT `id`,`title`,`content`,`create_time` FROM `Message` LIMIT ?,?";
+        String sql = "SELECT `id`,`title`,`content`,`create_time` FROM `T_message` LIMIT ?,?";
         return queryForList(Message.class, sql, pageNo, pageSize);
     }
 
     @Override
     public Integer CountAll() {
-        String sql = "SELECT COUNT(1) FROM `Message`";
+        String sql = "SELECT COUNT(1) FROM `T_message`";
         return Math.toIntExact(queryForSingleValue(sql));
     }
 
