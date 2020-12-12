@@ -21,18 +21,6 @@ public class ServletUtil {
     public static final Gson GSON = new Gson();
     // 项目路径
     public static final String PROJECT_PATH = "/Chiron";
-    private static final String STUDENT_HOMEWORK_SAVE_PATH = "/resources/studentHomework/";
-    private static final String HOMEWORK_SAVE_PATH = "/resources/homework/";
-
-//    /**
-//     * 将返回值为Boolean类型的DAO函数的return值通过response的writer输出.
-//     *
-//     * @param result   DAO操作结果
-//     * @param response 一次请求Servlet的response
-//     */
-//    public static void writeResult(Boolean result, HttpServletResponse response) throws IOException {
-//        response.getWriter().write(result ? TRUE : FALSE);
-//    }
 
     /**
      * 请求参数名.
@@ -40,7 +28,6 @@ public class ServletUtil {
     public static final class RequestParameterName {
         // 登录
 
-        //        public static final String LOGIN_TYPE = "type";
         public static final String LOGIN_USERNAME = "username";
         public static final String LOGIN_PASSWORD = "password";
 
@@ -51,27 +38,36 @@ public class ServletUtil {
 
         // 评阅作业
 
-        public static final String REVIEW_HOMEWORK_REVIEW_CONTENT = "reviewContent";
-        public static final String REVIEW_HOMEWORK_ID = "reviewHomeworkId";
+        public static final String REVIEW_HOMEWORK_REVIEW_CONTENT = "content";
+        public static final String REVIEW_HOMEWORK_ID = "homeworkId";
 
         // 布置作业
 
-        public static final String ASSIGN_HOMEWORK_TITLE = "homeworkTitle";
-        public static final String ASSIGN_HOMEWORK_DESCRIBE = "homeworkDescribe";
-        public static final String ASSIGN_HOMEWORK_END_TIME = "homeworkEndTime";
-        public static final String ASSIGN_HOMEWORK_CLASS_ID = "homeworkClassId";
+        public static final String ASSIGN_HOMEWORK_TITLE = "title";
+        public static final String ASSIGN_HOMEWORK_DESCRIBE = "describe";
+        public static final String ASSIGN_HOMEWORK_END_TIME = "endTime";
+        public static final String ASSIGN_HOMEWORK_CLASS_ID = "classId";
+
+        // 提交作业
+
+        public static final String SUBMIT_HOMEWORK_HOMEWORK_ID = "homeworkId"; // 教师布置作业的id
+        public static final String SUBMIT_HOMEWORK_TITLE = "title";
+        public static final String SUBMIT_HOMEWORK_DESCRIBE = "describe";
+
+        // 文件下载
+
+        public static final String DOWNLOAD_FILE_TYPE = "type";
+        public static final String DOWNLOAD_FILE_ID = "id";
 
         // 留言
 
-        public static final String MESSAGE_TITLE = "messageTitle";
-        public static final String MESSAGE_CONTENT = "messageContent";
-//        public static final String MESSAGE_CREATE_TIME = "createTime";
+        public static final String MESSAGE_TITLE = "title";
+        public static final String MESSAGE_CONTENT = "content";
 
         // 添加新用户
 
         public static final String ADD_USER_TYPE = "type";
         public static final String ADD_USER_USERNAME = "username";
-        //        public static final String ADD_USER_PASSWORD = "password"; // 默认给123456或者000000
         public static final String ADD_USER_NAME = "name";
         public static final String ADD_USER_SEX = "sex";
         public static final String ADD_USER_AGE = "age";
@@ -79,7 +75,7 @@ public class ServletUtil {
 
         // 移除用户
 
-        public static final String REMOVE_USER_ID = "userId";
+        public static final String REMOVE_USER_ID = "id";
 
         // 添加班级
 
@@ -88,25 +84,24 @@ public class ServletUtil {
 
         // 移除班级
 
-        public static final String REMOVE_CLASS_ID = "classId";
+        public static final String REMOVE_CLASS_ID = "id";
 
         // 移除留言
 
-        public static final String REMOVE_MESSAGE_ID = "messageId";
+        public static final String REMOVE_MESSAGE_ID = "id";
 
         // 添加公告
 
-        public static final String ADD_NOTICE_TITLE = "noticeTitle";
-        public static final String ADD_NOTICE_CONTENT = "noticeContent";
-//        public static final String ADD_NOTICE_CREATE_TIME = "createTime";
+        public static final String ADD_NOTICE_TITLE = "title";
+        public static final String ADD_NOTICE_CONTENT = "content";
 
         // 移除公告
 
-        public static final String REMOVE_NOTICE_ID = "noticeId";
+        public static final String REMOVE_NOTICE_ID = "id";
 
         // 更新公告
 
-        public static final String UPDATE_NOTICE_ID = "noticeId";
+        public static final String UPDATE_NOTICE_ID = "id";
         public static final String UPDATE_NOTICE_PROPERTY_NAME = "propertyName";
         public static final String UPDATE_NOTICE_PROPERTY_VALUE = "propertyValue";
     }
@@ -127,6 +122,7 @@ public class ServletUtil {
         public static final String ILLEGAL_USERNAME = "非法用户名。";
         public static final String ILLEGAL_USER_TYPE = "非法用户类型。";
         public static final String WRONG_USERNAME_OR_PASSWORD = "账户不存在或密码不正确。";
+        public static final String FILE_UPLOAD_FAILED = "文件上传失败。";
     }
 
     /**

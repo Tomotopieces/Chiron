@@ -4,9 +4,12 @@ import io.team.work.control.servlet.AbstractBaseServlet;
 import io.team.work.model.bean.Message;
 import io.team.work.model.bean.Notice;
 import io.team.work.model.bean.User;
+import io.team.work.model.service.impl.HomeworkService;
 import io.team.work.model.service.impl.MessageService;
 import io.team.work.model.service.impl.NoticeService;
+import io.team.work.model.service.impl.StudentHomeworkService;
 import io.team.work.model.service.impl.UserService;
+import io.team.work.util.FileUtil;
 import io.team.work.util.ServletUtil.ResponseDataWrapper;
 import io.team.work.util.UserUtil;
 
@@ -20,6 +23,8 @@ import java.util.List;
 import static io.team.work.util.BeanUtil.PROPERTY_PASSWORD;
 import static io.team.work.util.DateTimeUtil.DATE_TIME_FORMAT;
 import static io.team.work.util.ServletUtil.PROJECT_PATH;
+import static io.team.work.util.ServletUtil.RequestParameterName.DOWNLOAD_FILE_ID;
+import static io.team.work.util.ServletUtil.RequestParameterName.DOWNLOAD_FILE_TYPE;
 import static io.team.work.util.ServletUtil.RequestParameterName.LOGIN_PASSWORD;
 import static io.team.work.util.ServletUtil.RequestParameterName.LOGIN_USERNAME;
 import static io.team.work.util.ServletUtil.RequestParameterName.MESSAGE_CONTENT;
@@ -42,6 +47,8 @@ public class UserServlet extends AbstractBaseServlet {
     private static final UserService USER_SERVICE = UserService.getInstance();
     private static final MessageService MESSAGE_SERVICE = MessageService.getInstance();
     private static final NoticeService NOTICE_SERVICE = NoticeService.getInstance();
+    private static final HomeworkService HOMEWORK_SERVICE = HomeworkService.getInstance();
+    private static final StudentHomeworkService STUDENT_HOMEWORK_SERVICE = StudentHomeworkService.getInstance();
 
     /**
      * 登录.
@@ -132,12 +139,30 @@ public class UserServlet extends AbstractBaseServlet {
     }
 
     /**
-     * 查看公告板
+     * 查看公告板.
      * <p>
      * 动作函数.
      */
     public void getNoticeList(HttpServletRequest request, HttpServletResponse response) throws IOException {
         List<Notice> noticeList = NOTICE_SERVICE.list();
         response.getWriter().write(ResponseDataWrapper.of(noticeList));
+    }
+
+    /**
+     * 文件下载.
+     * <p>
+     * 动作函数.
+     */
+    public void downloadFile(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String type = request.getParameter(DOWNLOAD_FILE_TYPE);
+        Integer id = Integer.valueOf(request.getParameter(DOWNLOAD_FILE_ID));
+
+        if (type.equals("homework")) {
+            FileUtil.download(response, HOMEWORK_SERVICE.getById(id).getAttach_url());
+        } else if (type.equals("studentHomework")){
+            FileUtil.download(response, STUDENT_HOMEWORK_SERVICE.getById(id).getAttach_url());
+        } else {
+            response.getWriter().write(ResponseDataWrapper.of(false, "You wanna download what?"));
+        }
     }
 }
