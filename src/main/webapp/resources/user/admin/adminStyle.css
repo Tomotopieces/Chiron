@@ -21,4 +21,7 @@ div{
 a{
     cursor: pointer;
 }
+.listColor{
+    list-style: none
+}
 

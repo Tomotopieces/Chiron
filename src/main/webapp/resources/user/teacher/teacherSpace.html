@@ -42,7 +42,7 @@
 <!--布置作业-->
 <div id="assignHomeworkData" class="col-md-10">
     <h3>布置作业列表</h3>
-    <ul class="listColor" style="list-style: none">
+    <ul id="assignHomeworkDataList" class="listColor">
         <li>
             <div class="row">
                 <div class="col-md-2">作业标题</div>
@@ -52,47 +52,17 @@
                 <div class="col-md-2">操作</div>
             </div>
         </li>
-        <li>
-            <div class="row">
-                <div class="col-md-2">标题1</div>
-                <div class="col-md-3">描述1</div>
-                <div class="col-md-3"><a>附件1</a></div>
-                <div class="col-md-2">时间1</div>
-                <div class="col-md-2">
-                    <button type="button" class="btn btn-danger">删除</button>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="row">
-                <div class="col-md-2">标题2</div>
-                <div class="col-md-3">描述2</div>
-                <div class="col-md-3"><a>附件2</a></div>
-                <div class="col-md-2">时间2</div>
-                <div class="col-md-2">
-                    <button type="button" class="btn btn-danger">删除</button>
-                </div>
-            </div>
-        </li>
+    </ul>
+    <ul class="listColor">
         <li>
             <div class="col-md-1">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addHomework">布置作业</button>
             </div>
             <nav aria-label="page navigation" class="col-md-9">
-                <ul class="pagination">
+                <ul id="assignHomeworkPage" class="pagination">
                     <li>
                         <a href="#" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
                 </ul>
@@ -142,7 +112,7 @@
 <!--学生作业-->
 <div id="studentHomeworkData" class="col-md-10">
     <h3>学生提交作业列表</h3>
-    <ul class="listColor" style="list-style: none">
+    <ul id="studentHomeworkDataList" class="listColor">
         <li>
             <div class="row">
                 <div class="col-md-3">作业标题</div>
@@ -151,40 +121,15 @@
                 <div class="col-md-3">结束时间</div>
             </div>
         </li>
-        <li>
-            <div class="row">
-                <div class="col-md-3">标题1</div>
-                <div class="col-md-3">描述1</div>
-                <div class="col-md-3"><a>附件1</a></div>
-                <div class="col-md-3">时间1</div>
-            </div>
-        </li>
-        <li>
-            <div class="row">
-                <div class="col-md-3">标题2</div>
-                <div class="col-md-3">描述2</div>
-                <div class="col-md-3"><a>附件2</a></div>
-                <div class="col-md-3">时间2</div>
-            </div>
-        </li>
+    </ul>
+    <ul class="listColor">
         <li>
             <nav aria-label="page navigation" class="col-md-9 col-md-offset-1">
-                <ul class="pagination">
+                <ul id="studentHomeworkDataPage" class="pagination">
                     <li>
                         <a href="#" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
                 </ul>
             </nav>
         </li>
@@ -194,7 +139,7 @@
 <!--留言信息-->
 <div id="messageDate" class="col-md-10">
     <h3>留言列表</h3>
-    <ul class="listColor" style="list-style: none">
+    <ul id="messageDateList" class="listColor">
         <li>
             <div class="row">
                 <div class="col-md-2">标题</div>
@@ -202,46 +147,17 @@
                 <div class="col-md-2">发布时间</div>
             </div>
         </li>
-        <li>
-            <div class="row">
-                <div class="col-md-2">标题1</div>
-                <div class="col-md-8">内容1</div>
-                <div class="col-md-2">时间1</div>
-            </div>
-        </li>
-        <li>
-            <div class="row">
-                <div class="col-md-2">标题2</div>
-                <div class="col-md-8">内容2</div>
-                <div class="col-md-2">时间2</div>
-            </div>
-        </li>
-        <li>
-            <div class="row">
-                <div class="col-md-2">标题3</div>
-                <div class="col-md-8">内容3</div>
-                <div class="col-md-2">时间3</div>
-            </div>
-        </li>
+    </ul>
+    <ul class="listColor">
         <li>
             <div class="col-md-1">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addMessage">添加</button>
             </div>
             <nav aria-label="Page navigation" class="col-md-9">
-                <ul class="pagination">
+                <ul id="messagePage" class="pagination">
                     <li>
                         <a href="#" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
                 </ul>
@@ -279,7 +195,7 @@
 <!--公告-->
 <div id="noticeDate"  class="col-md-10">
     <h3>公告列表</h3>
-    <ul class="listColor" style="list-style: none">
+    <ul id="noticeDateList" class="listColor">
         <li>
             <div class="row">
                 <div class="col-md-2">标题</div>
@@ -287,43 +203,14 @@
                 <div class="col-md-2">创建时间</div>
             </div>
         </li>
-        <li>
-            <div class="row">
-                <div class="col-md-2">标题1</div>
-                <div class="col-md-8">内容1</div>
-                <div class="col-md-2">时间1</div>
-            </div>
-        </li>
-        <li>
-            <div class="row">
-                <div class="col-md-2">标题2</div>
-                <div class="col-md-8">内容2</div>
-                <div class="col-md-2">时间2</div>
-            </div>
-        </li>
-        <li>
-            <div class="row">
-                <div class="col-md-2">标题3</div>
-                <div class="col-md-8">内容3</div>
-                <div class="col-md-2">时间3</div>
-            </div>
-        </li>
+    </ul>
+    <ul class="listColor">
         <li>
             <nav aria-label="page navigation" class="col-md-9 col-md-offset-1">
-                <ul class="pagination">
+                <ul id="noticePage" class="pagination">
                     <li>
                         <a href="#" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
                 </ul>

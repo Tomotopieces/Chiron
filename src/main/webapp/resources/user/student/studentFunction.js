@@ -59,9 +59,7 @@ let messageDate = [
         text: "第十一个内容",
         time: "第十一个时间"
     },
-
 ]
-
 
 window.onload = function () {
     let homeworkBtn = document.getElementById("homeworkInformation"),
@@ -100,32 +98,83 @@ window.onload = function () {
             resetPassword.style.display = "block";
     }
 
+    // 作业数据填入列表
+    for(let i = 0;i < 6;i++){
+        let homeworkDateLi = document.createElement('li');
+        homeworkDateLi.innerHTML = '<div class="row"><div class="col-md-2">' + messageDate[i].title + '</div><div class="col-md-8">' + messageDate[i].text + '</div><div class="col-md-2">' + messageDate[i].time + '</div></div>'
+        document.getElementById("homeworkDataList").appendChild(homeworkDateLi);
+    }
 
-    // 数据填入列表
+    // 作业分页
+    let homeworkPage = messageDate.length/6;
+    if (messageDate.length%6 == 0){
+        for (let j = 1;j <= homeworkPage;j++){
+            let pageList = document.createElement('li');
+            pageList.innerHTML = '<a href="#" onclick="paging(' + j + ')">'+j+'</a>';
+            document.getElementById("homeworkPage").append(pageList);
+        }
+    }else {
+        for (let j = 1;j <= Math.ceil(homeworkPage);j++){
+            let pageList = document.createElement('li');
+            pageList.innerHTML = '<a href="#" onclick="paging(' + j + ')">'+j+'</a>';
+            document.getElementById("homeworkPage").appendChild(pageList);
+        }
+    }
+    let pageList = document.createElement('li');
+    pageList.innerHTML = '<a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>';
+    document.getElementById("homeworkPage").appendChild(pageList);
+
+    // 留言数据填入列表
     for(let i = 0;i < 6;i++){
         let messageDateLi = document.createElement('li');
         messageDateLi.innerHTML = '<div class="row"><div class="col-md-2">' + messageDate[i].title + '</div><div class="col-md-8">' + messageDate[i].text + '</div><div class="col-md-2">' + messageDate[i].time + '</div></div>'
         document.getElementById("messageDateList").appendChild(messageDateLi);
     }
 
-    // 分页
-    let Page = messageDate.length/6;
+    // 留言分页
+    let messagePage = messageDate.length/6;
     if (messageDate.length%6 == 0){
-        for (let j = 1;j <= Page;j++){
+        for (let j = 1;j <= messagePage;j++){
             let pageList = document.createElement('li');
             pageList.innerHTML = '<a href="#" onclick="paging(' + j + ')">'+j+'</a>';
             document.getElementById("messagePage").append(pageList);
         }
     }else {
-        for (let j = 1;j <= Math.ceil(Page);j++){
+        for (let j = 1;j <= Math.ceil(messagePage);j++){
             let pageList = document.createElement('li');
             pageList.innerHTML = '<a href="#" onclick="paging(' + j + ')">'+j+'</a>';
             document.getElementById("messagePage").appendChild(pageList);
         }
     }
-    let pageList = document.createElement('li');
-    pageList.innerHTML = '<a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>';
-    document.getElementById("messagePage").appendChild(pageList);
+    let messagePageList = document.createElement('li');
+    messagePageList.innerHTML = '<a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>';
+    document.getElementById("messagePage").appendChild(messagePageList);
+
+    // 公告数据填入列表
+    for(let i = 0;i < 6;i++){
+        let noticeDateLi = document.createElement('li');
+        noticeDateLi.innerHTML = '<div class="row"><div class="col-md-2">' + messageDate[i].title + '</div><div class="col-md-8">' + messageDate[i].text + '</div><div class="col-md-2">' + messageDate[i].time + '</div></div>'
+        document.getElementById("noticeDateList").appendChild(noticeDateLi);
+    }
+
+    // 公告分页
+    let noticePage = messageDate.length/6;
+    if (messageDate.length%6 == 0){
+        for (let j = 1;j <= noticePage;j++){
+            let pageList = document.createElement('li');
+            pageList.innerHTML = '<a href="#" onclick="paging(' + j + ')">'+j+'</a>';
+            document.getElementById("noticePage").append(pageList);
+        }
+    }else {
+        for (let j = 1;j <= Math.ceil(noticePage);j++){
+            let pageList = document.createElement('li');
+            pageList.innerHTML = '<a href="#" onclick="paging(' + j + ')">'+j+'</a>';
+            document.getElementById("noticePage").appendChild(pageList);
+        }
+    }
+    let noticePageList = document.createElement('li');
+    noticePageList.innerHTML = '<a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>';
+    document.getElementById("noticePage").appendChild(noticePageList);
 
     // 隔行换色
     for (let j = 0;j < listColor.length;j++){
@@ -136,6 +185,7 @@ window.onload = function () {
         }
     }
 }
+
 // 点击换页
 function paging(page) {
     // 删除<li>
