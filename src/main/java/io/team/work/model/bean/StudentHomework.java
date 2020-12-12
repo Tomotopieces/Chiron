@@ -11,6 +11,7 @@ public class StudentHomework {
     private Integer s_id;
     private Boolean status;
     private String title;
+    private String describe;
     private String review_time;
     private String review_content;
     private String attach_title;
@@ -91,6 +92,14 @@ public class StudentHomework {
         this.attach_url = attach_url;
     }
 
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
     @Override
     public String toString() {
         return "StudentHomework{" +
@@ -99,6 +108,7 @@ public class StudentHomework {
                 ", s_id=" + s_id +
                 ", status=" + status +
                 ", title='" + title + '\'' +
+                ", describe='" + describe + '\'' +
                 ", review_time='" + review_time + '\'' +
                 ", review_content='" + review_content + '\'' +
                 ", attach_title='" + attach_title + '\'' +

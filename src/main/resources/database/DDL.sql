@@ -66,6 +66,7 @@ CREATE TABLE `NewTable` (
 `hw_id`  int(255) NULL DEFAULT NULL COMMENT '作业id' ,
 `s_id`  int(255) NULL DEFAULT NULL COMMENT '学生id（学生信息）' ,
 `title`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '学生作业名称' ,
+`describe`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述' ,
 `status`  tinyint(255) NULL DEFAULT NULL COMMENT '审阅状态' ,
 `review_content`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '评阅意见（内容）' ,
 `review_time`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '评阅时间' ,
@@ -75,7 +76,7 @@ PRIMARY KEY (`id`)
 )
 ENGINE=InnoDB
 DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
-AUTO_INCREMENT=1
+AUTO_INCREMENT=2
 ROW_FORMAT=DYNAMIC
 ;
 --# 学生作业附件
