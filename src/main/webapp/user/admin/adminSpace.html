@@ -33,9 +33,9 @@
 </nav>
 
 <!--侧边栏-->
-<div class="col-md-2 column">
-    <div class="list-group">
-        <a id="classInformation" href="#" class="list-group-item">班级信息</a>
+<div id="sidebar" class="col-md-2 column">
+    <div class="list-group" style="padding: 0px">
+        <a id="classInformation" href="#" class="list-group-item ">班级信息</a>
         <a id="teacherInformation" href="#" class="list-group-item">教师信息</a>
         <a id="studentInformation" href="#" class="list-group-item ">学生信息</a>
         <a id="notice" href="#" class="list-group-item ">公告</a>
@@ -43,27 +43,260 @@
     </div>
 </div>
 
-<!--班级信息-->
-<div id="classData" class="col-md-10">
-    <h3>班级列表</h3>
-    <ul id="classDataList" class="listColor">
-        <li>
-            <div class="row">
-                <div class="col-md-3">班级编号</div>
-                <div class="col-md-6">班级名称</div>
-                <div class="col-md-3">操作</div>
+<div id="list" class="col-md-10">
+    <!--班级信息-->
+    <div id="classData">
+        <h3>班级列表</h3>
+        <ul id="classDataList" class="listColor">
+            <li>
+                <div class="row">
+                    <div class="col-md-3">班级编号</div>
+                    <div class="col-md-6">班级名称</div>
+                    <div class="col-md-3">操作</div>
+                </div>
+            </li>
+        </ul>
+        <ul class="listColor">
+            <li>
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addClass">添加</button>
+                </div>
+            </li>
+            <li>
+                <nav aria-label="page navigation" class="col-md-9">
+                    <ul id="classPage" class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </li>
+        </ul>
+    </div>
+    <!-- 添加班级 -->
+    <div class="modal fade" id="addClass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">添加班级</h4>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        班级编号：<input type="text" />
+                    </div>
+                    <div class="modal-body">
+                        班级名称：<input type="text" />
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+
+                </div>
             </div>
-        </li>
-    </ul>
-    <ul class="listColor" style="list-style: none">
-        <li>
-            <div class="col-md-1">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addClass">添加</button>
+        </div>
+    </div>
+
+    <!--教师信息-->
+    <div id="teacherDate">
+        <h3>教师列表</h3>
+        <ul id="teacherDataList" class="listColor">
+            <li>
+                <div class="row">
+                    <div class="col-md-2">职工号</div>
+                    <div class="col-md-2">姓名</div>
+                    <div class="col-md-2">性别</div>
+                    <div class="col-md-2">年龄</div>
+                    <div class="col-md-4">操作</div>
+                </div>
+            </li>
+        </ul>
+        <ul class="listColor">
+            <li>
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addTeacher">添加</button>
+                </div>
+                <nav aria-label="Page navigation"  class="col-md-9">
+                    <ul id="teacherPage" class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </li>
+        </ul>
+    </div>
+    <!-- 添加教师 -->
+    <div class="modal fade" id="addTeacher" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">添加教师</h4>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        职工号：<input type="text" />
+                    </div>
+                    <div class="modal-body">
+                        姓名：<input type="text" />
+                    </div>
+                    <div class="modal-body">
+                        性别：<input type="text" />
+                    </div>
+                    <div class="modal-body">
+                        年龄：<input type="text" />
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+
+                </div>
             </div>
-        </li>
-        <li>
-            <nav aria-label="page navigation" class="col-md-9">
-                <ul id="classPage" class="pagination">
+        </div>
+    </div>
+
+    <!--学生信息-->
+    <div id="studentDate">
+        <h3>学生列表</h3>
+        <ul id="studentDataList" class="listColor" style="list-style: none">
+            <li>
+                <div class="row">
+                    <div class="col-md-2">学号</div>
+                    <div class="col-md-2">姓名</div>
+                    <div class="col-md-2">性别</div>
+                    <div class="col-md-2">年龄</div>
+                    <div class="col-md-4">操作</div>
+                </div>
+            </li>
+        </ul>
+        <ul class="listColor">
+            <li>
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addStudent">添加</button>
+                </div>
+                <nav aria-label="Page navigation" class="col-md-9">
+                    <ul id="studentPage" class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </li>
+        </ul>
+    </div>
+    <!-- 添加学生 -->
+    <div class="modal fade" id="addStudent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">添加学生</h4>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        学号：<input type="text" />
+                    </div>
+                    <div class="modal-body">
+                        姓名：<input type="text" />
+                    </div>
+                    <div class="modal-body">
+                        性别：<input type="text" />
+                    </div>
+                    <div class="modal-body">
+                        年龄：<input type="text" />
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--公告-->
+    <div id="noticeDate">
+        <h3>公告列表</h3>
+        <ul id="noticeDateList" class="listColor">
+            <li>
+                <div class="row">
+                    <div class="col-md-2">标题</div>
+                    <div class="col-md-6">公告内容</div>
+                    <div class="col-md-2">创建时间</div>
+                    <div class="col-md-2">操作</div>
+                </div>
+            </li>
+        </ul>
+        <ul class="listColor">
+            <li>
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addNotice">发布公告</button>
+                </div>
+                <nav aria-label="page navigation" class="col-md-9">
+                    <ul id="noticePage" class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </li>
+        </ul>
+    </div>
+    <!-- 添加公告 -->
+    <div class="modal fade" id="addNotice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">发布公告</h4>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        标题：<input type="text" />
+                    </div>
+                    <div class="modal-body">
+                        <h5>公告内容：</h5>
+                        <textarea class="addNoticeData"></textarea>
+                    </div>
+                </form>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--留言信息-->
+    <div id="messageDate">
+        <h3>留言列表</h3>
+        <ul id="messageDateList" class="listColor">
+            <li>
+                <div class="row">
+                    <div class="col-md-2">标题</div>
+                    <div class="col-md-6">内容</div>
+                    <div class="col-md-2">发布时间</div>
+                    <div class="col-md-2">操作</div>
+                </div>
+            </li>
+        </ul>
+        <ul class="listColor">
+            <nav aria-label="Page navigation" class="col-md-9 col-md-offset-1">
+                <ul id="messagePage" class="pagination">
                     <li>
                         <a href="#" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
@@ -71,253 +304,23 @@
                     </li>
                 </ul>
             </nav>
-        </li>
-    </ul>
-</div>
-<!-- 添加班级 -->
-<div class="modal fade" id="addClass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">添加班级</h4>
-            </div>
-            <form>
-                <div class="modal-body">
-                    班级编号：<input type="text" />
-                </div>
-                <div class="modal-body">
-                    班级名称：<input type="text" />
-                </div>
-            </form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">确定</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        </ul>
+    </div>
 
-            </div>
+    <!--修改密码-->
+    <div id="resetPassword" class="col-md-10">
+        <h3>修改密码</h3>
+        <div>
+            <form>
+                账户名：<input id="username" name="username" type="text"><br>
+                原密码：<input id="oldPassword" name="oldPassword" type="password"><br>
+                新密码：<input id="newPassword" name="newPassword" type="password"><br>
+                确认密码：<input id="rePassword" name="rePassword" type="password"><br>
+            </form>
+            <button type="button" class="btn btn-primary">修改</button><br>
         </div>
     </div>
 </div>
 
-<!--教师信息-->
-<div id="teacherDate" class="col-md-10">
-    <h3>教师列表</h3>
-    <ul id="teacherDataList" class="listColor">
-        <li>
-            <div class="row">
-                <div class="col-md-2">职工号</div>
-                <div class="col-md-2">姓名</div>
-                <div class="col-md-2">性别</div>
-                <div class="col-md-2">年龄</div>
-                <div class="col-md-4">操作</div>
-            </div>
-        </li>
-    </ul>
-    <ul class="listColor">
-        <li>
-            <div class="col-md-1">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addTeacher">添加</button>
-            </div>
-            <nav aria-label="Page navigation"  class="col-md-9">
-                <ul id="teacherPage" class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </li>
-    </ul>
-</div>
-<!-- 添加教师 -->
-<div class="modal fade" id="addTeacher" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">添加教师</h4>
-            </div>
-            <form>
-                <div class="modal-body">
-                    职工号：<input type="text" />
-                </div>
-                <div class="modal-body">
-                    姓名：<input type="text" />
-                </div>
-                <div class="modal-body">
-                    性别：<input type="text" />
-                </div>
-                <div class="modal-body">
-                    年龄：<input type="text" />
-                </div>
-            </form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">确定</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--学生信息-->
-<div id="studentDate" class="col-md-10">
-    <h3>学生列表</h3>
-    <ul id="studentDataList" class="listColor" style="list-style: none">
-        <li>
-            <div class="row">
-                <div class="col-md-2">学号</div>
-                <div class="col-md-2">姓名</div>
-                <div class="col-md-2">性别</div>
-                <div class="col-md-2">年龄</div>
-                <div class="col-md-4">操作</div>
-            </div>
-        </li>
-    </ul>
-    <ul class="listColor">
-        <li>
-            <div class="col-md-1">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addStudent">添加</button>
-            </div>
-            <nav aria-label="Page navigation" class="col-md-9">
-                <ul id="studentPage" class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </li>
-    </ul>
-</div>
-<!-- 添加学生 -->
-<div class="modal fade" id="addStudent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">添加学生</h4>
-            </div>
-            <form>
-                <div class="modal-body">
-                    学号：<input type="text" />
-                </div>
-                <div class="modal-body">
-                    姓名：<input type="text" />
-                </div>
-                <div class="modal-body">
-                    性别：<input type="text" />
-                </div>
-                <div class="modal-body">
-                    年龄：<input type="text" />
-                </div>
-            </form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">确定</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--公告-->
-<div id="noticeDate"  class="col-md-10">
-    <h3>公告列表</h3>
-    <ul id="noticeDateList" class="listColor">
-        <li>
-            <div class="row">
-                <div class="col-md-2">标题</div>
-                <div class="col-md-6">公告内容</div>
-                <div class="col-md-2">创建时间</div>
-                <div class="col-md-2">操作</div>
-            </div>
-        </li>
-    </ul>
-    <ul class="listColor">
-        <li>
-            <div class="col-md-1">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addNotice">发布公告</button>
-            </div>
-            <nav aria-label="page navigation" class="col-md-9">
-                <ul id="noticePage" class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </li>
-    </ul>
-</div>
-<!-- 添加公告 -->
-<div class="modal fade" id="addNotice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">发布公告</h4>
-            </div>
-            <form>
-                <div class="modal-body">
-                    标题：<input type="text" />
-                </div>
-                <div class="modal-body">
-                    <h5>公告内容：</h5>
-                    <textarea class="addNoticeData"></textarea>
-                </div>
-            </form>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">确定</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--留言信息-->
-<div id="messageDate" class="col-md-10">
-    <h3>留言列表</h3>
-    <ul id="messageDateList" class="listColor">
-        <li>
-            <div class="row">
-                <div class="col-md-2">标题</div>
-                <div class="col-md-6">内容</div>
-                <div class="col-md-2">发布时间</div>
-                <div class="col-md-2">操作</div>
-            </div>
-        </li>
-    </ul>
-    <ul class="listColor">
-        <nav aria-label="Page navigation" class="col-md-9 col-md-offset-1">
-            <ul id="messagePage" class="pagination">
-                <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </ul>
-</div>
-
-<!--修改密码-->
-<div id="resetPassword" class="col-md-10">
-    <h3>修改密码</h3>
-    <div>
-        <form>
-            账户名：<input id="username" name="username" type="text"><br>
-            原密码：<input id="oldPassword" name="oldPassword" type="password"><br>
-            新密码：<input id="newPassword" name="newPassword" type="password"><br>
-            确认密码：<input id="rePassword" name="rePassword" type="password"><br>
-        </form>
-        <button type="button" class="btn btn-primary">修改</button><br>
-    </div>
-</div>
 </body>
 </html>

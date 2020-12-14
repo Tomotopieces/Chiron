@@ -2,6 +2,9 @@
     text-align: center;
     display: none;
 }
+#homeworkDataList,#messageDateList,#noticeDateList{
+    padding-left: 15px;
+}
 #homeworkData{
     display: block;
 }
@@ -21,6 +24,24 @@ div{
 a{
     cursor: pointer;
 }
+.listColor{
+     list-style: none
+ }
+#sidebar{
+    position: absolute;
+    left: 0px;
+    top: 72px;
+    background-color: #F1F1F1;
+    bottom: 0px;
+    border-right: solid 1px #CCCCCC;
+    padding: 0px;
+}
+#list{
+    position: absolute;
+    right: 0px;
+    padding-right: 30px;
+    padding-left: 15px;
+}
 /*超出部分隐藏*/
 .homeworkList{
     white-space:nowrap;
@@ -31,6 +52,4 @@ a{
     overflow: visible;
     white-space: normal;
 }
-.listColor{
-    list-style: none
-}
+

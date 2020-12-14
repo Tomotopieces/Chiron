@@ -2,6 +2,9 @@
     text-align: center;
     display: none;
 }
+#classDataList,#teacherDataList,#studentDataList,#noticeDateList,#messageDateList{
+    padding-left: 15px;
+}
 #classData{
     display: block;
 }
@@ -23,5 +26,20 @@ a{
 }
 .listColor{
     list-style: none
+}
+#sidebar{
+    position: absolute;
+    left: 0px;
+    top: 72px;
+    background-color: #F1F1F1;
+    bottom: 0px;
+    border-right: solid 1px #CCCCCC;
+    padding: 0px;
+}
+#list{
+    position: absolute;
+    right: 0px;
+    padding-right: 30px;
+    padding-left: 15px;
 }
 
