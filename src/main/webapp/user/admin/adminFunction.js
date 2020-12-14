@@ -146,7 +146,7 @@ window.onload = function () {
         }
     }
     let pageList = document.createElement('li');
-    pageList.innerHTML = '<a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>';
+    pageList.innerHTML = '<a href="#" aria-label="Previous"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>';
     document.getElementById("classPage").appendChild(pageList);
 
     // 教师数据填入列表
@@ -172,7 +172,7 @@ window.onload = function () {
         }
     }
     let teacherPageList = document.createElement('li');
-    teacherPageList.innerHTML = '<a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>';
+    teacherPageList.innerHTML = '<a href="#" aria-label="Previous"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>';
     document.getElementById("teacherPage").appendChild(teacherPageList);
 
     // 学生数据填入列表
@@ -198,7 +198,7 @@ window.onload = function () {
         }
     }
     let studentPageList = document.createElement('li');
-    studentPageList.innerHTML = '<a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>';
+    studentPageList.innerHTML = '<a href="#" aria-label="Previous"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>';
     document.getElementById("studentPage").appendChild(studentPageList);
 
     // 公告数据填入列表
@@ -224,7 +224,7 @@ window.onload = function () {
         }
     }
     let noticePageList = document.createElement('li');
-    noticePageList.innerHTML = '<a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>';
+    noticePageList.innerHTML = '<a href="#" aria-label="Previous"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>';
     document.getElementById("noticePage").appendChild(noticePageList);
 
     // 留言数据填入列表
@@ -250,7 +250,7 @@ window.onload = function () {
         }
     }
     let messagePageList = document.createElement('li');
-    messagePageList.innerHTML = '<a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>';
+    messagePageList.innerHTML = '<a href="#" aria-label="Previous"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>';
     document.getElementById("messagePage").appendChild(messagePageList);
 
     // 隔行换色

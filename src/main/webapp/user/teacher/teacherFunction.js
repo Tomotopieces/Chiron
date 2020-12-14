@@ -132,7 +132,7 @@ window.onload = function () {
         }
     }
     let assignPageList = document.createElement('li');
-    assignPageList.innerHTML = '<a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>';
+    assignPageList.innerHTML = '<a href="#" aria-label="Previous"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>';
     document.getElementById("assignHomeworkPage").appendChild(assignPageList);
 
     // 学生作业数据填入列表
@@ -158,7 +158,7 @@ window.onload = function () {
         }
     }
     let studentPageList = document.createElement('li');
-    studentPageList.innerHTML = '<a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>';
+    studentPageList.innerHTML = '<a href="#" aria-label="Previous"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>';
     document.getElementById("studentHomeworkDataPage").appendChild(studentPageList);
 
     // 留言数据填入列表
@@ -184,7 +184,7 @@ window.onload = function () {
         }
     }
     let messagePageList = document.createElement('li');
-    messagePageList.innerHTML = '<a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>';
+    messagePageList.innerHTML = '<a href="#" aria-label="Previous"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>';
     document.getElementById("messagePage").appendChild(messagePageList);
 
     // 公告数据填入列表
@@ -210,7 +210,7 @@ window.onload = function () {
         }
     }
     let noticePageList = document.createElement('li');
-    noticePageList.innerHTML = '<a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>';
+    noticePageList.innerHTML = '<a href="#" aria-label="Previous"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>';
     document.getElementById("noticePage").appendChild(noticePageList);
 
     for (let j = 0;j < listColor.length;j++){

@@ -121,7 +121,7 @@ window.onload = function () {
         }
     }
     let pageList = document.createElement('li');
-    pageList.innerHTML = '<a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>';
+    pageList.innerHTML = '<a href="#" aria-label="Previous"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>';
     document.getElementById("homeworkPage").appendChild(pageList);
 
     // 留言数据填入列表
@@ -147,7 +147,7 @@ window.onload = function () {
         }
     }
     let messagePageList = document.createElement('li');
-    messagePageList.innerHTML = '<a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>';
+    messagePageList.innerHTML = '<a href="#" aria-label="Previous"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>';
     document.getElementById("messagePage").appendChild(messagePageList);
 
     // 公告数据填入列表
@@ -173,7 +173,7 @@ window.onload = function () {
         }
     }
     let noticePageList = document.createElement('li');
-    noticePageList.innerHTML = '<a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>';
+    noticePageList.innerHTML = '<a href="#" aria-label="Previous"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>';
     document.getElementById("noticePage").appendChild(noticePageList);
 
     // 隔行换色

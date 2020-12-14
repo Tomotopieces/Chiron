@@ -35,6 +35,7 @@ a{
     bottom: 0px;
     border-right: solid 1px #CCCCCC;
     padding: 0px;
+    text-align: center;
 }
 #list{
     position: absolute;
