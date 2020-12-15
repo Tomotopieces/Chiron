@@ -23,15 +23,15 @@ import static io.team.work.util.BeanUtil.PROPERTY_REVIEW_TIME;
 import static io.team.work.util.BeanUtil.PROPERTY_REVIEW_CONTENT;
 import static io.team.work.util.BeanUtil.PROPERTY_REVIEW_STATUS;
 import static io.team.work.util.DateTimeUtil.DATE_TIME_FORMAT;
-import static io.team.work.util.ServletUtil.RequestParameterName.ASSIGN_HOMEWORK_CLASS_ID;
-import static io.team.work.util.ServletUtil.RequestParameterName.ASSIGN_HOMEWORK_DESCRIBE;
-import static io.team.work.util.ServletUtil.RequestParameterName.ASSIGN_HOMEWORK_END_TIME;
-import static io.team.work.util.ServletUtil.RequestParameterName.ASSIGN_HOMEWORK_TITLE;
-import static io.team.work.util.ServletUtil.RequestParameterName.REVIEW_HOMEWORK_ID;
-import static io.team.work.util.ServletUtil.RequestParameterName.REVIEW_HOMEWORK_REVIEW_CONTENT;
-import static io.team.work.util.ServletUtil.ResponseDataWrapper;
-import static io.team.work.util.ServletUtil.ResponseMessage.FILE_UPLOAD_FAILED;
-import static io.team.work.util.ServletUtil.SessionAttributeName.USER;
+import static io.team.work.util.CommonUtil.RequestParameterName.ASSIGN_HOMEWORK_CLASS_ID;
+import static io.team.work.util.CommonUtil.RequestParameterName.ASSIGN_HOMEWORK_DESCRIBE;
+import static io.team.work.util.CommonUtil.RequestParameterName.ASSIGN_HOMEWORK_END_TIME;
+import static io.team.work.util.CommonUtil.RequestParameterName.ASSIGN_HOMEWORK_TITLE;
+import static io.team.work.util.CommonUtil.RequestParameterName.REVIEW_HOMEWORK_ID;
+import static io.team.work.util.CommonUtil.RequestParameterName.REVIEW_HOMEWORK_REVIEW_CONTENT;
+import static io.team.work.util.CommonUtil.ResponseDataWrapper;
+import static io.team.work.util.CommonUtil.ResponseMessage.MESSAGE_FILE_UPLOAD_FAILED;
+import static io.team.work.util.CommonUtil.SessionAttributeName.USER;
 
 /**
  * 教师相关操作Servlet类.
@@ -104,7 +104,7 @@ public class TeacherServlet extends AbstractBaseServlet {
             response.getWriter().write(ResponseDataWrapper.of(HOMEWORK_SERVICE.add(homework)));
         } catch (Exception e) {
             e.printStackTrace();
-            response.getWriter().write(ResponseDataWrapper.of(false, FILE_UPLOAD_FAILED));
+            response.getWriter().write(ResponseDataWrapper.of(false, MESSAGE_FILE_UPLOAD_FAILED));
         }
     }
 

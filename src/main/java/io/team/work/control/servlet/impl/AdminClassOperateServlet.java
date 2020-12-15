@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static io.team.work.util.ServletUtil.RequestParameterName.ADD_CLASS_CLASS_NAME;
-import static io.team.work.util.ServletUtil.RequestParameterName.ADD_CLASS_CLASS_NO;
-import static io.team.work.util.ServletUtil.RequestParameterName.REMOVE_CLASS_ID;
-import static io.team.work.util.ServletUtil.ResponseDataWrapper;
+import static io.team.work.util.CommonUtil.RequestParameterName.ADD_CLASS_CLASS_NAME;
+import static io.team.work.util.CommonUtil.RequestParameterName.ADD_CLASS_CLASS_NO;
+import static io.team.work.util.CommonUtil.RequestParameterName.REMOVE_CLASS_ID;
+import static io.team.work.util.CommonUtil.ResponseDataWrapper;
 
 /**
  * 管理员班级相关操作Servlet类.

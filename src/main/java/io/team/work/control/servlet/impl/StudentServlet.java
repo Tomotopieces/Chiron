@@ -17,12 +17,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import static io.team.work.util.ServletUtil.RequestParameterName.SUBMIT_HOMEWORK_DESCRIBE;
-import static io.team.work.util.ServletUtil.RequestParameterName.SUBMIT_HOMEWORK_HOMEWORK_ID;
-import static io.team.work.util.ServletUtil.RequestParameterName.SUBMIT_HOMEWORK_TITLE;
-import static io.team.work.util.ServletUtil.ResponseDataWrapper;
-import static io.team.work.util.ServletUtil.ResponseMessage.FILE_UPLOAD_FAILED;
-import static io.team.work.util.ServletUtil.SessionAttributeName.USER;
+import static io.team.work.util.CommonUtil.RequestParameterName.SUBMIT_HOMEWORK_DESCRIBE;
+import static io.team.work.util.CommonUtil.RequestParameterName.SUBMIT_HOMEWORK_HOMEWORK_ID;
+import static io.team.work.util.CommonUtil.RequestParameterName.SUBMIT_HOMEWORK_TITLE;
+import static io.team.work.util.CommonUtil.ResponseDataWrapper;
+import static io.team.work.util.CommonUtil.ResponseMessage.MESSAGE_FILE_UPLOAD_FAILED;
+import static io.team.work.util.CommonUtil.SessionAttributeName.USER;
 
 /**
  * 学生相关操作Servlet类.
@@ -97,7 +97,7 @@ public class StudentServlet extends AbstractBaseServlet {
             response.getWriter().write(ResponseDataWrapper.of(STUDENT_HOMEWORK_SERVICE.add(studentHomework)));
         } catch (Exception e) {
             e.printStackTrace();
-            response.getWriter().write(ResponseDataWrapper.of(false, FILE_UPLOAD_FAILED));
+            response.getWriter().write(ResponseDataWrapper.of(false, MESSAGE_FILE_UPLOAD_FAILED));
         }
     }
 }

@@ -14,11 +14,13 @@ import java.util.Map;
  */
 public class UserUtil {
     // 用户类型
+
     public static final String ADMIN_TYPE = "admin";
     public static final String TEACHER_TYPE = "teacher";
     public static final String STUDENT_TYPE = "student";
 
     // 用户主页
+
     public static final String ADMIN_SPACE = "/user/admin/adminSpace.html";
     public static final String TEACHER_SPACE = "/user/teacher/teacherSpace.html";
     public static final String STUDENT_SPACE = "/user/student/studentSpace.html";

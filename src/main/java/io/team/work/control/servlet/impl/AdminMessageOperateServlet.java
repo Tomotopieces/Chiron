@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static io.team.work.util.ServletUtil.*;
-import static io.team.work.util.ServletUtil.RequestParameterName.REMOVE_MESSAGE_ID;
+import static io.team.work.util.CommonUtil.*;
+import static io.team.work.util.CommonUtil.RequestParameterName.REMOVE_MESSAGE_ID;
 
 /**
  * 管理员留言板相关操作Servlet类.

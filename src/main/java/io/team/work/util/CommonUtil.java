@@ -11,7 +11,7 @@ import com.google.gson.Gson;
  * <p>
  * 2020/12/9 9:27
  */
-public class ServletUtil {
+public class CommonUtil {
     public static final Gson GSON = new Gson();
     // 项目路径
     public static final String PROJECT_PATH = "/Chiron";
@@ -111,9 +111,15 @@ public class ServletUtil {
      * 回填通用信息.
      */
     public static final class ResponseMessage {
-        public static final String ILLEGAL_USERNAME = "非法用户名";
-        public static final String WRONG_USERNAME_OR_PASSWORD = "账户或密码错误";
-        public static final String FILE_UPLOAD_FAILED = "文件上传失败";
+        public static final String MESSAGE_ILLEGAL_USERNAME = "非法用户名";
+        public static final String MESSAGE_WRONG_USERNAME_OR_PASSWORD = "账户或密码错误";
+        public static final String MESSAGE_FILE_UPLOAD_FAILED = "文件上传失败";
+//        public static final String MESSAGE_USER_NOT_LOGGED_IN = "用户未登录";
+    }
+
+    public static final class CommonPagePath {
+        public static final String PAGE_NOT_LOGGED_IN = "/notLoggedIn.html";
+        public static final String PAGE_NO_PERMISSION = "/noPermission.html";
     }
 
     /**

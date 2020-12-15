@@ -10,13 +10,13 @@ import java.io.IOException;
 import java.util.Date;
 
 import static io.team.work.util.DateTimeUtil.DATE_TIME_FORMAT;
-import static io.team.work.util.ServletUtil.RequestParameterName.ADD_NOTICE_CONTENT;
-import static io.team.work.util.ServletUtil.RequestParameterName.ADD_NOTICE_TITLE;
-import static io.team.work.util.ServletUtil.RequestParameterName.REMOVE_NOTICE_ID;
-import static io.team.work.util.ServletUtil.RequestParameterName.UPDATE_NOTICE_ID;
-import static io.team.work.util.ServletUtil.RequestParameterName.UPDATE_NOTICE_PROPERTY_NAME;
-import static io.team.work.util.ServletUtil.RequestParameterName.UPDATE_NOTICE_PROPERTY_VALUE;
-import static io.team.work.util.ServletUtil.ResponseDataWrapper;
+import static io.team.work.util.CommonUtil.RequestParameterName.ADD_NOTICE_CONTENT;
+import static io.team.work.util.CommonUtil.RequestParameterName.ADD_NOTICE_TITLE;
+import static io.team.work.util.CommonUtil.RequestParameterName.REMOVE_NOTICE_ID;
+import static io.team.work.util.CommonUtil.RequestParameterName.UPDATE_NOTICE_ID;
+import static io.team.work.util.CommonUtil.RequestParameterName.UPDATE_NOTICE_PROPERTY_NAME;
+import static io.team.work.util.CommonUtil.RequestParameterName.UPDATE_NOTICE_PROPERTY_VALUE;
+import static io.team.work.util.CommonUtil.ResponseDataWrapper;
 
 /**
  * 管理员公告板相关操作Servlet类.

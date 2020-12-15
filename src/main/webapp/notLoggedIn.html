@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>未登录</title>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+
+<body>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: '未登陆',
+            text: '抱歉，您尚未登陆，请在登陆后尝试访问此页面。'
+        }).then((result) => {
+            window.location.href = '/Chiron';
+        });
+    </script>
+</body>
+
+</html>

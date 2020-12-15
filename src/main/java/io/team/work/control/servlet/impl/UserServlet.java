@@ -10,7 +10,7 @@ import io.team.work.model.service.impl.NoticeService;
 import io.team.work.model.service.impl.StudentHomeworkService;
 import io.team.work.model.service.impl.UserService;
 import io.team.work.util.FileUtil;
-import io.team.work.util.ServletUtil.ResponseDataWrapper;
+import io.team.work.util.CommonUtil.ResponseDataWrapper;
 import io.team.work.util.UserUtil;
 
 import javax.servlet.annotation.WebServlet;
@@ -22,18 +22,18 @@ import java.util.List;
 
 import static io.team.work.util.BeanUtil.PROPERTY_PASSWORD;
 import static io.team.work.util.DateTimeUtil.DATE_TIME_FORMAT;
-import static io.team.work.util.ServletUtil.PROJECT_PATH;
-import static io.team.work.util.ServletUtil.RequestParameterName.DOWNLOAD_FILE_ID;
-import static io.team.work.util.ServletUtil.RequestParameterName.DOWNLOAD_FILE_TYPE;
-import static io.team.work.util.ServletUtil.RequestParameterName.LOGIN_PASSWORD;
-import static io.team.work.util.ServletUtil.RequestParameterName.LOGIN_USERNAME;
-import static io.team.work.util.ServletUtil.RequestParameterName.MESSAGE_CONTENT;
-import static io.team.work.util.ServletUtil.RequestParameterName.MESSAGE_TITLE;
-import static io.team.work.util.ServletUtil.RequestParameterName.RESET_PASSWORD_NEW_PASSWORD;
-import static io.team.work.util.ServletUtil.RequestParameterName.RESET_PASSWORD_OLD_PASSWORD;
-import static io.team.work.util.ServletUtil.ResponseMessage.ILLEGAL_USERNAME;
-import static io.team.work.util.ServletUtil.ResponseMessage.WRONG_USERNAME_OR_PASSWORD;
-import static io.team.work.util.ServletUtil.SessionAttributeName.USER;
+import static io.team.work.util.CommonUtil.PROJECT_PATH;
+import static io.team.work.util.CommonUtil.RequestParameterName.DOWNLOAD_FILE_ID;
+import static io.team.work.util.CommonUtil.RequestParameterName.DOWNLOAD_FILE_TYPE;
+import static io.team.work.util.CommonUtil.RequestParameterName.LOGIN_PASSWORD;
+import static io.team.work.util.CommonUtil.RequestParameterName.LOGIN_USERNAME;
+import static io.team.work.util.CommonUtil.RequestParameterName.MESSAGE_CONTENT;
+import static io.team.work.util.CommonUtil.RequestParameterName.MESSAGE_TITLE;
+import static io.team.work.util.CommonUtil.RequestParameterName.RESET_PASSWORD_NEW_PASSWORD;
+import static io.team.work.util.CommonUtil.RequestParameterName.RESET_PASSWORD_OLD_PASSWORD;
+import static io.team.work.util.CommonUtil.ResponseMessage.MESSAGE_ILLEGAL_USERNAME;
+import static io.team.work.util.CommonUtil.ResponseMessage.MESSAGE_WRONG_USERNAME_OR_PASSWORD;
+import static io.team.work.util.CommonUtil.SessionAttributeName.USER;
 
 /**
  * 用户基本操作Servlet类.
@@ -61,7 +61,7 @@ public class UserServlet extends AbstractBaseServlet {
 
         String spacePage = UserUtil.getSpace(UserUtil.getType(username));
         if (spacePage == null) {
-            response.getWriter().write(ResponseDataWrapper.of(false, ILLEGAL_USERNAME));
+            response.getWriter().write(ResponseDataWrapper.of(false, MESSAGE_ILLEGAL_USERNAME));
             return;
         }
         String spacePath = PROJECT_PATH + spacePage;
@@ -70,7 +70,7 @@ public class UserServlet extends AbstractBaseServlet {
             request.getSession().setAttribute(USER, USER_SERVICE.getUserByUsername(username));
             response.getWriter().write(ResponseDataWrapper.of(spacePath));
         } else {
-            response.getWriter().write(ResponseDataWrapper.of(false, WRONG_USERNAME_OR_PASSWORD));
+            response.getWriter().write(ResponseDataWrapper.of(false, MESSAGE_WRONG_USERNAME_OR_PASSWORD));
         }
     }
 
