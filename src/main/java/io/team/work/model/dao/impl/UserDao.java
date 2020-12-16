@@ -101,6 +101,16 @@ public class UserDao extends AbstractBaseDao<User, Integer> {
         return queryForList(User.class, sql, pageNo, pageSize);
     }
 
+    public List<User> queryByPageType1(Integer pageNo,Integer pageSize){
+        String sql="SELECT `id`,`username`,`password`,`name`,`sex`,`age`,`class_id`,`type` FROM `T_user` WHERE `type`=1 LIMIT ?, ?";
+        return queryForList(User.class,sql,pageNo,pageSize);
+    }
+
+    public List<User> queryByPageType2(Integer pageNo,Integer pageSize){
+        String sql="SELECT `id`,`username`,`password`,`name`,`sex`,`age`,`class_id`,`type` FROM `T_user` WHERE `type`=2 LIMIT ?, ?";
+        return queryForList(User.class,sql,pageNo,pageSize);
+    }
+
     @Override
     public Integer CountAll() {
         String sql = "SELECT COUNT(1) FROM `T_user`";
