@@ -89,7 +89,7 @@ public class UserDao extends AbstractBaseDao<User, Integer> {
     @Override
     public List<User> queryByPage(Integer pageNo, Integer pageSize) {
         String sql = "SELECT `id`,`username`,`password`,`name`,`sex`,`age`,`class_id`,`type` FROM `T_user` LIMIT ?, ?";
-        return queryForList(User.class, sql, pageNo, pageSize);
+        return queryForList(User.class, sql, (pageNo-1)*pageSize, pageSize);
     }
 
     public List<User> queryByPageAndType(Integer pageNo, Integer pageSize, Integer type) {

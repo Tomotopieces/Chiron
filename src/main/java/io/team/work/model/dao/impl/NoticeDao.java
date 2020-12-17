@@ -55,7 +55,7 @@ public class NoticeDao extends AbstractBaseDao<Notice, Integer> {
     @Override
     public List<Notice> queryByPage(Integer pageNo, Integer pageSize) {
         String sql = "SELECT `id`,`title`,`content`,`create_time` FROM `T_notice` LIMIT ?,?";
-        return queryForList(Notice.class, sql, pageNo, pageSize);
+        return queryForList(Notice.class, sql, (pageNo-1)*pageSize, pageSize);
     }
 
     @Override

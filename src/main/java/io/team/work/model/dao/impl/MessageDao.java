@@ -57,7 +57,7 @@ public class MessageDao extends AbstractBaseDao<Message, Integer> {
     @Override
     public List<Message> queryByPage(Integer pageNo, Integer pageSize) {
         String sql = "SELECT `id`,`title`,`content`,`create_time` FROM `T_message` LIMIT ?,?";
-        return queryForList(Message.class, sql, pageNo, pageSize);
+        return queryForList(Message.class, sql, (pageNo-1)*pageSize, pageSize);
     }
 
     @Override
