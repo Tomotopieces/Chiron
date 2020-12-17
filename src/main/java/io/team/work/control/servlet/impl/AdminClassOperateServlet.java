@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static io.team.work.util.CommonUtil.RequestParameterName.ADD_CLASS_CLASS_NAME;
-import static io.team.work.util.CommonUtil.RequestParameterName.ADD_CLASS_CLASS_NO;
-import static io.team.work.util.CommonUtil.RequestParameterName.REMOVE_CLASS_ID;
+import static io.team.work.util.CommonUtil.RequestParameterName.*;
 import static io.team.work.util.CommonUtil.ResponseDataWrapper;
 
 /**
@@ -59,5 +57,16 @@ public class AdminClassOperateServlet extends AbstractBaseServlet {
      */
     public void getClassList(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.getWriter().write(ResponseDataWrapper.of(CLAZZ_SERVICE.list()));
+    }
+
+    /**
+     * 通过id获取班级信息
+     * <p>
+     * 动作函数
+     */
+    public void getClass(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().write(
+                ResponseDataWrapper.of(
+                        CLAZZ_SERVICE.getById(Integer.valueOf(request.getParameter(GET_CLASS_CLASS_ID)))));
     }
 }

@@ -85,6 +85,10 @@ public class CommonUtil {
 
         public static final String REMOVE_CLASS_ID = "id";
 
+        // 查找班级
+
+        public static final String GET_CLASS_CLASS_ID = "classId";
+
         // 移除留言
 
         public static final String REMOVE_MESSAGE_ID = "id";

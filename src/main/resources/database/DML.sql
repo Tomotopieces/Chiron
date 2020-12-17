@@ -1,5 +1,8 @@
 -- 增删改语句
 
+INSERT INTO `T_user`(`username`, `password`,`type`)
+VALUES ('admin', 'admin', 0);
+
 INSERT INTO `T_user`(`username`, `password`, `name`, `sex`, `age`, `class_id`, `type`)
 VALUES ('a10001', '123456', '马云', '男', 56, null, 0 ),
        ('a10002', '456789', '马化腾', '男', 49, null, 0),
@@ -50,12 +53,7 @@ VALUES ('a10001', '123456', '马云', '男', 56, null, 0 ),
        ('s10047', 's12345', '铃兰', '男', 24, 2, 2),
        ('s10048', 's12345', '狼毒', '男', 25, 2, 2),
        ('s10049', 's12345', '雏菊', '男', 25, 2, 2),
-       ('s10050', 's12345', 'GHOST', '男', 24, 2, 2),
-
-
-
-
-
+       ('s10050', 's12345', 'GHOST', '男', 24, 2, 2);
 
 INSERT INTO `T_homework`(`teacher_id`, `title`, `describe`, `class_id`, `end_time`, `attachment_title`, `attachment_url`)
 VALUES(1, '语文', '大学一年级', 1, '2020-12-15', '课后作业', 'E://11.txt'),
