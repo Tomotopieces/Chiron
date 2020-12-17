@@ -57,7 +57,7 @@ public class HomeworkDao extends AbstractBaseDao<Homework, Integer> {
     @Override
     public List<Homework> queryByPage(Integer pageNo, Integer pageSize) {
         String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attach_title`,`attach_url` FROM `T_homework` LIMIT ?,?";
-        return queryForList(Homework.class, sql, pageNo, pageSize);
+        return queryForList(Homework.class, sql, (pageNo-1)*pageSize, pageSize);
     }
 
     @Override

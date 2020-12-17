@@ -59,7 +59,7 @@ public class ClazzDao extends AbstractBaseDao<Clazz, Integer> {
     @Override
     public List<Clazz> queryByPage(Integer pageNo, Integer pageSize) {
         String sql = "SELECT `classNo`,`className` FROM `T_class` LIMIT ?, ?";
-        return queryForList(Clazz.class, sql, pageNo, pageSize);
+        return queryForList(Clazz.class, sql, (pageNo-1)*pageSize, pageSize);
     }
 
     @Override
