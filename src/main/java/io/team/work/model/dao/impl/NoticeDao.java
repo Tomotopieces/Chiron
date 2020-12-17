@@ -59,9 +59,9 @@ public class NoticeDao extends AbstractBaseDao<Notice, Integer> {
     }
 
     @Override
-    public Integer CountAll() {
+    public Long countAll() {
         String sql = "SELECT COUNT(1) FROM `T_notice`";
-        return Math.toIntExact(queryForSingleValue(sql));
+        return queryForSingleValue(sql);
     }
 
 

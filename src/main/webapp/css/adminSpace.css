@@ -1,0 +1,28 @@
+#mainContainer {
+    display: none;
+}
+
+.navbar {
+    height: 5%;
+    margin-bottom: 0;
+}
+
+.navbar-default {
+    border-bottom: solid 1px #CCCCCC;
+}
+
+.operate {
+    position: relative;
+    top: -7px;
+}
+
+input[type=text] {
+    position: relative;
+    top: -2px;
+}
+
+#pageButtonGroup {
+    position: absolute;
+    top: 450px;
+    margin-left: 33%;
+}

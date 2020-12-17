@@ -16,8 +16,11 @@ import static io.team.work.util.CommonUtil.RequestParameterName.ADD_USER_NAME;
 import static io.team.work.util.CommonUtil.RequestParameterName.ADD_USER_SEX;
 import static io.team.work.util.CommonUtil.RequestParameterName.ADD_USER_TYPE;
 import static io.team.work.util.CommonUtil.RequestParameterName.ADD_USER_USERNAME;
+import static io.team.work.util.CommonUtil.RequestParameterName.GET_USER_BY_PAGE_PAGE_NO;
+import static io.team.work.util.CommonUtil.RequestParameterName.GET_USER_BY_PAGE_PAGE_SIZE;
 import static io.team.work.util.CommonUtil.RequestParameterName.REMOVE_USER_ID;
 import static io.team.work.util.CommonUtil.ResponseDataWrapper;
+import static io.team.work.util.CommonUtil.SessionAttributeName.USER;
 
 /**
  * 管理员的用户相关操作Servlet类.
@@ -38,7 +41,6 @@ public class AdminUserOperateServlet extends AbstractBaseServlet {
     public void addUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Integer type = Integer.valueOf(request.getParameter(ADD_USER_TYPE));
         String username = request.getParameter(ADD_USER_USERNAME);
-//        String password = request.getParameter(ADD_USER_PASSWORD);
         String name = request.getParameter(ADD_USER_NAME);
         String sex = request.getParameter(ADD_USER_SEX);
         Integer age = Integer.valueOf(request.getParameter(ADD_USER_AGE));
@@ -83,5 +85,47 @@ public class AdminUserOperateServlet extends AbstractBaseServlet {
      */
     public void getStudentList(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.getWriter().write(ResponseDataWrapper.of(USER_SERVICE.listStudents()));
+    }
+
+    /**
+     * 分页获取学生信息
+     * <p>
+     * 动作函数
+     */
+    public void getStudentListByPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Integer pageNo = Integer.valueOf(request.getParameter(GET_USER_BY_PAGE_PAGE_NO));
+        Integer pageSize = Integer.valueOf(request.getParameter(GET_USER_BY_PAGE_PAGE_SIZE));
+
+        response.getWriter().write(ResponseDataWrapper.of(USER_SERVICE.listStudentsByPage(pageNo, pageSize)));
+    }
+
+    /**
+     * 分页获取教师信息
+     * <p>
+     * 动作函数
+     */
+    public void getTeacherListByPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Integer pageNo = Integer.valueOf(request.getParameter(GET_USER_BY_PAGE_PAGE_NO));
+        Integer pageSize = Integer.valueOf(request.getParameter(GET_USER_BY_PAGE_PAGE_SIZE));
+
+        response.getWriter().write(ResponseDataWrapper.of(USER_SERVICE.listTeachersByPage(pageNo, pageSize)));
+    }
+
+    /**
+     * 获取学生总数
+     * <p>
+     * 动作函数
+     */
+    public void getStudentCount(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().write(ResponseDataWrapper.of(USER_SERVICE.countStudent()));
+    }
+
+    /**
+     * 获取教师总数
+     * <p>
+     * 动作函数
+     */
+    public void getTeacherCount(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().write(ResponseDataWrapper.of(USER_SERVICE.countTeacher()));
     }
 }

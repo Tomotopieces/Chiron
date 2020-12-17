@@ -58,6 +58,11 @@ public class CommonUtil {
         public static final String MESSAGE_TITLE = "title";
         public static final String MESSAGE_CONTENT = "content";
 
+        // 分页获取用
+
+        public static final String GET_USER_BY_PAGE_PAGE_NO = "pageNo";
+        public static final String GET_USER_BY_PAGE_PAGE_SIZE = "pageSize";
+
         // 添加新用户
 
         public static final String ADD_USER_TYPE = "type";
@@ -152,7 +157,7 @@ public class CommonUtil {
          * @return 包装后JSON
          */
         public static String of(boolean result, Object data) {
-            return GSON.toJson(new ResponseDataWrapper(result, data));
+            return GSON.toJson(new ResponseDataWrapper(result, GSON.toJson(data)));
         }
 
         /**
@@ -162,7 +167,7 @@ public class CommonUtil {
          * @return 包装后JSON
          */
         public static String of(Object data) {
-            return GSON.toJson(new ResponseDataWrapper(true, data));
+            return GSON.toJson(new ResponseDataWrapper(true, GSON.toJson(data)));
         }
     }
 }

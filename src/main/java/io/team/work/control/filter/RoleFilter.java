@@ -26,7 +26,7 @@ import static io.team.work.util.UserUtil.getType;
  * <p>
  * 2020/12/14 10:15
  */
-@WebFilter("/user/*.html")
+@WebFilter("/user/*")
 public class RoleFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {

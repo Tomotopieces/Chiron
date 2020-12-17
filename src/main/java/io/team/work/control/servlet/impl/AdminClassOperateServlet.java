@@ -57,7 +57,7 @@ public class AdminClassOperateServlet extends AbstractBaseServlet {
      * <p>
      * 动作函数.
      */
-    public void getClasses(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void getClassList(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.getWriter().write(ResponseDataWrapper.of(CLAZZ_SERVICE.list()));
     }
 }

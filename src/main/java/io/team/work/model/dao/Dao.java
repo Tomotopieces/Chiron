@@ -1,7 +1,5 @@
 package io.team.work.model.dao;
 
-import io.team.work.model.bean.User;
-
 import java.util.List;
 
 /**
@@ -29,5 +27,5 @@ public interface Dao<T, ID> {
     List<T> queryByPage(Integer pageNo, Integer pageSize);
 
     //计数
-    Integer CountAll();
+    Long countAll();
 }

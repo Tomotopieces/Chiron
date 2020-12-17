@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+}
+
+#slideShow * {
+    border-radius: 20px;
+}
+
+#slideShowImage {
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+}
+
+#slideShowText {
+    background-color: rgba(0,0,0, 0.4);
+    color: #DDDDDD;
+    text-shadow: 2px 2px black;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    padding: 10px;
+}

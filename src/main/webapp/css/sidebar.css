@@ -1,0 +1,36 @@
+#sidebarContainer {
+    height: 100%;
+}
+
+.sidebar {
+    position: absolute;
+    top: 52px;
+    left: 0;
+    bottom: 0px;
+    width: 15%;
+    background-color: #F1F1F1;
+    border-right: solid 1px #CCCCCC;
+}
+
+.sidebar .tab {
+    background-color: inherit;
+    padding: 22px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: center;
+    cursor: pointer;
+    font-size: 17px;
+    border-left: #F1F1F1 3px solid;
+    transition: 0.3s;
+}
+
+.sidebar .tab:hover {
+    background-color: #DDDDDD;
+    border-left: #CCCCCC 3px solid;
+}
+
+.sidebar .tab.active {
+    background-color: #CCCCCC;
+    border-left: #666666 3px solid;
+}

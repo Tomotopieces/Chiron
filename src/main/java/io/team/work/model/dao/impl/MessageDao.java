@@ -61,9 +61,9 @@ public class MessageDao extends AbstractBaseDao<Message, Integer> {
     }
 
     @Override
-    public Integer CountAll() {
+    public Long countAll() {
         String sql = "SELECT COUNT(1) FROM `T_message`";
-        return Math.toIntExact(queryForSingleValue(sql));
+        return queryForSingleValue(sql);
     }
 
 

@@ -1,5 +1,4 @@
 $(() => {
-    console.log('jQuery code loading.');
     $('#mainContainer').fadeIn('slow');
 
     $('#loginButton').on('click', () => {
@@ -12,7 +11,7 @@ $(() => {
             data: $('#loginForm').serialize(),
             success: json => {
                 let wrapper = JSON.parse(json);
-                let data = wrapper.data;
+                let data = JSON.parse(wrapper.data);
                 wrapper.result ?
                     window.location.href = data :
                     Swal.fire({

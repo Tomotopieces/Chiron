@@ -75,6 +75,15 @@ public class UserServlet extends AbstractBaseServlet {
     }
 
     /**
+     * 获取当前用户.
+     * <p>
+     * 动作函数.
+     */
+    public void getUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().write(ResponseDataWrapper.of(request.getSession().getAttribute(USER)));
+    }
+
+    /**
      * 登出.
      * <p>
      * 动作函数.

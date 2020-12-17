@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static io.team.work.util.CommonUtil.*;
 import static io.team.work.util.CommonUtil.RequestParameterName.REMOVE_MESSAGE_ID;
+import static io.team.work.util.CommonUtil.ResponseDataWrapper;
 
 /**
  * 管理员留言板相关操作Servlet类.
@@ -21,6 +21,15 @@ import static io.team.work.util.CommonUtil.RequestParameterName.REMOVE_MESSAGE_I
 @WebServlet("/admin.message.do")
 public class AdminMessageOperateServlet extends AbstractBaseServlet {
     private static final MessageService MESSAGE_SERVICE = MessageService.getInstance();
+
+    /**
+     * 获取留言列表.
+     * <p>
+     * 动作函数.
+     */
+    public void getMessageList(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().write(ResponseDataWrapper.of(MESSAGE_SERVICE.list()));
+    }
 
     /**
      * 移除留言.

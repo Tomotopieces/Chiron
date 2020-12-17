@@ -63,12 +63,20 @@ public class UserService extends AbstractBaseService<User, Integer> {
         return user != null && user.getPassword().equals(password);
     }
 
-    public List<User> listTeacherByPage(Integer pageNo,Integer pageSize) {
-        return userDao.queryByPageType1(pageNo,pageSize);
+    public List<User> listTeachersByPage(Integer pageNo, Integer pageSize) {
+        return userDao.queryByPageAndType(pageNo, pageSize, 1);
     }
 
-    public List<User> listStudentByPage(Integer pageNo,Integer pageSize){
-        return userDao.queryByPageType2(pageNo,pageSize);
+    public List<User> listStudentsByPage(Integer pageNo, Integer pageSize) {
+        return userDao.queryByPageAndType(pageNo, pageSize, 2);
+    }
+
+    public Long countTeacher() {
+        return userDao.countType(1);
+    }
+
+    public Long countStudent() {
+        return userDao.countType(2);
     }
 
     @Override

@@ -61,9 +61,9 @@ public class HomeworkDao extends AbstractBaseDao<Homework, Integer> {
     }
 
     @Override
-    public Integer CountAll() {
+    public Long countAll() {
         String sql = "SELECT COUNT(1) FROM `T_homework`";
-        return Math.toIntExact(queryForSingleValue(sql));
+        return queryForSingleValue(sql);
     }
 
     public List<Homework> queryByTeacherId(Integer teacher_id) {

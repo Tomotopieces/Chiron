@@ -10,6 +10,8 @@
 - `remove :: (Integer id) -> Boolean`
 - `getUserById :: (Integer id) -> User`
 - `getUserByUsername :: (String username) -> User`
+- `listTeacherByPage :: () -> List<User>`
+- `listStudentByPage :: () -> List<User>`
 - `update :: (Integer userId, String PropertyName, P propertyValue) -> Boolean`
 - `login :: (String username, String password) -> Boolean`
 

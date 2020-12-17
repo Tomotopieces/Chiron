@@ -1,6 +1,5 @@
 package io.team.work.model.dao.impl;
 
-import io.team.work.model.bean.Homework;
 import io.team.work.model.bean.StudentHomework;
 import io.team.work.model.dao.AbstractBaseDao;
 
@@ -70,9 +69,9 @@ public class StudentHomeworkDao extends AbstractBaseDao<StudentHomework, Integer
     }
 
     @Override
-    public Integer CountAll() {
+    public Long countAll() {
         String sql = "SELECT COUNT(1) FROM `T_student_homework`";
-        return Math.toIntExact(queryForSingleValue(sql));
+        return queryForSingleValue(sql);
     }
 
 
