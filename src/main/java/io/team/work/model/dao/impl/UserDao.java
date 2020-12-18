@@ -1,6 +1,7 @@
 package io.team.work.model.dao.impl;
 
 
+import io.team.work.model.bean.Clazz;
 import io.team.work.model.bean.User;
 import io.team.work.model.dao.AbstractBaseDao;
 import io.team.work.util.JdbcUtils;
@@ -67,6 +68,46 @@ public class UserDao extends AbstractBaseDao<User, Integer> {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 模糊查询
+     * @param user 用户名
+     * @return
+     */
+    public  List<User> queryUserByUsername(User user){
+        String sql="SELECT `id`,`username`,`password`,`name`,`sex`,`age`,`class_id`,`type` FROM `T_user` WHERE `username` like `%?%`";
+        return queryForList(User.class,sql,user.getUsername());
+    }
+
+    /**
+     * 模糊查询
+     * @param user 名字
+     * @return
+     */
+    public List<User> queryUserByName(User user){
+        String sql="SELECT `id`,`username`,`password`,`name`,`sex`,`age`,`class_id`,`type` FROM `T_user` WHERE `name` like '%?%'";
+        return queryForList(User.class,sql,user.getName());
+    }
+
+    /**
+     *关联模糊查询
+     * @param clazz 班级名称
+     * @return
+     */
+    public List<User> queryByClassName(Clazz clazz){
+        String sql="SELECT t_user.`id`,t_user.`username`,t_user.`password`,t_user.`name`,t_user.`sex`,t_user.`age`,t_user.`class_id`,t_user.`type`FROM `T_user` left join `T_class` on t_user.class_id=t_class.id WHERE t_class.className Like '%?%' ";
+        return queryForList(User.class,sql,clazz.getClassName());
+    }
+
+    /**
+     *关联模糊查询
+     * @param clazz 班级编号
+     * @return
+     */
+    public List<User> queryByClassNo(Clazz clazz){
+        String sql="SELECT t_user.`id`,t_user.`username`,t_user.`password`,t_user.`name`,t_user.`sex`,t_user.`age`,t_user.`class_id`,t_user.`type`FROM `T_user` left join `T_class` on t_user.class_id=t_class.id WHERE t_class.classNo Like '%?%' ";
+        return queryForList(User.class,sql,clazz.getClassNo());
     }
 
     @Override

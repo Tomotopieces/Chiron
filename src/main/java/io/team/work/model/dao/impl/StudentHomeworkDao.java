@@ -58,7 +58,7 @@ public class StudentHomeworkDao extends AbstractBaseDao<StudentHomework, Integer
     }
 
     public List<StudentHomework> queryByTeacherId(Integer teacherId) {
-        String sql = "SELECT `Stu_hw`.`hw.id`,`Stu_hw`.`s.id`,`Stu_hw`.`title`,`Stu_hw`.`describe`,`Stu_hw`.`status`,`Stu_hw`.`review_content`,`T_student_homework`.`review_time`,`Stu_hw`.`attach_title`,`Stu_hw`.`attach_url`,`User`.`name` FROM `stu_hw` inner join `User` on `Stu_hw`.`hw_id`=`User`.`id` WHERE `type`=1";
+        String sql = "SELECT `T_Student_homework`.`hw.id`,`T_Student_homework`.`s.id`,`T_Student_homework`.`title`,`T_Student_homework`.`describe`,`T_Student_homework`.`status`,`T_Student_homework`.`review_content`,`T_student_homework`.`review_time`,`T_Student_homework`.`attach_title`,`T_Student_homework`.`attach_url`,`T_User`.`name` FROM `T_student_homework` inner join `T_User` on `T_Student_homework`.`hw_id`=`T_User`.`id` WHERE `type`=1";
         return queryForList(StudentHomework.class, sql, teacherId);
     }
 
