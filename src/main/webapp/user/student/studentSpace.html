@@ -1,179 +1,217 @@
 <!DOCTYPE html>
-<html lang=zh">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <title>欢迎使用Chiron喀戎在线作业管理</title>
 
-    <link rel="stylesheet" href="../../css/studentStyle.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+    <!-- Bootstrap.css & jQuery.js & Bootstrap.js & SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../../js/studentFunction.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <!-- 自定义 css & js -->
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/datasheet.css">
+    <link rel="stylesheet" href="../../css/space.css">
+    <script src="../../js/sidebar.js"></script>
+    <script src="../../js/datasheet.js"></script>
+    <script src="../../js/commonUtil.js"></script>
+    <script src="../../js/switchTabUtil.js"></script>
+    <script src="../../js/turnPageUtil.js"></script>
+    <script src="../../js/adminSpace.js"></script>
 </head>
 <body>
-<!--导航栏-->
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#" style="color: black">Chiron喀戎</a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">学生姓名<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a id="resetPasswordBtn" href="#">修改密码</a></li>
-                        <li><a id="exit" href="/Chiron">注销</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<!--侧边栏-->
-<div id="sidebar" class="col-md-2 column">
-    <div class="list-group" style="padding: 0px">
-        <button id="homeworkInformation" class="tab btn glyphicon glyphicon-file">作业信息</button>
-        <button id="messageBoard" class="tab btn glyphicon glyphicon-comment">留言信息</button>
-        <button id="notice" class="tab btn glyphicon glyphicon-bullhorn">公告</button>
-    </div>
-</div>
-
-<div id="list" class="data col-md-10">
-    <!--作业列表-->
-    <div id="homeworkData">
-        <h3>作业列表</h3>
-        <ul id="homeworkDataList" class="listColor">
-            <li>
-                <div class="row">
-                    <div class="col-md-1">发布教师</div>
-                    <div class="col-md-1">作业标题</div>
-                    <div class="col-md-1">作业描述</div>
-                    <div class="col-md-2">作业附件</div>
-                    <div class="col-md-1">结束时间</div>
-                    <div class="col-md-1">提交状态</div>
-                    <div class="col-md-2">提交附件</div>
-                    <div class="col-md-1">评阅状态</div>
-                    <div class="col-md-2">评阅内容</div>
+<div id="mainContainer">
+    <!-- 导航栏 -->
+    <div class="navbar">
+        <nav class="navbar-default">
+            <div class="container-fluid">
+                <!-- Chiron标志 与 窄页面时的下拉菜单栏 -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Chiron | 喀戎在线作业管理</a>
                 </div>
-            </li>
-        </ul>
-        <ul class="listColor">
-            <li>
-                <nav aria-label="page navigation" class="col-md-9 col-md-offset-1">
-                    <ul id="homeworkPage" class="pagination">
+
+                <!-- 右侧下拉项 -->
+                <div class="collapse navbar-collapse" id="navbarItems">
+                    <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#" aria-label="Previous">
-                                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">
+                                <span id="currentUsername">学生</span>
+                                <span class="caret"></span>
                             </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">修改密码</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">登出</a></li>
+                            </ul>
                         </li>
                     </ul>
-                </nav>
-            </li>
-        </ul>
-    </div>
-
-    <!--留言信息-->
-    <div id="messageDate">
-        <h3>留言列表</h3>
-        <ul id="messageDateList" class="listColor">
-            <li>
-                <div class="row">
-                    <div class="col-md-2">标题</div>
-                    <div class="col-md-8">内容</div>
-                    <div class="col-md-2">发布时间</div>
-                </div>
-            </li>
-        </ul>
-        <ul class="listColor">
-            <li>
-                <div class="col-md-1">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addMessage">添加留言</button>
-                </div>
-                <nav aria-label="Page navigation" class="col-md-9">
-                    <ul id="messagePage" class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </li>
-        </ul>
-
-    </div>
-    <!-- 添加留言 -->
-    <div class="modal fade" id="addMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">添加留言</h4>
-                </div>
-                <form>
-                    <div class="modal-body">
-                        标题：<input type="text" />
-                    </div>
-                    <div class="modal-body">
-                        <h5>留言内容：</h5>
-                        <textarea class="addMessageData"></textarea>
-                    </div>
-                </form>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">确定</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-
                 </div>
             </div>
-        </div>
+        </nav>
+    </div> <!-- /导航栏 -->
+
+    <!-- 侧边栏 -->
+    <div class="sidebar">
+        <button id="homeworkTab" class="tab glyphicon glyphicon-file active"> 作业信息 </button>
+        <button id="messageTab" class="tab glyphicon glyphicon-comment"> 留言信息 </button>
+        <button id="noticeTab" class="tab glyphicon glyphicon-bullhorn"> 公告 </button>
     </div>
 
-    <!--公告-->
-    <div id="noticeDate">
-        <h3>公告列表</h3>
-        <ul id="noticeDateList" class="listColor">
-            <li>
-                <div class="row">
-                    <div class="col-md-2">标题</div>
-                    <div class="col-md-8">公告内容</div>
-                    <div class="col-md-2">创建时间</div>
-                </div>
-            </li>
-        </ul>
-        <ul class="listColor">
-            <li>
-                <nav aria-label="page navigation" class="col-md-9 col-md-offset-1">
-                    <ul id="noticePage" class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </li>
-        </ul>
-    </div>
+    <!-- 表格 -->
+    <div id="datasheet" class="datasheet col-md-10"></div>
 
-    <!--修改密码-->
-    <div id="resetPassword">
-        <h3>修改密码</h3>
-        <div>
-            <form>
-                账户名：<input id="username" name="username" type="text"><br>
-                原密码：<input id="oldPassword" name="oldPassword" type="password"><br>
-                新密码：<input id="newPassword" name="newPassword" type="password"><br>
-                确认密码：<input id="rePassword" name="rePassword" type="password"><br>
-            </form>
-            <button type="button" class="btn btn-primary">修改</button><br>
-        </div>
+    <!-- 分页按钮组 -->
+    <div id="pageButtonGroup" class="btn-group" role="group">
+        <button id="previousPageButton" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        </button>
+        <button id="nextPageButton" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        </button>
     </div>
-</div>
+</div> <!-- /mainContainer -->
+
+
+
+<!--<div id="list" class="data col-md-10">-->
+<!--    &lt;!&ndash;作业列表&ndash;&gt;-->
+<!--    <div id="homeworkData">-->
+<!--        <h3>作业列表</h3>-->
+<!--        <ul id="homeworkDataList" class="listColor">-->
+<!--            <li>-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-1">发布教师</div>-->
+<!--                    <div class="col-md-1">作业标题</div>-->
+<!--                    <div class="col-md-1">作业描述</div>-->
+<!--                    <div class="col-md-2">作业附件</div>-->
+<!--                    <div class="col-md-1">结束时间</div>-->
+<!--                    <div class="col-md-1">提交状态</div>-->
+<!--                    <div class="col-md-2">提交附件</div>-->
+<!--                    <div class="col-md-1">评阅状态</div>-->
+<!--                    <div class="col-md-2">评阅内容</div>-->
+<!--                </div>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--        <ul class="listColor">-->
+<!--            <li>-->
+<!--                <nav aria-label="page navigation" class="col-md-9 col-md-offset-1">-->
+<!--                    <ul id="homeworkPage" class="pagination">-->
+<!--                        <li>-->
+<!--                            <a href="#" aria-label="Previous">-->
+<!--                                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </nav>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash;留言信息&ndash;&gt;-->
+<!--    <div id="messageDate">-->
+<!--        <h3>留言列表</h3>-->
+<!--        <ul id="messageDateList" class="listColor">-->
+<!--            <li>-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-2">标题</div>-->
+<!--                    <div class="col-md-8">内容</div>-->
+<!--                    <div class="col-md-2">发布时间</div>-->
+<!--                </div>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--        <ul class="listColor">-->
+<!--            <li>-->
+<!--                <div class="col-md-1">-->
+<!--                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addMessage">添加留言</button>-->
+<!--                </div>-->
+<!--                <nav aria-label="Page navigation" class="col-md-9">-->
+<!--                    <ul id="messagePage" class="pagination">-->
+<!--                        <li>-->
+<!--                            <a href="#" aria-label="Previous">-->
+<!--                                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </nav>-->
+<!--            </li>-->
+<!--        </ul>-->
+
+<!--    </div>-->
+<!--    &lt;!&ndash; 添加留言 &ndash;&gt;-->
+<!--    <div class="modal fade" id="addMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">-->
+<!--        <div class="modal-dialog" role="document">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+<!--                    <h4 class="modal-title">添加留言</h4>-->
+<!--                </div>-->
+<!--                <form>-->
+<!--                    <div class="modal-body">-->
+<!--                        标题：<input type="text" />-->
+<!--                    </div>-->
+<!--                    <div class="modal-body">-->
+<!--                        <h5>留言内容：</h5>-->
+<!--                        <textarea class="addMessageData"></textarea>-->
+<!--                    </div>-->
+<!--                </form>-->
+
+<!--                <div class="modal-footer">-->
+<!--                    <button type="button" class="btn btn-primary">确定</button>-->
+<!--                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>-->
+
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash;公告&ndash;&gt;-->
+<!--    <div id="noticeDate">-->
+<!--        <h3>公告列表</h3>-->
+<!--        <ul id="noticeDateList" class="listColor">-->
+<!--            <li>-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-2">标题</div>-->
+<!--                    <div class="col-md-8">公告内容</div>-->
+<!--                    <div class="col-md-2">创建时间</div>-->
+<!--                </div>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--        <ul class="listColor">-->
+<!--            <li>-->
+<!--                <nav aria-label="page navigation" class="col-md-9 col-md-offset-1">-->
+<!--                    <ul id="noticePage" class="pagination">-->
+<!--                        <li>-->
+<!--                            <a href="#" aria-label="Previous">-->
+<!--                                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </nav>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash;修改密码&ndash;&gt;-->
+<!--    <div id="resetPassword">-->
+<!--        <h3>修改密码</h3>-->
+<!--        <div>-->
+<!--            <form>-->
+<!--                账户名：<input id="username" name="username" type="text"><br>-->
+<!--                原密码：<input id="oldPassword" name="oldPassword" type="password"><br>-->
+<!--                新密码：<input id="newPassword" name="newPassword" type="password"><br>-->
+<!--                确认密码：<input id="rePassword" name="rePassword" type="password"><br>-->
+<!--            </form>-->
+<!--            <button type="button" class="btn btn-primary">修改</button><br>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 
 </body>
