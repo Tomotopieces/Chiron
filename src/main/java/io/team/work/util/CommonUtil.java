@@ -58,7 +58,7 @@ public class CommonUtil {
         public static final String MESSAGE_TITLE = "title";
         public static final String MESSAGE_CONTENT = "content";
 
-        // 分页获取用
+        // 分页获取用户
 
         public static final String GET_USER_BY_PAGE_PAGE_NO = "pageNo";
         public static final String GET_USER_BY_PAGE_PAGE_SIZE = "pageSize";
@@ -75,6 +75,11 @@ public class CommonUtil {
         // 移除用户
 
         public static final String REMOVE_USER_ID = "id";
+
+        // 分页获取班级
+
+        public static final String GET_CLASS_BY_PAGE_PAGE_NO = "pageNo";
+        public static final String GET_CLASS_BY_PAGE_PAGE_SIZE = "pageSize";
 
         // 添加班级
 

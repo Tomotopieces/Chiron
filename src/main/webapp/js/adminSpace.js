@@ -13,12 +13,34 @@ $(() => {
 
     // 设置页面初始数据
     setCurrentUsername();
-    initDatasheet('../../admin.user.do', 'getStudentListByPage', fillStudentSheet);
+    generateByActiveId($('.active').attr('id'));
     generatePageButtonGroup('../../admin.user.do', 'getStudentCount', 'getStudentListByPage', fillStudentSheet);
 
     // 页面淡入效果
     $('#mainContainer').fadeIn('slow');
 });
+
+/**
+ * 通过当前 tab id 来生成数据表和按钮组
+ * 
+ * @param {string} activeId 当前选中的 tab id
+ */
+function generateByActiveId(activeId) {
+    switch (activeId) {
+        case 'studentTab':
+            generateDatasheet('../../admin.user.do', 'getStudentListByPage', fillStudentSheet);
+            generatePageButtonGroup('../../admin.user.do', 'getStudentCount', 'getStudentListByPage', fillStudentSheet);
+            return;
+        case 'teacherTab':
+            generateDatasheet('../../admin.user.do', 'getTeacherListByPage', fillTeacherSheet);
+            generatePageButtonGroup('../../admin.user.do', 'getTeacherCount', 'getTeacherListByPage', fillTeacherSheet);
+        case 'classTab':
+            generateDatasheet('../../admin.class.do', 'getClassCount', fillClassSheet);
+            generatePageButtonGroup('../../admin.class.do', 'getClassCount', 'getClassListByPage', fillClassSheet);
+        case 'noticeTab':
+        case 'messageTab':
+    }
+}
 
 /**
  * 绑定 '添加' 按钮 事件
@@ -77,19 +99,19 @@ function fillStudentSheet(dataList) {
     let addRow =
         '<li class="datasheetRow">' +
         '<form id="addForm">' +
-        '<input type="hidden" name="behavior" value="addStudent">' +
-        '<input type="hidden" name="type" value="student">' +
-        '<div class="col-md-2"><input id="username" name="username" type="text" size="10" placeholder="学号"></div>' +
-        '<div class="col-md-2"><input id="name" name="name" type="text" size="10" placeholder="姓名"></div>' +
+        '<input type="hidden" name="behavior" value="addStudent">' + // behavior
+        '<input type="hidden" name="type" value="student">' + // type
+        '<div class="col-md-2"><input id="username" name="username" type="text" size="10" placeholder="学号"></div>' + // username
+        '<div class="col-md-2"><input id="name" name="name" type="text" size="10" placeholder="姓名"></div>' + // name
         '<div class="col-md-2">' +
-        '<select id="sex" name="sex" style="width: 50px;">' +
+        '<select id="sex" name="sex" style="width: 50px;">' + // sex
         '<option value="男">男</option>' +
         '<option value="女">女</option>' +
         '</select>' +
         '</div>' +
-        '<div class="col-md-2"><input id="age" name="age" type="text" size="10" placeholder="年龄"></div>' +
+        '<div class="col-md-2"><input id="age" name="age" type="text" size="10" placeholder="年龄"></div>' + // age
         '<div class="col-md-2">' +
-        '<select name="class" id="class" style="width: 50px;">' +
+        '<select name="class" id="class" style="width: 50px;">' + // class
         '<option value="1-A">1-A</option>' +
         '<option value="1-B">1-B</option>' +
         '<option value="1-C">1-C</option>' +
@@ -123,12 +145,9 @@ function fillStudentSheet(dataList) {
             '</li>';
         $ul.append(row);
     }
-    $('.className').map((index, name) => {
-        console.log(index + ' ' + name);
-    })
-    classIdToName(); // 将班级id替换为班级名
-
+    
     $datasheet.append($ul);
+    classIdToName(); // 将班级id替换为班级名
 }
 
 /**
@@ -156,17 +175,17 @@ function fillTeacherSheet(dataList) {
     let addRow =
         '<li class="datasheetRow">' +
         '<form id="addForm">' +
-        '<input type="hidden" name="behavior" value="addStudent">' +
-        '<input type="hidden" name="type" value="student">' +
-        '<div class="col-md-2"><input id="username" name="username" type="text" size="10" placeholder="教职工号"></div>' +
-        '<div class="col-md-3"><input id="name" name="name" type="text" size="10" placeholder="姓名"></div>' +
+        '<input type="hidden" name="behavior" value="addStudent">' + // behavior
+        '<input type="hidden" name="type" value="teacher">' + // type
+        '<div class="col-md-2"><input id="username" name="username" type="text" size="10" placeholder="教职工号"></div>' + // username
+        '<div class="col-md-3"><input id="name" name="name" type="text" size="10" placeholder="姓名"></div>' + // name
         '<div class="col-md-2">' +
-        '<select id="sex" name="sex" style="width: 50px;">' +
+        '<select id="sex" name="sex" style="width: 50px;">' + // sex
         '<option value="男">男</option>' +
         '<option value="女">女</option>' +
         '</select>' +
         '</div>' +
-        '<div class="col-md-2"><input id="age" name="age" type="text" size="10" placeholder="年龄"></div>' +
+        '<div class="col-md-2"><input id="age" name="age" type="text" size="10" placeholder="年龄"></div>' + // age
         '</form>' +
         '<div class="col-md-2">' +
         '<button id="addButton" type="button" class="operate btn btn-success">添加</button>' +
@@ -197,6 +216,56 @@ function fillTeacherSheet(dataList) {
     $datasheet.append($ul);
 }
 
+/**
+ * 表内填充教师数据
+ * 
+ * @param {User[]} dataList 教师数据表
+ */
 function fillClassSheet(dataList) {
+    $datasheet.empty(); // 清空现存数据
+    let $ul = $('<ul></ul>'); // 重新设置无序列表
 
+    // 表头
+    let head =
+        '<li class="datasheetHead">' +
+        '<div class="col-md-3">班级编号</div>' +
+        '<div class="col-md-6">班级名称</div>' +
+        '<div class="col-md-3">操作</div>' +
+        '<br>' +
+        '</li>';
+    $ul.append(head);
+
+    // '添加'行
+    let addRow =
+        '<li class="datasheetRow">' +
+        '<form id="addForm">' +
+        '<input type="hidden" name="behavior" value="addStudent">' + // behavior
+        '<div class="col-md-3"><input id="classNo" name="classNo" type="text" size="10" placeholder="班级编号"></div>' + // classNo
+        '<div class="col-md-6"><input id="className" name="className" type="text" size="10" placeholder="班级名称"></div>' + // classId
+        '</form>' +
+        '<div class="col-md-3">' +
+        '<button id="addButton" type="button" class="operate btn btn-success">添加</button>' +
+        '</div>' +
+        '<br>' +
+        '</li>';
+    $ul.append(addRow);
+    bindAddButtonEvent();
+
+    // 数据行
+    for (let i = 0; i < dataList.length; i++) {
+        let data = dataList[i];
+        let row =
+            '<li class="datasheetRow">' +
+            '<div class="classId" style="display: none;">' + data.id + '</div>' +
+            '<div class="col-md-3">' + data.classNo + '</div>' +
+            '<div class="col-md-6">' + data.className + '</div>' +
+            '<div class="col-md-3">' +
+            '<button type="button" class="operate btn btn-danger">删除</button>' +
+            '</div>' +
+            '<br>' +
+            '</li>';
+        $ul.append(row);
+    }
+
+    $datasheet.append($ul);
 }

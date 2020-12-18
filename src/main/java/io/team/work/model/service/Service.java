@@ -71,4 +71,11 @@ public interface Service<T, ID> {
      * @return 更新成功与否
      */
     <P> Boolean update(ID id, String propertyName, P propertyValue);
+
+    /**
+     * 计算数据量
+     *
+     * @return 数据量
+     */
+    Long count();
 }

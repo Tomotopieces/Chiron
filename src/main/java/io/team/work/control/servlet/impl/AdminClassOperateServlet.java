@@ -59,6 +59,13 @@ public class AdminClassOperateServlet extends AbstractBaseServlet {
         response.getWriter().write(ResponseDataWrapper.of(CLAZZ_SERVICE.list()));
     }
 
+    public void getClassListByPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Integer pageNo = Integer.valueOf(request.getParameter(GET_CLASS_BY_PAGE_PAGE_NO));
+        Integer pageSize = Integer.valueOf(request.getParameter(GET_CLASS_BY_PAGE_PAGE_SIZE));
+
+        response.getWriter().write(ResponseDataWrapper.of(CLAZZ_SERVICE.listByPage(pageNo, pageSize)));
+    }
+
     /**
      * 通过id获取班级信息
      * <p>
@@ -68,5 +75,14 @@ public class AdminClassOperateServlet extends AbstractBaseServlet {
         response.getWriter().write(
                 ResponseDataWrapper.of(
                         CLAZZ_SERVICE.getById(Integer.valueOf(request.getParameter(GET_CLASS_CLASS_ID)))));
+    }
+
+    /**
+     * 获取班级总数
+     * <p>
+     * 动作函数
+     */
+    public void getClassCount(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().write(ResponseDataWrapper.of(CLAZZ_SERVICE.count()));
     }
 }

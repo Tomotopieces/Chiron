@@ -44,5 +44,10 @@ public abstract class AbstractBaseService<T, ID> implements Service<T, ID> {
         return getDao().update(id, propertyName, propertyValue) == 1;
     }
 
+    @Override
+    public Long count() {
+        return getDao().countAll();
+    }
+
     protected abstract Dao<T, ID> getDao();
 }
