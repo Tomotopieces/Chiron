@@ -20,6 +20,7 @@ import static io.team.work.util.CommonUtil.RequestParameterName.GET_USER_BY_PAGE
 import static io.team.work.util.CommonUtil.RequestParameterName.GET_USER_BY_PAGE_PAGE_SIZE;
 import static io.team.work.util.CommonUtil.RequestParameterName.REMOVE_USER_ID;
 import static io.team.work.util.CommonUtil.ResponseDataWrapper;
+import static io.team.work.util.CommonUtil.ResponseMessage.ADD_DATA_EMPTY_VALUE;
 import static io.team.work.util.CommonUtil.SessionAttributeName.USER;
 
 /**
@@ -39,14 +40,28 @@ public class AdminUserOperateServlet extends AbstractBaseServlet {
      * 动作函数.
      */
     public void addUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Integer type = Integer.valueOf(request.getParameter(ADD_USER_TYPE));
+        Integer type = null;
+        String typeString = request.getParameter(ADD_USER_TYPE);
+        if (!typeString.isEmpty()) {
+            type = Integer.valueOf(typeString);
+        }
         String username = request.getParameter(ADD_USER_USERNAME);
         String name = request.getParameter(ADD_USER_NAME);
         String sex = request.getParameter(ADD_USER_SEX);
-        Integer age = Integer.valueOf(request.getParameter(ADD_USER_AGE));
+        Integer age = null;
+        String ageString = request.getParameter(ADD_USER_AGE);
+        if (!ageString.isEmpty()) {
+            age = Integer.valueOf(ageString);
+        }
         Integer classId = Integer.valueOf(request.getParameter(ADD_USER_CLASS));
 
+        if (type == null || username == null || name == null || age == null) {
+            response.getWriter().write(ResponseDataWrapper.of(false, ADD_DATA_EMPTY_VALUE));
+            return;
+        }
+
         User user = new User();
+        user.setType(type);
         user.setUsername(username);
         user.setPassword("123456");
         user.setName(name);

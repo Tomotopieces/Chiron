@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>没有权限</title>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+
+<body>
+    <script>
+        $.post({
+            url: 'user.do',
+            data: {
+                behavior: 'logout'
+            },
+            success: json => {
+                Swal.fire({
+                    icon: 'success',
+                    title: '登出成功',
+                    confirmButtonText: '确定'
+                }).then(result => {
+                    window.location.href = '/Chiron';
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

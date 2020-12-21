@@ -98,6 +98,15 @@ public class CommonUtil {
 
         public static final String REMOVE_MESSAGE_ID = "id";
 
+        // 获取留言
+
+        public static final String GET_MESSAGE_ID = "id";
+
+        // 分页获取留言
+
+        public static final String GET_MESSAGE_BY_PAGE_PAGE_NO = "pageNo";
+        public static final String GET_MESSAGE_BY_PAGE_PAGE_SIZE = "pageSize";
+
         // 添加公告
 
         public static final String ADD_NOTICE_TITLE = "title";
@@ -106,6 +115,15 @@ public class CommonUtil {
         // 移除公告
 
         public static final String REMOVE_NOTICE_ID = "id";
+
+        // 获取公告
+
+        public static final String GET_NOTICE_ID = "id";
+
+        // 分页获取公告
+
+        public static final String GET_NOTICE_BY_PAGE_PAGE_NO = "pageNo";
+        public static final String GET_NOTICE_BY_PAGE_PAGE_SIZE = "pageSize";
 
         // 更新公告
 
@@ -129,6 +147,7 @@ public class CommonUtil {
         public static final String MESSAGE_WRONG_USERNAME_OR_PASSWORD = "账户或密码错误";
         public static final String MESSAGE_FILE_UPLOAD_FAILED = "文件上传失败";
 //        public static final String MESSAGE_USER_NOT_LOGGED_IN = "用户未登录";
+        public static final String ADD_DATA_EMPTY_VALUE = "请输入所有的信息";
     }
 
     public static final class CommonPagePath {

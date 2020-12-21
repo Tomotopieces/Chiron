@@ -38,6 +38,9 @@ function generatePageButtonGroup(servlet, countBehavior, listBehavior, fillFunct
                 let maxPageNo = Math.ceil(length / pageSize);
                 let pageButtonAmount = maxPageNo > maxPageButtonAmount ? maxPageButtonAmount : maxPageNo;
 
+                // 清空数字按钮
+                $('.pageButton').remove();
+
                 // 插入按钮
                 for (let i = 0; i < pageButtonAmount; i++) {
                     let pageNo = i + 1;

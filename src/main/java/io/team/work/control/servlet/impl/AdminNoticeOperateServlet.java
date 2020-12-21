@@ -1,5 +1,6 @@
 package io.team.work.control.servlet.impl;
 
+import io.team.work.control.servlet.AbstractBaseServlet;
 import io.team.work.model.bean.Notice;
 import io.team.work.model.service.impl.NoticeService;
 
@@ -9,13 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 
-import static io.team.work.util.CommonUtil.RequestParameterName.ADD_NOTICE_CONTENT;
-import static io.team.work.util.CommonUtil.RequestParameterName.ADD_NOTICE_TITLE;
-import static io.team.work.util.CommonUtil.RequestParameterName.REMOVE_NOTICE_ID;
-import static io.team.work.util.CommonUtil.RequestParameterName.UPDATE_NOTICE_ID;
-import static io.team.work.util.CommonUtil.RequestParameterName.UPDATE_NOTICE_PROPERTY_NAME;
-import static io.team.work.util.CommonUtil.RequestParameterName.UPDATE_NOTICE_PROPERTY_VALUE;
+import static io.team.work.util.CommonUtil.RequestParameterName.*;
 import static io.team.work.util.CommonUtil.ResponseDataWrapper;
+import static io.team.work.util.CommonUtil.ResponseMessage.ADD_DATA_EMPTY_VALUE;
 import static io.team.work.util.DateTimeUtil.DATE_TIME_FORMAT;
 
 /**
@@ -26,7 +23,7 @@ import static io.team.work.util.DateTimeUtil.DATE_TIME_FORMAT;
  * 2020/12/9 16:38
  */
 @WebServlet("/admin.notice.do")
-public class AdminNoticeOperateServlet {
+public class AdminNoticeOperateServlet extends AbstractBaseServlet {
     private static final NoticeService NOTICE_SERVICE = NoticeService.getInstance();
 
     /**
@@ -37,6 +34,10 @@ public class AdminNoticeOperateServlet {
     public void addNotice(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String title = request.getParameter(ADD_NOTICE_TITLE);
         String content = request.getParameter(ADD_NOTICE_CONTENT);
+
+        if (title == null || content == null) {
+            response.getWriter().write(ResponseDataWrapper.of(false, ADD_DATA_EMPTY_VALUE));
+        }
 
         Notice notice = new Notice();
         notice.setTitle(title);
@@ -67,6 +68,18 @@ public class AdminNoticeOperateServlet {
     }
 
     /**
+     * 分页获取公告
+     * <p>
+     * 动作函数
+     */
+    public void getNoticeListByPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Integer pageNo = Integer.valueOf(request.getParameter(GET_NOTICE_BY_PAGE_PAGE_NO));
+        Integer pageSize = Integer.valueOf(request.getParameter(GET_NOTICE_BY_PAGE_PAGE_SIZE));
+
+        response.getWriter().write(ResponseDataWrapper.of(NOTICE_SERVICE.listByPage(pageNo, pageSize)));
+    }
+
+    /**
      * 更新公告.
      * <p>
      * 动作函数.
@@ -78,5 +91,14 @@ public class AdminNoticeOperateServlet {
 
         response.getWriter().write(
                 ResponseDataWrapper.of(NOTICE_SERVICE.update(noticeId, propertyName, propertyValue)));
+    }
+
+    /**
+     * 获取公告总数
+     * <p>
+     * 动作函数
+     */
+    public void getNoticeCount(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().write(ResponseDataWrapper.of(NOTICE_SERVICE.count()));
     }
 }

@@ -1,20 +1,31 @@
 /**
  * 管理员界面配置js
  */
-
+let $active; // 选中的tab id
 let $datasheet; // 数据表
+let $tab; // 侧边栏项
 
 /**
  * 初始化
  */
 $(() => {
     // 数据初始化
+    $active = $('.active');
     $datasheet = $('#datasheet');
+    $tab = $('.tab');
 
     // 设置页面初始数据
     setCurrentUsername();
-    generateByActiveId($('.active').attr('id'));
-    generatePageButtonGroup('../../admin.user.do', 'getStudentCount', 'getStudentListByPage', fillStudentSheet);
+    generateDatasheetByActiveId();
+
+    // 事件绑定
+    $tab.on('click', event => {
+        let $this = $(event.target);
+        $tab.removeClass('active');
+        $this.addClass('active');
+
+        generateDatasheetByActiveId();
+    });
 
     // 页面淡入效果
     $('#mainContainer').fadeIn('slow');
@@ -22,11 +33,9 @@ $(() => {
 
 /**
  * 通过当前 tab id 来生成数据表和按钮组
- * 
- * @param {string} activeId 当前选中的 tab id
  */
-function generateByActiveId(activeId) {
-    switch (activeId) {
+function generateDatasheetByActiveId() {
+    switch ($('.active').attr('id')) {
         case 'studentTab':
             generateDatasheet('../../admin.user.do', 'getStudentListByPage', fillStudentSheet);
             generatePageButtonGroup('../../admin.user.do', 'getStudentCount', 'getStudentListByPage', fillStudentSheet);
@@ -34,29 +43,47 @@ function generateByActiveId(activeId) {
         case 'teacherTab':
             generateDatasheet('../../admin.user.do', 'getTeacherListByPage', fillTeacherSheet);
             generatePageButtonGroup('../../admin.user.do', 'getTeacherCount', 'getTeacherListByPage', fillTeacherSheet);
+            return;
         case 'classTab':
-            generateDatasheet('../../admin.class.do', 'getClassCount', fillClassSheet);
+            generateDatasheet('../../admin.class.do', 'getClassListByPage', fillClassSheet);
             generatePageButtonGroup('../../admin.class.do', 'getClassCount', 'getClassListByPage', fillClassSheet);
+            return;
         case 'noticeTab':
+            generateDatasheet('../../admin.notice.do', 'getNoticeListByPage', fillNoticeSheet);
+            generatePageButtonGroup('../../admin.notice.do', 'getNoticeCount', 'getNoticeListByPage', fillNoticeSheet);
+            return;
         case 'messageTab':
+            generateDatasheet('../../admin.message.do', 'getMessageListByPage', fillMessageSheet);
+            generatePageButtonGroup('../../admin.message.do', 'getMessageCount', 'getMessageListByPage', fillMessageSheet);
+            return;
     }
 }
 
 /**
  * 绑定 '添加' 按钮 事件
  */
-function bindAddButtonEvent() {
+function bindAddButtonEvent(servlet) {
     $('#addButton').on('click', () => {
         $.ajax({
-            url: 'admin.user.do',
-            data: $(addForm).serialize(),
+            url: servlet,
+            data: $('#addForm').serialize(),
             success: json => {
+                console.log(json);
                 let wrapper = JSON.parse(json);
-                // let data = JSON.parse(wrapper.data);
+                let data = JSON.parse(wrapper.data);
                 if (wrapper.result) {
                     Swal.fire({
                         icon: 'success',
                         title: '添加成功',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(result => {
+                        generateDatasheetByActiveId();
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: data,
                         showConfirmButton: false,
                         timer: 1500
                     });
@@ -66,11 +93,44 @@ function bindAddButtonEvent() {
     });
 }
 
-function bindDeleteButtonEvent() {
+/**
+ * 绑定 '删除' 按钮 事件
+ * 
+ * @param {string} servlet Servlet
+ * @param {string} behavior 动作
+ */
+function bindDeleteButtonEvent(servlet, behavior) {
     $('.deleteButton').on('click', event => {
         $this = $(event.target);
-        console.log($this.parent());
-    })
+        let id = $($this.parent().parent().children()[0]).text();
+        $.post({
+            url: servlet,
+            data: {
+                id: id,
+                behavior: behavior
+            },
+            success: json => {
+                let wrapper = JSON.parse(json);
+                if (wrapper.result) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '删除成功',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(result => {
+                        generateDatasheetByActiveId();
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '删除失败',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            }
+        })
+    });
 }
 
 /**
@@ -99,8 +159,8 @@ function fillStudentSheet(dataList) {
     let addRow =
         '<li class="datasheetRow">' +
         '<form id="addForm">' +
-        '<input type="hidden" name="behavior" value="addStudent">' + // behavior
-        '<input type="hidden" name="type" value="student">' + // type
+        '<input type="hidden" name="behavior" value="addUser">' + // behavior
+        '<input type="hidden" name="type" value="2">' + // type
         '<div class="col-md-2"><input id="username" name="username" type="text" size="10" placeholder="学号"></div>' + // username
         '<div class="col-md-2"><input id="name" name="name" type="text" size="10" placeholder="姓名"></div>' + // name
         '<div class="col-md-2">' +
@@ -111,11 +171,7 @@ function fillStudentSheet(dataList) {
         '</div>' +
         '<div class="col-md-2"><input id="age" name="age" type="text" size="10" placeholder="年龄"></div>' + // age
         '<div class="col-md-2">' +
-        '<select name="class" id="class" style="width: 50px;">' + // class
-        '<option value="1-A">1-A</option>' +
-        '<option value="1-B">1-B</option>' +
-        '<option value="1-C">1-C</option>' +
-        '</select>' +
+        '<select id="classSelector" name="class" style="width: 50px;"></select>' + // class
         '</div>' +
         '</form>' +
         '<div class="col-md-1">' +
@@ -124,7 +180,6 @@ function fillStudentSheet(dataList) {
         '<br>' +
         '</li>';
     $ul.append(addRow);
-    bindAddButtonEvent();
 
     // 数据行
     for (let i = 0; i < dataList.length; i++) {
@@ -147,6 +202,9 @@ function fillStudentSheet(dataList) {
     }
     
     $datasheet.append($ul);
+    bindAddButtonEvent('../../admin.user.do'); // 绑定'添加'按钮事件
+    bindDeleteButtonEvent('../../admin.user.do', 'removeUser'); // 绑定'删除'按钮事件
+    fillClassSelector();
     classIdToName(); // 将班级id替换为班级名
 }
 
@@ -175,8 +233,8 @@ function fillTeacherSheet(dataList) {
     let addRow =
         '<li class="datasheetRow">' +
         '<form id="addForm">' +
-        '<input type="hidden" name="behavior" value="addStudent">' + // behavior
-        '<input type="hidden" name="type" value="teacher">' + // type
+        '<input type="hidden" name="behavior" value="addUser">' + // behavior
+        '<input type="hidden" name="type" value="1">' + // type
         '<div class="col-md-2"><input id="username" name="username" type="text" size="10" placeholder="教职工号"></div>' + // username
         '<div class="col-md-3"><input id="name" name="name" type="text" size="10" placeholder="姓名"></div>' + // name
         '<div class="col-md-2">' +
@@ -193,7 +251,6 @@ function fillTeacherSheet(dataList) {
         '<br>' +
         '</li>';
     $ul.append(addRow);
-    bindAddButtonEvent();
 
     // 数据行
     for (let i = 0; i < dataList.length; i++) {
@@ -206,14 +263,16 @@ function fillTeacherSheet(dataList) {
             '<div class="col-md-2">' + data.sex + '</div>' +
             '<div class="col-md-2">' + data.age + '</div>' +
             '<div class="col-md-2">' +
-            '<button type="button" class="operate btn btn-danger">删除</button>' +
+            '<button type="button" class="deleteButton operate btn btn-danger">删除</button>' +
             '</div>' +
             '<br>' +
             '</li>';
         $ul.append(row);
     }
-
+    
     $datasheet.append($ul);
+    bindAddButtonEvent('../../admin.user.do'); // 绑定'添加'按钮事件
+    bindDeleteButtonEvent('../../admin.user.do', 'removeUser'); // 绑定'删除'按钮事件
 }
 
 /**
@@ -239,7 +298,7 @@ function fillClassSheet(dataList) {
     let addRow =
         '<li class="datasheetRow">' +
         '<form id="addForm">' +
-        '<input type="hidden" name="behavior" value="addStudent">' + // behavior
+        '<input type="hidden" name="behavior" value="addClass">' + // behavior
         '<div class="col-md-3"><input id="classNo" name="classNo" type="text" size="10" placeholder="班级编号"></div>' + // classNo
         '<div class="col-md-6"><input id="className" name="className" type="text" size="10" placeholder="班级名称"></div>' + // classId
         '</form>' +
@@ -249,7 +308,6 @@ function fillClassSheet(dataList) {
         '<br>' +
         '</li>';
     $ul.append(addRow);
-    bindAddButtonEvent();
 
     // 数据行
     for (let i = 0; i < dataList.length; i++) {
@@ -260,14 +318,16 @@ function fillClassSheet(dataList) {
             '<div class="col-md-3">' + data.classNo + '</div>' +
             '<div class="col-md-6">' + data.className + '</div>' +
             '<div class="col-md-3">' +
-            '<button type="button" class="operate btn btn-danger">删除</button>' +
+            '<button type="button" class="deleteButton operate btn btn-danger">删除</button>' +
             '</div>' +
             '<br>' +
             '</li>';
         $ul.append(row);
     }
-
+    
     $datasheet.append($ul);
+    bindAddButtonEvent('../../admin.class.do'); // 绑定'添加'按钮事件
+    bindDeleteButtonEvent('../../admin.class.do', 'removeClass'); // 绑定'删除'按钮事件
 }
 
 /**
@@ -304,7 +364,6 @@ function fillNoticeSheet(dataList) {
         '<br>' +
         '</li>';
     $ul.append(addRow);
-    bindAddButtonEvent();
 
     // 数据行
     for (let i = 0; i < dataList.length; i++) {
@@ -316,7 +375,7 @@ function fillNoticeSheet(dataList) {
             '<div class="col-md-6">' + data.content + '</div>' +
             '<div class="col-md-2">' + data.create_time + '</div>' +
             '<div class="col-md-2">' +
-            '<button type="button" class="operate btn btn-danger">删除</button>' +
+            '<button type="button" class="deleteButton operate btn btn-danger">删除</button>' +
             '</div>' +
             '<br>' +
             '</li>';
@@ -324,6 +383,8 @@ function fillNoticeSheet(dataList) {
     }
 
     $datasheet.append($ul);
+    bindAddButtonEvent('../../admin.class.do'); // 绑定'添加'按钮事件
+    bindDeleteButtonEvent('../../admin.notice.do', 'removeNotice'); // 绑定'删除'按钮事件
 }
 
 /**
@@ -331,7 +392,7 @@ function fillNoticeSheet(dataList) {
  *
  * @param {Message[]} dataList 留言数据表
  */
-function fillNoticeSheet(dataList) {
+function fillMessageSheet(dataList) {
     $datasheet.empty(); // 清空现存数据
     let $ul = $('<ul></ul>'); // 重新设置无序列表
 
@@ -356,12 +417,13 @@ function fillNoticeSheet(dataList) {
             '<div class="col-md-6">' + data.content + '</div>' +
             '<div class="col-md-2">' + data.create_time + '</div>' +
             '<div class="col-md-2">' +
-            '<button type="button" class="operate btn btn-danger">删除</button>' +
+            '<button type="button" class="deleteButton operate btn btn-danger">删除</button>' +
             '</div>' +
             '<br>' +
             '</li>';
         $ul.append(row);
     }
-
+    
     $datasheet.append($ul);
+    bindDeleteButtonEvent('../../admin.message.do', 'removeMessage'); // 绑定'删除'按钮事件
 }

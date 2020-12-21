@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static io.team.work.util.CommonUtil.RequestParameterName.REMOVE_MESSAGE_ID;
+import static io.team.work.util.CommonUtil.RequestParameterName.*;
 import static io.team.work.util.CommonUtil.ResponseDataWrapper;
 
 /**
@@ -32,6 +32,18 @@ public class AdminMessageOperateServlet extends AbstractBaseServlet {
     }
 
     /**
+     * 分页获取留言
+     * <p>
+     * 动作函数
+     */
+    public void getMessageListByPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Integer pageNo = Integer.valueOf(request.getParameter(GET_MESSAGE_BY_PAGE_PAGE_NO));
+        Integer pageSize = Integer.valueOf(request.getParameter(GET_MESSAGE_BY_PAGE_PAGE_SIZE));
+
+        response.getWriter().write(ResponseDataWrapper.of(MESSAGE_SERVICE.listByPage(pageNo, pageSize)));
+    }
+
+    /**
      * 移除留言.
      * <p>
      * 动作函数
@@ -40,5 +52,14 @@ public class AdminMessageOperateServlet extends AbstractBaseServlet {
         response.getWriter().write(
                 ResponseDataWrapper.of(
                         MESSAGE_SERVICE.remove(Integer.valueOf(request.getParameter(REMOVE_MESSAGE_ID)))));
+    }
+
+    /**
+     * 获取留言总数
+     * <p>
+     * 动作函数
+     */
+    public void getMessageCount(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().write(ResponseDataWrapper.of(MESSAGE_SERVICE.count()));
     }
 }
