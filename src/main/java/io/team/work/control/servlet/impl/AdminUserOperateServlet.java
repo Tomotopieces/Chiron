@@ -10,18 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static io.team.work.util.BeanUtil.USER_TYPE_STUDENT;
-import static io.team.work.util.CommonUtil.RequestParameterName.ADD_USER_AGE;
-import static io.team.work.util.CommonUtil.RequestParameterName.ADD_USER_CLASS;
-import static io.team.work.util.CommonUtil.RequestParameterName.ADD_USER_NAME;
-import static io.team.work.util.CommonUtil.RequestParameterName.ADD_USER_SEX;
-import static io.team.work.util.CommonUtil.RequestParameterName.ADD_USER_TYPE;
-import static io.team.work.util.CommonUtil.RequestParameterName.ADD_USER_USERNAME;
-import static io.team.work.util.CommonUtil.RequestParameterName.GET_USER_BY_PAGE_PAGE_NO;
-import static io.team.work.util.CommonUtil.RequestParameterName.GET_USER_BY_PAGE_PAGE_SIZE;
-import static io.team.work.util.CommonUtil.RequestParameterName.REMOVE_USER_ID;
+import static io.team.work.util.CommonUtil.RequestParameterName.*;
 import static io.team.work.util.CommonUtil.ResponseDataWrapper;
 import static io.team.work.util.CommonUtil.ResponseMessage.ADD_DATA_EMPTY_VALUE;
-import static io.team.work.util.CommonUtil.SessionAttributeName.USER;
 
 /**
  * 管理员的用户相关操作Servlet类.

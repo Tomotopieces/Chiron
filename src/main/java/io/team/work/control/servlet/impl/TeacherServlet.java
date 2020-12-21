@@ -19,19 +19,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import static io.team.work.util.BeanUtil.PROPERTY_REVIEW_TIME;
-import static io.team.work.util.BeanUtil.PROPERTY_REVIEW_CONTENT;
-import static io.team.work.util.BeanUtil.PROPERTY_REVIEW_STATUS;
-import static io.team.work.util.DateTimeUtil.DATE_TIME_FORMAT;
-import static io.team.work.util.CommonUtil.RequestParameterName.ASSIGN_HOMEWORK_CLASS_ID;
-import static io.team.work.util.CommonUtil.RequestParameterName.ASSIGN_HOMEWORK_DESCRIBE;
-import static io.team.work.util.CommonUtil.RequestParameterName.ASSIGN_HOMEWORK_END_TIME;
-import static io.team.work.util.CommonUtil.RequestParameterName.ASSIGN_HOMEWORK_TITLE;
-import static io.team.work.util.CommonUtil.RequestParameterName.REVIEW_HOMEWORK_ID;
-import static io.team.work.util.CommonUtil.RequestParameterName.REVIEW_HOMEWORK_REVIEW_CONTENT;
+import static io.team.work.util.BeanUtil.*;
+import static io.team.work.util.CommonUtil.RequestParameterName.*;
 import static io.team.work.util.CommonUtil.ResponseDataWrapper;
 import static io.team.work.util.CommonUtil.ResponseMessage.MESSAGE_FILE_UPLOAD_FAILED;
 import static io.team.work.util.CommonUtil.SessionAttributeName.USER;
+import static io.team.work.util.DateTimeUtil.DATE_TIME_FORMAT;
 
 /**
  * 教师相关操作Servlet类.

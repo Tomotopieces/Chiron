@@ -4,13 +4,9 @@ import io.team.work.control.servlet.AbstractBaseServlet;
 import io.team.work.model.bean.Message;
 import io.team.work.model.bean.Notice;
 import io.team.work.model.bean.User;
-import io.team.work.model.service.impl.HomeworkService;
-import io.team.work.model.service.impl.MessageService;
-import io.team.work.model.service.impl.NoticeService;
-import io.team.work.model.service.impl.StudentHomeworkService;
-import io.team.work.model.service.impl.UserService;
-import io.team.work.util.FileUtil;
+import io.team.work.model.service.impl.*;
 import io.team.work.util.CommonUtil.ResponseDataWrapper;
+import io.team.work.util.FileUtil;
 import io.team.work.util.UserUtil;
 
 import javax.servlet.annotation.WebServlet;
@@ -21,19 +17,12 @@ import java.util.Date;
 import java.util.List;
 
 import static io.team.work.util.BeanUtil.PROPERTY_PASSWORD;
-import static io.team.work.util.DateTimeUtil.DATE_TIME_FORMAT;
 import static io.team.work.util.CommonUtil.PROJECT_PATH;
-import static io.team.work.util.CommonUtil.RequestParameterName.DOWNLOAD_FILE_ID;
-import static io.team.work.util.CommonUtil.RequestParameterName.DOWNLOAD_FILE_TYPE;
-import static io.team.work.util.CommonUtil.RequestParameterName.LOGIN_PASSWORD;
-import static io.team.work.util.CommonUtil.RequestParameterName.LOGIN_USERNAME;
-import static io.team.work.util.CommonUtil.RequestParameterName.MESSAGE_CONTENT;
-import static io.team.work.util.CommonUtil.RequestParameterName.MESSAGE_TITLE;
-import static io.team.work.util.CommonUtil.RequestParameterName.RESET_PASSWORD_NEW_PASSWORD;
-import static io.team.work.util.CommonUtil.RequestParameterName.RESET_PASSWORD_OLD_PASSWORD;
+import static io.team.work.util.CommonUtil.RequestParameterName.*;
 import static io.team.work.util.CommonUtil.ResponseMessage.MESSAGE_ILLEGAL_USERNAME;
 import static io.team.work.util.CommonUtil.ResponseMessage.MESSAGE_WRONG_USERNAME_OR_PASSWORD;
 import static io.team.work.util.CommonUtil.SessionAttributeName.USER;
+import static io.team.work.util.DateTimeUtil.DATE_TIME_FORMAT;
 
 /**
  * 用户基本操作Servlet类.
@@ -149,6 +138,28 @@ public class UserServlet extends AbstractBaseServlet {
     }
 
     /**
+     * 分页获取留言
+     * <p>
+     * 动作函数
+     */
+    public void getMessageListByPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Integer pageNo = Integer.valueOf(request.getParameter(GET_MESSAGE_BY_PAGE_PAGE_NO));
+        Integer pageSize = Integer.valueOf(request.getParameter(GET_MESSAGE_BY_PAGE_PAGE_SIZE));
+
+        List<Message> messageList = MESSAGE_SERVICE.listByPage(pageNo, pageSize);
+        response.getWriter().write(ResponseDataWrapper.of(messageList));
+    }
+
+    /**
+     * 获取留言总数
+     * <p>
+     * 动作函数
+     */
+    public void getMessageCount(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().write(ResponseDataWrapper.of(MESSAGE_SERVICE.count()));
+    }
+
+    /**
      * 查看公告板.
      * <p>
      * 动作函数.
@@ -156,6 +167,28 @@ public class UserServlet extends AbstractBaseServlet {
     public void getNoticeList(HttpServletRequest request, HttpServletResponse response) throws IOException {
         List<Notice> noticeList = NOTICE_SERVICE.list();
         response.getWriter().write(ResponseDataWrapper.of(noticeList));
+    }
+
+    /**
+     * 分页获取公告
+     * <p>
+     * 动作函数
+     */
+    public void getNoticeListByPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Integer pageNo = Integer.valueOf(request.getParameter(GET_NOTICE_BY_PAGE_PAGE_NO));
+        Integer pageSize = Integer.valueOf(request.getParameter(GET_NOTICE_BY_PAGE_PAGE_SIZE));
+
+        List<Notice> messageList = NOTICE_SERVICE.listByPage(pageNo, pageSize);
+        response.getWriter().write(ResponseDataWrapper.of(messageList));
+    }
+
+    /**
+     * 获取公告总数
+     * <p>
+     * 动作函数
+     */
+    public void getNoticeCount(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().write(ResponseDataWrapper.of(NOTICE_SERVICE.count()));
     }
 
     /**
@@ -169,7 +202,7 @@ public class UserServlet extends AbstractBaseServlet {
 
         if (type.equals("homework")) {
             FileUtil.download(response, HOMEWORK_SERVICE.getById(id).getAttach_url());
-        } else if (type.equals("studentHomework")){
+        } else if (type.equals("studentHomework")) {
             FileUtil.download(response, STUDENT_HOMEWORK_SERVICE.getById(id).getAttach_url());
         } else {
             response.getWriter().write(ResponseDataWrapper.of(false, "You wanna download what?"));

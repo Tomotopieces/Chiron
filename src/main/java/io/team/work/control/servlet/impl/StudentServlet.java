@@ -17,9 +17,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import static io.team.work.util.CommonUtil.RequestParameterName.SUBMIT_HOMEWORK_DESCRIBE;
-import static io.team.work.util.CommonUtil.RequestParameterName.SUBMIT_HOMEWORK_HOMEWORK_ID;
-import static io.team.work.util.CommonUtil.RequestParameterName.SUBMIT_HOMEWORK_TITLE;
+import static io.team.work.util.CommonUtil.RequestParameterName.*;
 import static io.team.work.util.CommonUtil.ResponseDataWrapper;
 import static io.team.work.util.CommonUtil.ResponseMessage.MESSAGE_FILE_UPLOAD_FAILED;
 import static io.team.work.util.CommonUtil.SessionAttributeName.USER;
