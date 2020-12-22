@@ -1,7 +1,6 @@
 /**
  * 管理员界面配置js
  */
-let $active; // 选中的tab id
 let $datasheet; // 数据表
 let $tab; // 侧边栏项
 
@@ -10,7 +9,6 @@ let $tab; // 侧边栏项
  */
 $(() => {
     // 数据初始化
-    $active = $('.active');
     $datasheet = $('#datasheet');
     $tab = $('.tab');
 

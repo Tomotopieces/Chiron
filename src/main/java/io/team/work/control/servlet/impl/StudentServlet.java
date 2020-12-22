@@ -13,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import static io.team.work.util.CommonUtil.RequestParameterName.*;
@@ -37,7 +36,7 @@ public class StudentServlet extends AbstractBaseServlet {
      * 通过request session获取学生班级id.
      */
     private static Integer getStudentClassId(HttpServletRequest request) {
-        return ((User) request.getServletContext().getAttribute(USER)).getClass_id();
+        return ((User) request.getSession().getAttribute(USER)).getClass_id();
     }
 
     /**

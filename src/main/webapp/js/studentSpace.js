@@ -1,7 +1,6 @@
 /**
  * 学生界面配置js
  */
-let $active; // 选中的tab id
 let $datasheet; // 数据表
 let $tab; // 侧边栏项
 
@@ -10,7 +9,6 @@ let $tab; // 侧边栏项
  */
 $(() => {
     // 数据初始化
-    $active = $('.active');
     $datasheet = $('#datasheet');
     $tab = $('.tab');
 
@@ -38,7 +36,7 @@ function generateDatasheetByActiveId() {
     switch ($('.active').attr('id')) {
         case 'homeworkTab':
             generateDatasheet('../../student.do', 'getHomeworkListByPageAndStudentId', fillHomeworkSheet);
-            generateDatasheet('../../student.do', 'getSubmittedHomeworkListByPageAndStudentId', fillInsertHomeworkSheet);
+            // generateDatasheet('../../student.do', 'getSubmittedHomeworkListByPageAndStudentId', insertHomeworkSheet);
             generatePageButtonGroup('../../student.do', 'getHomeworkCountByStudentId', 'getHomeworkListByPageAndStudentId', fillHomeworkSheet);
             return;
         case 'noticeTab':
@@ -170,17 +168,16 @@ function fillHomeworkSheet(dataList) {
             '</li>';
         $ul.append(row);
     }
+
     $datasheet.append($ul);
 }
 
-
 /**
- * 表内填充插入作业数据
+ * 表内插入作业数据
  *
  * @param {Homework[]} dataList 插入作业数据表
  */
-function fillInsertHomeworkSheet(dataList) {
-
+function insertHomeworkSheet(dataList) {
     // 数据行
     let $submitStatus = $('.submitStatus'),
         $attachmentTitle = $('.attachmentTitle'),
@@ -197,11 +194,8 @@ function fillInsertHomeworkSheet(dataList) {
                 $reviewStatus.text('已评阅');
                 $reviewContent.text(data.review_content);
             }
-
         }
     }
-
-    $datasheet.append($ul);
 }
 
 /**

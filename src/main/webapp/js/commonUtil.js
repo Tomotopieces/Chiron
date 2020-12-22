@@ -39,9 +39,9 @@ function generateDatasheet(servlet, behavior, fillFunction) {
         },
         success: json => {
             let wrapper = JSON.parse(json);
-            let lsit = JSON.parse(wrapper.data);
+            let list = JSON.parse(wrapper.data);
             if (wrapper.result) {
-                fillFunction(lsit);
+                fillFunction(list);
                 setCrossColor();
             } else {
                 Swal.fire({

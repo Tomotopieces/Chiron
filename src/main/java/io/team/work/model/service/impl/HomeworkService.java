@@ -50,41 +50,45 @@ public class HomeworkService extends AbstractBaseService<Homework, Integer> {
 
     /**
      * 根据班级ID获取分页
-     * @param pageNo 页码
+     *
+     * @param pageNo   页码
      * @param pageSize 条数
-     * @param classId 班级ID
+     * @param classId  班级ID
      * @return 教师布置作业列表
      */
-    public List<Homework> listByPageAndClassId(Integer pageNo, Integer pageSize, Integer classId){
-        return homeworkDao.listByPageAndClassId(pageNo,pageSize,classId);
+    public List<Homework> listByPageAndClassId(Integer pageNo, Integer pageSize, Integer classId) {
+        return homeworkDao.listByPageAndClassId(classId, pageNo, pageSize);
     }
 
     /**
      * 根据教师ID获取分页
-     * @param pageNo 页面
-     * @param pageSize 条数
+     *
+     * @param pageNo    页面
+     * @param pageSize  条数
      * @param teacherId 教师ID
      * @return 教师布置作业列表
      */
-    public List<Homework> listByPageAndTeacherId(Integer pageNo, Integer pageSize, Integer teacherId){
-        return homeworkDao.listByPageAndTeacherId(pageNo,pageSize,teacherId);
+    public List<Homework> listByPageAndTeacherId(Integer pageNo, Integer pageSize, Integer teacherId) {
+        return homeworkDao.listByPageAndTeacherId(teacherId, pageNo, pageSize);
     }
 
     /**
      * 根据班级ID查找记录，并记录共有多少条
+     *
      * @param classId 班级ID
      * @return 根据班级ID查找出来的条数
      */
-    public Long countByClassId(Integer classId){
+    public Long countByClassId(Integer classId) {
         return homeworkDao.countByClassId(classId);
     }
 
     /**
      * 根据教师ID查找记录，并记录共有多少条
+     *
      * @param teacherId 教师ID
      * @return 根基教师ID查找出来的条数
      */
-    public Long countByTeacherId(Integer teacherId){
+    public Long countByTeacherId(Integer teacherId) {
         return homeworkDao.countByTeacherId(teacherId);
     }
 
