@@ -11,7 +11,7 @@ import java.util.List;
  * 描述:作业
  */
 public class HomeworkDao extends AbstractBaseDao<Homework, Integer> {
-    private HomeworkDao(){
+    private HomeworkDao() {
     }
 
     private static final String TABLE_NAME = "T_homework";
@@ -25,7 +25,7 @@ public class HomeworkDao extends AbstractBaseDao<Homework, Integer> {
     @Override
     public int insert(Homework homework) {
         String sql = "INSERT INTO `T_homework`(`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attachment_title`,`attachment_url`) VALUES(?,?,?,?,?,?,?)";
-        return update(sql, homework.getTeacher_id(), homework.getTitle(), homework.getDescribe(), homework.getClass_id(), homework.getEnd_time(),homework.getAttachment_title(),homework.getAttachment_url());
+        return update(sql, homework.getTeacher_id(), homework.getTitle(), homework.getDescribe(), homework.getClass_id(), homework.getEnd_time(), homework.getAttachment_title(), homework.getAttachment_url());
     }
 
     @Override
@@ -36,7 +36,7 @@ public class HomeworkDao extends AbstractBaseDao<Homework, Integer> {
 
     public int update(Homework homework) {
         String sql = "UPDATE `T_homework` SET `teacher_id`=?,`title`=?,`describe`=?,`class_id`=?,`end_time`=?,`attachment_title`=?,`attachment_url`=? WHERE `id`=?";
-        return update(sql, homework.getTeacher_id(), homework.getTitle(), homework.getDescribe(), homework.getClass_id(), homework.getEnd_time(),homework.getAttachment_title(),homework.getAttachment_url(),homework.getId());
+        return update(sql, homework.getTeacher_id(), homework.getTitle(), homework.getDescribe(), homework.getClass_id(), homework.getEnd_time(), homework.getAttachment_title(), homework.getAttachment_url(), homework.getId());
     }
 
     @Override
@@ -53,40 +53,44 @@ public class HomeworkDao extends AbstractBaseDao<Homework, Integer> {
 
     /**
      * 全部分页查询
-     * @param pageNo 页码
+     *
+     * @param pageNo   页码
      * @param pageSize 条数
      * @return
      */
     @Override
     public List<Homework> queryByPage(Integer pageNo, Integer pageSize) {
-        String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attachment_title`,`attachment_url` FROM `T_homework` LIMIT ?,?";
-        return queryForList(Homework.class, sql, (pageNo-1)*pageSize, pageSize);
+        String sql = "SELECT `id`, `teacher_id`, `title`, `describe`, `class_id`, `end_time`, `attachment_title`, `attachment_url` FROM `T_homework` LIMIT ?,?";
+        return queryForList(Homework.class, sql, (pageNo - 1) * pageSize, pageSize);
     }
 
     /**
      * 根据班级ID查询分页
-     * @param pageNo 页码
+     *
+     * @param pageNo   页码
      * @param pageSize 条数
      * @return
      */
-    public List<Homework> listByPageAndClassId(Integer pageNo,Integer pageSize,Integer classId){
-        String sql="SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attachment_title`,`attachment_url` FROM `T_homework` WHERE `class_id`=? LIMIT ?,?";
-        return  queryForList(Homework.class,sql,(pageNo-1)*pageSize,pageSize,classId);
+    public List<Homework> listByPageAndClassId( Integer classId,Integer pageNo, Integer pageSize) {
+        String sql = "SELECT `id`, `teacher_id`, `title`, `describe`, `class_id`, `end_time`, `attachment_title`, `attachment_url` FROM `T_homework` WHERE `class_id`=? LIMIT ?,?";
+        return queryForList(Homework.class, sql,  classId, (pageNo - 1) * pageSize, pageSize);
     }
 
     /**
      * 根据教师ID查询分页
-     * @param pageNo 页码
+     *
+     * @param pageNo   页码
      * @param pageSize 条数
      * @return
      */
-    public List<Homework> listByPageAndTeacherId(Integer pageNo, Integer pageSize, Integer teacherId){
-        String sql="SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attachment_title`,`attachment_url` FROM `T_homework` WHERE `teacher_id`=? LIMIT ?,?";
-        return  queryForList(Homework.class,sql,(pageNo-1)*pageSize,pageSize,teacherId);
+    public List<Homework> listByPageAndTeacherId(Integer teacherId,Integer pageNo, Integer pageSize) {
+        String sql = "SELECT `id`, `teacher_id`, `title`, `describe`, `class_id`, `end_time`, `attachment_title`, `attachment_url` FROM `T_homework` WHERE `teacher_id`= ? LIMIT ?,?";
+        return queryForList(Homework.class, sql, teacherId, (pageNo - 1) * pageSize, pageSize);
     }
 
     /**
      * 记录全部总数
+     *
      * @return
      */
     @Override
@@ -97,17 +101,18 @@ public class HomeworkDao extends AbstractBaseDao<Homework, Integer> {
 
     /**
      * 根据班级ID查找总条数
+     *
      * @param classId
      * @return
      */
-    public Long countByClassId(Integer classId){
-        String sql="SELECT COUNT(1) FROM `T_homework` WHERE `class_id`=?";
-        return queryForSingleValue(sql,classId);
+    public Long countByClassId(Integer classId) {
+        String sql = "SELECT COUNT(1) FROM `T_homework` WHERE `class_id`=?";
+        return queryForSingleValue(sql, classId);
     }
 
-    public Long countByTeacherId(Integer teacherId){
-        String sql="SELECT COUNT(1) FROM `T_homework` WHERE `teacher_id`=?";
-        return queryForSingleValue(sql,teacherId);
+    public Long countByTeacherId(Integer teacherId) {
+        String sql = "SELECT COUNT(1) FROM `T_homework` WHERE `teacher_id`=?";
+        return queryForSingleValue(sql, teacherId);
     }
 
     public List<Homework> queryByTeacherId(Integer teacher_id) {
@@ -119,7 +124,6 @@ public class HomeworkDao extends AbstractBaseDao<Homework, Integer> {
         String sql = "SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attachment_title`,`attachment_url` FROM `T_homework` WHERE `class_id`=?";
         return queryForList(Homework.class, sql, class_id);
     }
-
 
 
     private static class Instance {

@@ -25,7 +25,7 @@ public class StudentHomeworkDao extends AbstractBaseDao<StudentHomework, Integer
     @Override
     public int insert(StudentHomework studentHomework) {
         String sql = "INSERT INTO `T_student_homework`(`hw_id`,`s_id`,`status`,`title`,`describe`,`review_content`,`review_time`,`attachment_title`,`attachment_url`) VALUES(?,?,?,?,?,?,?,?)";
-        return update(sql, studentHomework.getHw_id(), studentHomework.getS_id(), studentHomework.getStatus(), studentHomework.getReview_content(), studentHomework.getReview_time(), studentHomework.getAttachment_title(),studentHomework.getAttachment_url());
+        return update(sql, studentHomework.getHw_id(), studentHomework.getS_id(), studentHomework.getStatus(), studentHomework.getReview_content(), studentHomework.getReview_time(), studentHomework.getAttachment_title(), studentHomework.getAttachment_url());
     }
 
     @Override
@@ -65,29 +65,31 @@ public class StudentHomeworkDao extends AbstractBaseDao<StudentHomework, Integer
     @Override
     public List<StudentHomework> queryByPage(Integer pageNo, Integer pageSize) {
         String sql = "SELECT `id`,`hw_id`,`s_id`,`status`,`title`,`describe`,`review_content`,`review_time`,`attachment_title`,`attachment_url` FROM `T_student_homework`  LIMIT ?,?";
-        return queryForList(StudentHomework.class, sql, (pageNo-1)*pageSize, pageSize);
+        return queryForList(StudentHomework.class, sql, (pageNo - 1) * pageSize, pageSize);
     }
 
     /**
      * 班级ID查询分页
-     * @param pageNo 页码
+     *
+     * @param pageNo   页码
      * @param pageSize 条数
      * @return 所有数据
      */
-    public List<StudentHomework> listByPageAndClassId(Integer pageNo, Integer pageSize, Integer classId){
-        String sql="SELECT `T_Student_homework`.`hw_id`,`T_Student_homework`.`s_id`,`T_Student_homework`.`title`,`T_Student_homework`.`describe`,`T_Student_homework`.`status`,`T_Student_homework`.`review_content`,`T_student_homework`.`review_time`,`T_Student_homework`.`attachment_title`,`T_Student_homework`.`attachment_url` FROM `T_student_homework` inner join `t_homework` on `T_Student_homework`.`hw_id`=`t_homework`.`id` WHERE  `class_id`=? LIMIT ?,?";
-        return queryForList(StudentHomework.class,sql,(pageNo-1)*pageSize,pageSize,classId);
+    public List<StudentHomework> listByPageAndClassId(Integer classId, Integer pageNo, Integer pageSize) {
+        String sql = "SELECT `T_Student_homework`.`hw_id`,`T_Student_homework`.`s_id`,`T_Student_homework`.`title`,`T_Student_homework`.`describe`,`T_Student_homework`.`status`,`T_Student_homework`.`review_content`,`T_student_homework`.`review_time`,`T_Student_homework`.`attachment_title`,`T_Student_homework`.`attachment_url` FROM `T_student_homework` inner join `t_homework` on `T_Student_homework`.`hw_id`=`t_homework`.`id` WHERE  `class_id`=? LIMIT ?,?";
+        return queryForList(StudentHomework.class, sql, classId, (pageNo - 1) * pageSize, pageSize);
     }
 
     /**
      * 教师ID查询分页
-     * @param pageNo 页码
+     *
+     * @param pageNo   页码
      * @param pageSize 条数
      * @return 所有数据
      */
-    public List<StudentHomework> listByPageAndTeacherId(Integer pageNo, Integer pageSize, Integer teacherId){
-        String sql="SELECT `T_Student_homework`.`hw_id`,`T_Student_homework`.`s_id`,`T_Student_homework`.`title`,`T_Student_homework`.`describe`,`T_Student_homework`.`status`,`T_Student_homework`.`review_content`,`T_student_homework`.`review_time`,`T_Student_homework`.`attachment_title`,`T_Student_homework`.`attachment_url` FROM `T_student_homework` inner join `t_homework` on `T_Student_homework`.`hw_id`=`t_homework`.`id` WHERE  `teacher_id`=? LIMIT ?,?";
-        return queryForList(StudentHomework.class,sql,(pageNo-1)*pageSize,pageSize,teacherId);
+    public List<StudentHomework> listByPageAndTeacherId(Integer teacherId, Integer pageNo, Integer pageSize) {
+        String sql = "SELECT `T_Student_homework`.`hw_id`,`T_Student_homework`.`s_id`,`T_Student_homework`.`title`,`T_Student_homework`.`describe`,`T_Student_homework`.`status`,`T_Student_homework`.`review_content`,`T_student_homework`.`review_time`,`T_Student_homework`.`attachment_title`,`T_Student_homework`.`attachment_url` FROM `T_student_homework` inner join `t_homework` on `T_Student_homework`.`hw_id`=`t_homework`.`id` WHERE  `teacher_id`=? LIMIT ?,?";
+        return queryForList(StudentHomework.class, sql, teacherId, (pageNo - 1) * pageSize, pageSize);
     }
 
     @Override
@@ -96,16 +98,15 @@ public class StudentHomeworkDao extends AbstractBaseDao<StudentHomework, Integer
         return queryForSingleValue(sql);
     }
 
-    public Long countByClassId(Integer classId){
-        String sql="SELECT COUNT(1) FROM `T_student_homework` inner join `t_homework` on `T_Student_homework`.`hw_id`=`t_homework`.`id` WHERE `class_id`=?";
-        return queryForSingleValue(sql,classId);
+    public Long countByClassId(Integer classId) {
+        String sql = "SELECT COUNT(1) FROM `T_student_homework` inner join `t_homework` on `T_Student_homework`.`hw_id`=`t_homework`.`id` WHERE `class_id`=?";
+        return queryForSingleValue(sql, classId);
     }
 
-    public Long countByTeacherId(Integer teacherId){
-        String sql="SELECT COUNT(1) FROM `T_student_homework` inner join `t_homework` on `T_Student_homework`.`hw_id`=`t_homework`.`id` WHERE `teacher_id`=?";
-        return queryForSingleValue(sql,teacherId);
+    public Long countByTeacherId(Integer teacherId) {
+        String sql = "SELECT COUNT(1) FROM `T_student_homework` inner join `t_homework` on `T_Student_homework`.`hw_id`=`t_homework`.`id` WHERE `teacher_id`=?";
+        return queryForSingleValue(sql, teacherId);
     }
-
 
 
     private static class Instance {
