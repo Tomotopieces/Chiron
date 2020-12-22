@@ -37,8 +37,8 @@ $(() => {
 function generateDatasheetByActiveId() {
     switch ($('.active').attr('id')) {
         case 'assignHomeworkTab':
-            generateDatasheet('../../teacher.do', 'getAssignedHomeworkListByPage', fillAssignHomeworkSheet);
-            generatePageButtonGroup('../../teacher.do', 'getAssignedHomeworkCountByTeacherId', 'getAssignedHomeworkListByPage', fillAssignHomeworkSheet);
+            generateDatasheet('../../teacher.do', 'getAssignedHomeworkListByPageAndTeacherId', fillAssignHomeworkSheet);
+            generatePageButtonGroup('../../teacher.do', 'getAssignedHomeworkCountByTeacherId', 'getAssignedHomeworkListByPageAndTeacherId', fillAssignHomeworkSheet);
             return;
         case 'homeworkTab':
             generateDatasheet('../../teacher.do', 'getSubmittedHomeworkListByPage', fillHomeworkSheet);
@@ -132,7 +132,7 @@ function bindDeleteButtonEvent(servlet, behavior) {
 /**
  * 表内填充布置作业数据
  *
- * @param {AssignHomework[]} dataList 布置作业数据表
+ * @param {Homework[]} dataList 布置作业数据表
  */
 function fillAssignHomeworkSheet(dataList) {
     $datasheet.empty(); // 清空现存数据
@@ -172,7 +172,7 @@ function fillAssignHomeworkSheet(dataList) {
         let data = dataList[i];
         let row =
             '<li class="datasheetRow">' +
-            '<div class="classId" style="display: none;">' + data.id + '</div>' +
+            '<div class="assignHomeworkId" style="display: none;">' + data.id + '</div>' +
             '<div class="col-md-3">' + data.title + '</div>' +
             '<div class="col-md-3">' + data.describe + '</div>' +
             '<div class="col-md-3">' + data.attachment_title + '</div>' +
@@ -264,7 +264,7 @@ function fillNoticeSheet(dataList) {
  *
  * @param {Message[]} dataList 留言数据表
  */
-function fillNoticeSheet(dataList) {
+function fillMessageSheet(dataList) {
     $datasheet.empty(); // 清空现存数据
     let $ul = $('<ul></ul>'); // 重新设置无序列表
 

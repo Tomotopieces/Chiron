@@ -196,16 +196,16 @@ public class UserServlet extends AbstractBaseServlet {
      * <p>
      * 动作函数.
      */
-//    public void downloadFile(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        String type = request.getParameter(DOWNLOAD_FILE_TYPE);
-//        Integer id = Integer.valueOf(request.getParameter(DOWNLOAD_FILE_ID));
-//
-//        if (type.equals("homework")) {
-//            FileUtil.download(response, HOMEWORK_SERVICE.getById(id).getAttach_url());
-//        } else if (type.equals("studentHomework")) {
-//            FileUtil.download(response, STUDENT_HOMEWORK_SERVICE.getById(id).getAttach_url());
-//        } else {
-//            response.getWriter().write(ResponseDataWrapper.of(false, "You wanna download what?"));
-//        }
-//    }
+    public void downloadFile(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String type = request.getParameter(DOWNLOAD_FILE_TYPE);
+        Integer id = Integer.valueOf(request.getParameter(DOWNLOAD_FILE_ID));
+
+        if (type.equals("homework")) {
+            FileUtil.download(response, HOMEWORK_SERVICE.getById(id).getAttachment_url());
+        } else if (type.equals("studentHomework")) {
+            FileUtil.download(response, STUDENT_HOMEWORK_SERVICE.getById(id).getAttachment_url());
+        } else {
+            response.getWriter().write(ResponseDataWrapper.of(false, "You wanna download what?"));
+        }
+    }
 }

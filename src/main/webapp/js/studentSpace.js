@@ -200,8 +200,6 @@ function fillInsertHomeworkSheet(dataList) {
 
         }
     }
-
-    $datasheet.append($ul);
 }
 
 /**
