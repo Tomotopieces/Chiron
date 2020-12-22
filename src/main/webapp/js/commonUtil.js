@@ -112,3 +112,32 @@ function classIdToName() {
         });
     });
 }
+
+/**
+ * 将学生id替换为学生名
+ */
+function studentIdToName() {
+    $('.studentName').map((index, element) => {
+        let $element = $(element);
+        let studentId = $element.text();
+        $.post({
+            url: '../../student.do',
+            data: {
+                behavior: 'getClassNameById',
+                studentId: studentId
+            },
+            success: json => {
+                let wrapper = JSON.parse(json);
+                let data = JSON.parse(wrapper.data);
+                if (wrapper.result) {
+                    $element.text(data);
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '获取班级名失败'
+                    });
+                }
+            }
+        });
+    });
+}

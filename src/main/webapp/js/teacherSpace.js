@@ -155,10 +155,10 @@ function fillAssignHomeworkSheet(dataList) {
         '<li class="datasheetRow">' +
         '<form id="addForm">' +
         '<input type="hidden" name="behavior" value="addNotice">' +
-        '<div class="col-md-2"><input id="classNo" name="classNo" type="text" size="10" placeholder="作业标题"></div>' + // title
-        '<div class="col-md-3"><input id="className" name="className" type="text" size="10" placeholder="作业描述"></div>' + // content
-        '<div class="col-md-3"><input id="classNo" name="classNo" type="text" size="10" placeholder="作业附件"></div>' +
-        '<div class="col-md-2"><input id="classNo" name="classNo" type="text" size="10" placeholder="结束时间"></div>' +
+        '<div class="col-md-2"><input id="title" name="title" type="text" size="10" placeholder="作业标题"></div>' + // title
+        '<div class="col-md-3"><input id="describe" name="describe" type="text" size="10" placeholder="作业描述"></div>' + // content
+        '<div class="col-md-3"><input id="endTime" name="endTime" type="text" size="10" placeholder="作业附件"></div>' +
+        '<div class="col-md-2"><input id="classId" name="classId" type="text" size="10" placeholder="布置班级"></div>' +
         '</form>' +
         '<div class="col-md-2">' +
         '<button id="addButton" type="button" class="operate btn btn-success">添加</button>' +
@@ -173,16 +173,21 @@ function fillAssignHomeworkSheet(dataList) {
         let row =
             '<li class="datasheetRow">' +
             '<div class="assignHomeworkId" style="display: none;">' + data.id + '</div>' +
-            '<div class="col-md-3">' + data.title + '</div>' +
+            '<div class="col-md-2">' + data.title + '</div>' +
             '<div class="col-md-3">' + data.describe + '</div>' +
             '<div class="col-md-3">' + data.attachment_title + '</div>' +
-            '<div class="col-md-3">' + data.end_time + '</div>' +
+            '<div class="col-md-2">' + data.end_time + '</div>' +
+            '<div class="col-md-2">' +
+            '<button type="button" class="deleteButton operate btn btn-danger">删除</button>' +
+            '</div>' +
             '<br>' +
             '</li>';
         $ul.append(row);
     }
 
     $datasheet.append($ul);
+    bindAddButtonEvent('../../teacher.do'); // 绑定'添加'按钮事件
+    bindDeleteButtonEvent('../../teacher.do', 'deleteHomework'); // 绑定'删除'按钮事件
 }
 
 /**
@@ -197,10 +202,10 @@ function fillHomeworkSheet(dataList) {
     // 表头
     let head =
         '<li class="datasheetHead">' +
+        '<div class="col-md-3">提交学生</div>' +
         '<div class="col-md-3">作业标题</div>' +
         '<div class="col-md-3">作业描述</div>' +
         '<div class="col-md-3">作业附件</div>' +
-        '<div class="col-md-3">结束时间</div>' +
         '<br>' +
         '</li>';
     $ul.append(head);
@@ -211,16 +216,16 @@ function fillHomeworkSheet(dataList) {
         let row =
             '<li class="datasheetRow">' +
             '<div class="classId" style="display: none;">' + data.id + '</div>' +
+            '<div class="col-md-3">' + data.s_id + '</div>' +
             '<div class="col-md-3">' + data.title + '</div>' +
             '<div class="col-md-3">' + data.describe + '</div>' +
             '<div class="col-md-3">' + data.attach_title + '</div>' +
-            '<div class="col-md-3">' + data.end_time + '</div>' +
             '<br>' +
             '</li>';
         $ul.append(row);
     }
-
     $datasheet.append($ul);
+    // studentIdToName();
 }
 
 /**

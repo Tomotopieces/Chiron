@@ -154,17 +154,17 @@ function fillHomeworkSheet(dataList) {
         let data = dataList[i];
         let row =
             '<li class="datasheetRow">' +
-            '<div class="homeworkId" style="display: none;">' + data.id + '</div>' +
-            '<div class="col-md-1">' + data.teacher_id + '</div>' +
-            '<div class="col-md-1">' + data.title + '</div>' +
-            '<div class="col-md-1">' + data.describe + '</div>' +
-            '<div class="col-md-2">' + data.attachment_title + '</div>' +
-            '<div class="col-md-1">' + data.end_time + '</div>' +
-            '<div class="submitStatus col-md-1">未提交</div>' +
-            '<div class="attachmentTitle col-md-2">未提交</div>' +
-            '<div class="reviewStatus col-md-1">未提交</div>' +
-            '<div class="reviewContent col-md-2">未提交</div>' +
-            '<br>' +
+                '<div class="homeworkId" style="display: none;">' + data.id + '</div>' +
+                '<div class="col-md-1">' + data.teacher_id + '</div>' +
+                '<div class="col-md-1">' + data.title + '</div>' +
+                '<div class="col-md-1">' + data.describe + '</div>' +
+                '<div class="col-md-2">' + data.attachment_title + '</div>' +
+                '<div class="col-md-1">' + data.end_time + '</div>' +
+                '<div class="submitStatus col-md-1">未提交</div>' +
+                '<div class="attachmentTitle col-md-2">未提交</div>' +
+                '<div class="reviewStatus col-md-1">未提交</div>' +
+                '<div class="reviewContent col-md-2">未提交</div>' +
+                '<br>' +
             '</li>';
         $ul.append(row);
     }
@@ -175,20 +175,22 @@ function fillHomeworkSheet(dataList) {
 /**
  * 表内插入作业数据
  *
- * @param {Homework[]} dataList 插入作业数据表
+ * @param {StudentHomework[]} dataList 插入作业数据表
  */
 function insertHomeworkSheet(dataList) {
+
     // 数据行
-    let $submitStatus = $('.submitStatus'),
-        $attachmentTitle = $('.attachmentTitle'),
-        $reviewStatus = $('.reviewStatus'),
-        $reviewContent = $('.reviewContent');
-    for (let j = 0; j < dataList.length; j++) {
-        let $homeworkId = $('.homeworkId');
-        let id = $homeworkId.text();
-        for (let i = 0; i < dataList.length; i++) {
+    let $homeworkId = $('.homeworkId');
+
+    for (let idRow of $homeworkId.children()) {
+        let $datasheetRow = $($(idRow).parent());
+        let $submitStatus = $datasheetRow.find('.submitStatus'),
+            $attachmentTitle = $datasheetRow.find('.attachmentTitle'),
+            $reviewStatus = $datasheetRow.find('.reviewStatus'),
+            $reviewContent = $datasheetRow.find('.reviewContent');
+        for (let i = 0; i < dataList.length; i++){
             let data = dataList[i];
-            if (id == data.id) {
+            if ($(idRow).text() == data.id){
                 $submitStatus.text('已提交');
                 $attachmentTitle.attr('href','#');
                 $reviewStatus.text('已评阅');
