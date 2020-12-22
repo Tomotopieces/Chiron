@@ -49,3 +49,17 @@
 - `remove :: (Integer id) -> Boolean`
 - `listNotices :: () -> List<Notice>`
 - `update :: (Integer noticeId, String PropertyName, P propertyValue) -> Boolean`
+
+## 2020/12/22
+
+### HomeworkService
+- `listByPageAndClassId :: (Integer pageNo, Integer pageSize, Integer classId) -> List<Homework>`
+- `countByClassId :: (Integer classId) -> Integer`
+- `listByPageAndTeacherId :: (Integer pageNo, Integer pageSize, Integer teacherId) -> List<Homework>`
+- `countByTeacherId :: (Integer teacherId) -> Integer`
+
+### StudentHomeworkService
+- `listByPageAndClassId :: (Integer pageNo, Integer pageSize, Integer classId) -> List<Homework>`
+- `countByClassId :: (Integer classId) -> Integer`
+- `listByPageAndTeacherId :: (Integer pageNo, Integer pageSize, Integer teacherId) -> List<Homework>`
+- `countByTeacherId :: (Integer teacherId) -> Integer`
