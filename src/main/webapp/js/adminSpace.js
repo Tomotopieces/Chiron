@@ -355,10 +355,10 @@ function fillNoticeSheet(dataList) {
         '<li class="datasheetRow">' +
         '<form id="addForm">' +
         '<input type="hidden" name="behavior" value="addNotice">' +
-        '<div class="col-md-3"><input id="classNo" name="classNo" type="text" size="10" placeholder="标题"></div>' + // title
+        '<div class="col-md-2"><input id="classNo" name="classNo" type="text" size="10" placeholder="标题"></div>' + // title
         '<div class="col-md-6"><input id="className" name="className" type="text" size="10" placeholder="公告内容"></div>' + // content
         '</form>' +
-        '<div class="col-md-3">' +
+        '<div class="col-md-2 col-md-offset-2">' +
         '<button id="addButton" type="button" class="operate btn btn-success">添加</button>' +
         '</div>' +
         '<br>' +

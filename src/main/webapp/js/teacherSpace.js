@@ -1,6 +1,227 @@
+/**
+ * 教师界面配置js
+ */
+let $active; // 选中的tab id
+let $datasheet; // 数据表
+let $tab; // 侧边栏项
 
+/**
+ * 初始化
+ */
+$(() => {
+    // 数据初始化
+    $active = $('.active');
+    $datasheet = $('#datasheet');
+    $tab = $('.tab');
 
+    // 设置页面初始数据
+    setCurrentUsername();
+    generateDatasheetByActiveId();
 
+    // 事件绑定
+    $tab.on('click', event => {
+        let $this = $(event.target);
+        $tab.removeClass('active');
+        $this.addClass('active');
+
+        generateDatasheetByActiveId();
+    });
+
+    // 页面淡入效果
+    $('#mainContainer').fadeIn('slow');
+});
+
+/**
+ * 通过当前 tab id 来生成数据表和按钮组
+ */
+function generateDatasheetByActiveId() {
+    switch ($('.active').attr('id')) {
+        case 'assignHomeworkTab':
+            generateDatasheet('../../teacher.do', 'getAssignedHomeworkListByPage', fillNoticeSheet);
+            generatePageButtonGroup('../../teacher.do', 'getAssignedHomeworkCount', 'getAssignedHomeworkListByPage', fillNoticeSheet);
+            return;
+        case 'homeworkTab':
+            generateDatasheet('../../teacher.do', 'getSubmittedHomeworkListByPage', fillNoticeSheet);
+            generatePageButtonGroup('../../teacher.do', 'getSubmittedHomeworkCount', 'getSubmittedHomeworkListByPage', fillNoticeSheet);
+            return;
+        case 'noticeTab':
+            generateDatasheet('../../user.do', 'getNoticeListByPage', fillNoticeSheet);
+            generatePageButtonGroup('../../user.do', 'getNoticeCount', 'getNoticeListByPage', fillNoticeSheet);
+            return;
+        case 'messageTab':
+            generateDatasheet('../../user.do', 'getMessageListByPage', fillMessageSheet);
+            generatePageButtonGroup('../../user.do', 'getMessageCount', 'getMessageListByPage', fillMessageSheet);
+            return;
+    }
+}
+
+/**
+ * 绑定 '添加' 按钮 事件
+ */
+function bindAddButtonEvent(servlet) {
+    $('#addButton').on('click', () => {
+        $.ajax({
+            url: servlet,
+            data: $('#addForm').serialize(),
+            success: json => {
+                console.log(json);
+                let wrapper = JSON.parse(json);
+                let data = JSON.parse(wrapper.data);
+                if (wrapper.result) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '添加成功',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(result => {
+                        generateDatasheetByActiveId();
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: data,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            }
+        });
+    });
+}
+
+/**
+ * 绑定 '删除' 按钮 事件
+ *
+ * @param {string} servlet Servlet
+ * @param {string} behavior 动作
+ */
+function bindDeleteButtonEvent(servlet, behavior) {
+    $('.deleteButton').on('click', event => {
+        $this = $(event.target);
+        let id = $($this.parent().parent().children()[0]).text();
+        $.post({
+            url: servlet,
+            data: {
+                id: id,
+                behavior: behavior
+            },
+            success: json => {
+                let wrapper = JSON.parse(json);
+                if (wrapper.result) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '删除成功',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(result => {
+                        generateDatasheetByActiveId();
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '删除失败',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            }
+        })
+    });
+}
+
+/**
+ * 表内填充布置作业数据
+ *
+ * @param {AssignHomework[]} dataList 布置作业数据表
+ */
+function fillAssignHomeworkSheet(dataList) {
+    $datasheet.empty(); // 清空现存数据
+    let $ul = $('<ul></ul>'); // 重新设置无序列表
+
+    // 表头
+    let head =
+        '<li class="datasheetHead">' +
+        '<div class="col-md-2">作业标题</div>' +
+        '<div class="col-md-3">作业描述</div>' +
+        '<div class="col-md-3">作业附件</div>' +
+        '<div class="col-md-2">结束时间</div>' +
+        '<div class="col-md-2">操作</div>' +
+        '<br>' +
+        '</li>';
+    $ul.append(head);
+
+    // '添加'行
+    let addRow =
+        '<li class="datasheetRow">' +
+        '<form id="addForm">' +
+        '<input type="hidden" name="behavior" value="addNotice">' +
+        '<div class="col-md-2"><input id="classNo" name="classNo" type="text" size="10" placeholder="作业标题"></div>' + // title
+        '<div class="col-md-3"><input id="className" name="className" type="text" size="10" placeholder="作业描述"></div>' + // content
+        '<div class="col-md-3"><input id="classNo" name="classNo" type="text" size="10" placeholder="作业附件"></div>' +
+        '<div class="col-md-2"><input id="classNo" name="classNo" type="text" size="10" placeholder="结束时间"></div>' +
+        '</form>' +
+        '<div class="col-md-2">' +
+        '<button id="addButton" type="button" class="operate btn btn-success">添加</button>' +
+        '</div>' +
+        '<br>' +
+        '</li>';
+    $ul.append(addRow);
+
+    // 数据行
+    for (let i = 0; i < dataList.length; i++) {
+        let data = dataList[i];
+        let row =
+            '<li class="datasheetRow">' +
+            '<div class="classId" style="display: none;">' + data.id + '</div>' +
+            '<div class="col-md-3">' + data.title + '</div>' +
+            '<div class="col-md-3">' + data.describe + '</div>' +
+            '<div class="col-md-3">' + data.attach_title + '</div>' +
+            '<div class="col-md-3">' + data.end_time + '</div>' +
+            '<br>' +
+            '</li>';
+        $ul.append(row);
+    }
+
+    $datasheet.append($ul);
+}
+
+/**
+ * 表内填充学生提交作业数据
+ *
+ * @param {Homework[]} dataList 学生提交作业数据表
+ */
+function fillHomeworkSheet(dataList) {
+    $datasheet.empty(); // 清空现存数据
+    let $ul = $('<ul></ul>'); // 重新设置无序列表
+
+    // 表头
+    let head =
+        '<li class="datasheetHead">' +
+        '<div class="col-md-3">作业标题</div>' +
+        '<div class="col-md-3">作业描述</div>' +
+        '<div class="col-md-3">作业附件</div>' +
+        '<div class="col-md-3">结束时间</div>' +
+        '<br>' +
+        '</li>';
+    $ul.append(head);
+
+    // 数据行
+    for (let i = 0; i < dataList.length; i++) {
+        let data = dataList[i];
+        let row =
+            '<li class="datasheetRow">' +
+            '<div class="classId" style="display: none;">' + data.id + '</div>' +
+            '<div class="col-md-3">' + data.title + '</div>' +
+            '<div class="col-md-3">' + data.describe + '</div>' +
+            '<div class="col-md-3">' + data.attach_title + '</div>' +
+            '<div class="col-md-3">' + data.end_time + '</div>' +
+            '<br>' +
+            '</li>';
+        $ul.append(row);
+    }
+
+    $datasheet.append($ul);
+}
 
 /**
  * 表内填充公告数据
