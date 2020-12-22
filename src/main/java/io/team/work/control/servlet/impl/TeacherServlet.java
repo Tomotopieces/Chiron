@@ -51,14 +51,62 @@ public class TeacherServlet extends AbstractBaseServlet {
     }
 
     /**
+     * 根据教师ID分页获取已布置作业
+     * <p>
+     * 动作函数
+     */
+    public void getAssignedHomeworkListByPageAndTeacherId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Integer pageNo = Integer.valueOf(request.getParameter(GET_ASSIGN_HOMEWORK_BY_PAGE_ID_PAGE_NO));
+        Integer pageSize = Integer.valueOf(request.getParameter(GET_ASSIGN_HOMEWORK_BY_PAGE_PAGE_SIZE));
+        User teacher = (User) request.getSession().getAttribute(USER);
+
+        response.getWriter().write(ResponseDataWrapper.of(HOMEWORK_SERVICE.listByPageAndTeacherId(pageNo, pageSize, teacher.getId())));
+    }
+
+    /**
+     * 根据教师ID获取已布置作业数量
+     * <p>
+     * 动作函数
+     */
+    public void getAssignedHomeworkCountByTeacherId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        User teacher = (User) request.getSession().getAttribute(USER);
+
+        response.getWriter().write(ResponseDataWrapper.of(HOMEWORK_SERVICE.countByTeacherId(teacher.getId())));
+    }
+
+    /**
      * 根据教师ID获取学生提交了的作业.
      * <p>
      * 动作函数.
      */
-    public void getSubmittedHomeworkList(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void getSubmittedHomeworkListByTeacherId(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User teacher = (User) request.getSession().getAttribute(USER);
         List<StudentHomework> studentHomeworkList = STUDENT_HOMEWORK_SERVICE.listByTeacherId(teacher.getId());
         response.getWriter().write(ResponseDataWrapper.of(studentHomeworkList));
+    }
+
+    /**
+     * 通过教师ID分页获取学生提交了的作业
+     * <p>
+     * 动作函数
+     */
+    public void getSubmittedHomeworkListByPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Integer pageNo = Integer.valueOf(request.getParameter(GET_SUBMIT_HOMEWORK_BY_PAGE_PAGE_NO));
+        Integer pageSize = Integer.valueOf(request.getParameter(GET_SUBMIT_HOMEWORK_BY_PAGE_PAGE_SIZE));
+        User teacher = (User) request.getSession().getAttribute(USER);
+
+        response.getWriter().write(ResponseDataWrapper.of(STUDENT_HOMEWORK_SERVICE.listByPageAndTeacherId(pageNo, pageSize, teacher.getId())));
+    }
+
+    /**
+     * 通过教师ID获取学生提交了的作业数量
+     * <p>
+     * 动作函数
+     */
+    public void getSubmittedHomeworkCountByTeacherId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        User teacher = (User) request.getSession().getAttribute(USER);
+
+        response.getWriter().write(ResponseDataWrapper.of(STUDENT_HOMEWORK_SERVICE.countByTeacherId(teacher.getId())));
     }
 
     /**
@@ -121,7 +169,7 @@ public class TeacherServlet extends AbstractBaseServlet {
         String reviewContent = request.getParameter(REVIEW_HOMEWORK_REVIEW_CONTENT);
         response.getWriter().write(ResponseDataWrapper.of(
                 STUDENT_HOMEWORK_SERVICE.update(homeworkId, PROPERTY_REVIEW_CONTENT, reviewContent) &&
-                STUDENT_HOMEWORK_SERVICE.update(homeworkId, PROPERTY_REVIEW_TIME, DATE_TIME_FORMAT.format(new Date())) &&
-                STUDENT_HOMEWORK_SERVICE.update(homeworkId, PROPERTY_REVIEW_STATUS, true)));
+                        STUDENT_HOMEWORK_SERVICE.update(homeworkId, PROPERTY_REVIEW_TIME, DATE_TIME_FORMAT.format(new Date())) &&
+                        STUDENT_HOMEWORK_SERVICE.update(homeworkId, PROPERTY_REVIEW_STATUS, true)));
     }
 }

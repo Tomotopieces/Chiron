@@ -1,7 +1,6 @@
 package io.team.work.control.servlet.impl;
 
 import io.team.work.control.servlet.AbstractBaseServlet;
-import io.team.work.model.bean.Homework;
 import io.team.work.model.bean.StudentHomework;
 import io.team.work.model.bean.User;
 import io.team.work.model.service.impl.HomeworkService;
@@ -49,14 +48,35 @@ public class StudentServlet extends AbstractBaseServlet {
     }
 
     /**
-     * 根据学生班级id获取应完成作业.
+     * 根据学生id获取应完成作业.
      * <p>
      * 动作函数.
      */
-    public void getHomeworkList(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        List<Homework> homeworkList = HOMEWORK_SERVICE.listByClassId(getStudentClassId(request));
+    public void getHomeworkListByStudentId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().write(ResponseDataWrapper.of(HOMEWORK_SERVICE.listByClassId(getStudentClassId(request))));
+    }
 
-        response.getWriter().write(ResponseDataWrapper.of(homeworkList));
+    /**
+     * 通过学生id分页获取应完成作业
+     * <p>
+     * 动作函数
+     */
+    public void getHomeworkListByPageAndStudentId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Integer pageNo = Integer.valueOf(request.getParameter(GET_ASSIGN_HOMEWORK_BY_PAGE_ID_PAGE_NO));
+        Integer pageSize = Integer.valueOf(request.getParameter(GET_ASSIGN_HOMEWORK_BY_PAGE_PAGE_SIZE));
+
+        response.getWriter().write(
+                ResponseDataWrapper.of(
+                        HOMEWORK_SERVICE.listByPageAndClassId(pageNo, pageSize, getStudentClassId(request))));
+    }
+
+    /**
+     * 通过学生id获取应完成作业数量
+     * <p>
+     * 动作函数
+     */
+    public void getHomeworkCountByStudentId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().write(ResponseDataWrapper.of(HOMEWORK_SERVICE.countByClassId(getStudentClassId(request))));
     }
 
     /**
@@ -64,10 +84,31 @@ public class StudentServlet extends AbstractBaseServlet {
      * <p>
      * 动作函数.
      */
-    public void getSubmittedHomeworkList(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        List<StudentHomework> studentHomeworkList = STUDENT_HOMEWORK_SERVICE.listByStudentId(getStudentId(request));
+    public void getSubmittedHomeworkListByStudentId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().write(ResponseDataWrapper.of(STUDENT_HOMEWORK_SERVICE.listByStudentId(getStudentId(request))));
+    }
 
-        response.getWriter().write(ResponseDataWrapper.of(studentHomeworkList));
+    /**
+     * 通过学生id分页获取已提交作业
+     * <p>
+     * 动作函数
+     */
+    public void getSubmittedHomeworkListByPageAndStudentId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Integer pageNo = Integer.valueOf(request.getParameter(GET_SUBMIT_HOMEWORK_BY_PAGE_PAGE_NO));
+        Integer pageSize = Integer.valueOf(request.getParameter(GET_SUBMIT_HOMEWORK_BY_PAGE_PAGE_SIZE));
+
+        response.getWriter().write(
+                ResponseDataWrapper.of(
+                        STUDENT_HOMEWORK_SERVICE.listByPageAndClassId(pageNo, pageSize, getStudentClassId(request))));
+    }
+
+    /**
+     * 通过学生id获取已提交作业数量
+     * <p>
+     * 动作函数
+     */
+    public void getSubmittedHomeworkCountByStudnetId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().write(ResponseDataWrapper.of(STUDENT_HOMEWORK_SERVICE.countByClassId(getStudentClassId(request))));
     }
 
     /**

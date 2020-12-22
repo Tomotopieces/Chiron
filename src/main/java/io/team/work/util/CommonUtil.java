@@ -42,11 +42,21 @@ public class CommonUtil {
         public static final String ASSIGN_HOMEWORK_END_TIME = "endTime";
         public static final String ASSIGN_HOMEWORK_CLASS_ID = "classId";
 
+        // 分页获取已布置作业
+
+        public static final String GET_ASSIGN_HOMEWORK_BY_PAGE_ID_PAGE_NO = "pageNo";
+        public static final String GET_ASSIGN_HOMEWORK_BY_PAGE_PAGE_SIZE = "pageSize";
+
         // 提交作业
 
         public static final String SUBMIT_HOMEWORK_HOMEWORK_ID = "homeworkId"; // 教师布置作业的id
         public static final String SUBMIT_HOMEWORK_TITLE = "title";
         public static final String SUBMIT_HOMEWORK_DESCRIBE = "describe";
+
+        // 分页获取提交作业
+
+        public static final String GET_SUBMIT_HOMEWORK_BY_PAGE_PAGE_NO = "pageNo";
+        public static final String GET_SUBMIT_HOMEWORK_BY_PAGE_PAGE_SIZE = "pageSize";
 
         // 文件下载
 
