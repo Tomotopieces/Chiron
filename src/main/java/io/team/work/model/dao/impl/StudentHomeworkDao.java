@@ -74,9 +74,9 @@ public class StudentHomeworkDao extends AbstractBaseDao<StudentHomework, Integer
      * @param pageSize 条数
      * @return 所有数据
      */
-    public List<StudentHomework> listByPageAndClassId(Integer pageNo,Integer pageSize){
+    public List<StudentHomework> listByPageAndClassId(Integer pageNo, Integer pageSize, Integer classId){
         String sql="SELECT `T_Student_homework`.`hw_id`,`T_Student_homework`.`s_id`,`T_Student_homework`.`title`,`T_Student_homework`.`describe`,`T_Student_homework`.`status`,`T_Student_homework`.`review_content`,`T_student_homework`.`review_time`,`T_Student_homework`.`attachment_title`,`T_Student_homework`.`attachment_url` FROM `T_student_homework` inner join `t_homework` on `T_Student_homework`.`hw_id`=`t_homework`.`id` WHERE  `class_id`=? LIMIT ?,?";
-        return queryForList(StudentHomework.class,sql,(pageNo-1)*pageSize,pageSize);
+        return queryForList(StudentHomework.class,sql,(pageNo-1)*pageSize,pageSize,classId);
     }
 
     /**
@@ -85,9 +85,9 @@ public class StudentHomeworkDao extends AbstractBaseDao<StudentHomework, Integer
      * @param pageSize 条数
      * @return 所有数据
      */
-    public List<StudentHomework> listByPageAndTeacherId(Integer pageNo,Integer pageSize){
+    public List<StudentHomework> listByPageAndTeacherId(Integer pageNo, Integer pageSize, Integer teacherId){
         String sql="SELECT `T_Student_homework`.`hw_id`,`T_Student_homework`.`s_id`,`T_Student_homework`.`title`,`T_Student_homework`.`describe`,`T_Student_homework`.`status`,`T_Student_homework`.`review_content`,`T_student_homework`.`review_time`,`T_Student_homework`.`attachment_title`,`T_Student_homework`.`attachment_url` FROM `T_student_homework` inner join `t_homework` on `T_Student_homework`.`hw_id`=`t_homework`.`id` WHERE  `teacher_id`=? LIMIT ?,?";
-        return queryForList(StudentHomework.class,sql,(pageNo-1)*pageSize,pageSize);
+        return queryForList(StudentHomework.class,sql,(pageNo-1)*pageSize,pageSize,teacherId);
     }
 
     @Override
