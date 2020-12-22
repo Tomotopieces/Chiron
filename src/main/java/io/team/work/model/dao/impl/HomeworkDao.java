@@ -69,9 +69,9 @@ public class HomeworkDao extends AbstractBaseDao<Homework, Integer> {
      * @param pageSize 条数
      * @return
      */
-    public List<Homework> listByPageAndClassId(Integer pageNo,Integer pageSize){
+    public List<Homework> listByPageAndClassId(Integer pageNo,Integer pageSize,Integer classId){
         String sql="SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attachment_title`,`attachment_url` FROM `T_homework` WHERE `class_id`=? LIMIT ?,?";
-        return  queryForList(Homework.class,sql,(pageNo-1)*pageSize,pageSize);
+        return  queryForList(Homework.class,sql,(pageNo-1)*pageSize,pageSize,classId);
     }
 
     /**
@@ -80,9 +80,9 @@ public class HomeworkDao extends AbstractBaseDao<Homework, Integer> {
      * @param pageSize 条数
      * @return
      */
-    public List<Homework> listByPageAndTeacherId(Integer pageNo,Integer pageSize){
+    public List<Homework> listByPageAndTeacherId(Integer pageNo, Integer pageSize, Integer teacherId){
         String sql="SELECT `id`,`teacher_id`,`title`,`describe`,`class_id`,`end_time`,`attachment_title`,`attachment_url` FROM `T_homework` WHERE `teacher_id`=? LIMIT ?,?";
-        return  queryForList(Homework.class,sql,(pageNo-1)*pageSize,pageSize);
+        return  queryForList(Homework.class,sql,(pageNo-1)*pageSize,pageSize,teacherId);
     }
 
     /**

@@ -49,6 +49,46 @@ public class StudentHomeworkService extends AbstractBaseService<StudentHomework,
         return studentHomeworkDao.queryByTeacherId(teacherId);
     }
 
+    /**
+     * 关联教师布置作业表，然后根据班级ID分页查询
+     * @param pageNo 页码
+     * @param pageSize 条数
+     * @param classId 班级ID
+     * @return 学生作业列表
+     */
+    public List<StudentHomework> listByPageAndClassId(Integer pageNo, Integer pageSize, Integer classId){
+        return studentHomeworkDao.listByPageAndClassId(pageNo,pageSize,classId);
+    }
+
+    /**
+     * 关联教师布置作业表，然后根据教师ID分页查询
+     * @param pageNo 页码
+     * @param pageSize 条数
+     * @param teacherId 教师ID
+     * @return 学生作业列表
+     */
+    public List<StudentHomework> listByPageAndTeacherId(Integer pageNo, Integer pageSize, Integer teacherId){
+        return studentHomeworkDao.listByPageAndTeacherId(pageNo,pageSize,teacherId);
+    }
+
+    /**
+     * 根据班级ID查找记录，并记录共有多少条
+     * @param classId 班级ID
+     * @return 关联教师布置作业表，并根据班级ID查找出来的条数
+     */
+    public Long countByClassId(Integer classId){
+        return studentHomeworkDao.countByClassId(classId);
+    }
+
+    /**
+     * 根据教师ID查找记录，并记录共有多少条
+     * @param teacherId 教师ID
+     * @return 关联教师布置作业表，并根据教师ID查找出来的条数
+     */
+    public Long countByTeacherId(Integer teacherId){
+        return studentHomeworkDao.countByTeacherId(teacherId);
+    }
+
     private static final class Instance {
         public static final StudentHomeworkService INSTANCE = new StudentHomeworkService();
     }
