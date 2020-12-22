@@ -40,9 +40,9 @@ function generateDatasheetByActiveId() {
             generateDatasheet('../../teacher.do', 'getAssignedHomeworkListByPageAndTeacherId', fillAssignHomeworkSheet);
             generatePageButtonGroup('../../teacher.do', 'getAssignedHomeworkCountByTeacherId', 'getAssignedHomeworkListByPageAndTeacherId', fillAssignHomeworkSheet);
             return;
-        case 'homeworkTab':
-            generateDatasheet('../../teacher.do', 'getSubmittedHomeworkListByPage', fillHomeworkSheet);
-            generatePageButtonGroup('../../teacher.do', 'getSubmittedHomeworkCountByTeacherId', 'getSubmittedHomeworkListByPage', fillHomeworkSheet);
+        case 'studentHomeworkTab':
+            generateDatasheet('../../teacher.do', 'getSubmittedHomeworkListByPageAndTeacherId', fillHomeworkSheet);
+            generatePageButtonGroup('../../teacher.do', 'getSubmittedHomeworkCountByTeacherId', 'getSubmittedHomeworkListByPageAndTeacherId', fillHomeworkSheet);
             return;
         case 'noticeTab':
             generateDatasheet('../../user.do', 'getNoticeListByPage', fillNoticeSheet);

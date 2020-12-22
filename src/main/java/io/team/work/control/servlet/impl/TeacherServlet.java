@@ -90,7 +90,7 @@ public class TeacherServlet extends AbstractBaseServlet {
      * <p>
      * 动作函数
      */
-    public void getSubmittedHomeworkListByPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void getSubmittedHomeworkListByPageAndTeacherId(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Integer pageNo = Integer.valueOf(request.getParameter(GET_SUBMIT_HOMEWORK_BY_PAGE_PAGE_NO));
         Integer pageSize = Integer.valueOf(request.getParameter(GET_SUBMIT_HOMEWORK_BY_PAGE_PAGE_SIZE));
         User teacher = (User) request.getSession().getAttribute(USER);
