@@ -13,8 +13,8 @@ public class Homework {
     private String describe;
     private String end_time;
     private Integer class_id;
-    private String attach_title;
-    private String attach_url;
+    private String attachment_title;
+    private String attachment_url;
 
     public Homework() {
     }
@@ -67,20 +67,20 @@ public class Homework {
         this.class_id = class_id;
     }
 
-    public String getAttach_title() {
-        return attach_title;
+    public String getAttachment_title() {
+        return attachment_title;
     }
 
-    public void setAttach_title(String attach_title) {
-        this.attach_title = attach_title;
+    public void setAttachment_title(String attachment_title) {
+        this.attachment_title = attachment_title;
     }
 
-    public String getAttach_url() {
-        return attach_url;
+    public String getAttachment_url() {
+        return attachment_url;
     }
 
-    public void setAttach_url(String attach_url) {
-        this.attach_url = attach_url;
+    public void setAttachment_url(String attachment_url) {
+        this.attachment_url = attachment_url;
     }
 
     @Override
@@ -92,8 +92,8 @@ public class Homework {
                 ", describe='" + describe + '\'' +
                 ", end_time='" + end_time + '\'' +
                 ", class_id=" + class_id +
-                ", attach_title='" + attach_title + '\'' +
-                ", attach_url='" + attach_url + '\'' +
+                ", attachment_title='" + attachment_title + '\'' +
+                ", attachment_url='" + attachment_url + '\'' +
                 '}';
     }
 }

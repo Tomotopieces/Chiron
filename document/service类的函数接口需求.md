@@ -54,9 +54,9 @@
 
 ### HomeworkService
 - `listByPageAndClassId :: (Integer pageNo, Integer pageSize, Integer classId) -> List<Homework>`
-- `countByClassId :: (Integer classId) -> Integer`
+- `countByClassId :: (Integer classId) -> Long`
 - `listByPageAndTeacherId :: (Integer pageNo, Integer pageSize, Integer teacherId) -> List<Homework>`
-- `countByTeacherId :: (Integer teacherId) -> Integer`
+- `countByTeacherId :: (Integer teacherId) -> Long`
 
 ### StudentHomeworkService
 - `listByPageAndClassId :: (Integer pageNo, Integer pageSize, Integer classId) -> List<Homework>`
