@@ -14,8 +14,8 @@ public class StudentHomework {
     private String describe;
     private String review_time;
     private String review_content;
-    private String attach_title;
-    private String attach_url;
+    private String attachment_title;
+    private String attachment_url;
 
     public StudentHomework() {
     }
@@ -76,20 +76,20 @@ public class StudentHomework {
         this.title = title;
     }
 
-    public String getAttach_title() {
-        return attach_title;
+    public String getAttachment_title() {
+        return attachment_title;
     }
 
-    public void setAttach_title(String attach_title) {
-        this.attach_title = attach_title;
+    public void setAttachment_title(String attachment_title) {
+        this.attachment_title = attachment_title;
     }
 
-    public String getAttach_url() {
-        return attach_url;
+    public String getAttachment_url() {
+        return attachment_url;
     }
 
-    public void setAttach_url(String attach_url) {
-        this.attach_url = attach_url;
+    public void setAttachment_url(String attachment_url) {
+        this.attachment_url = attachment_url;
     }
 
     public String getDescribe() {
@@ -111,8 +111,8 @@ public class StudentHomework {
                 ", describe='" + describe + '\'' +
                 ", review_time='" + review_time + '\'' +
                 ", review_content='" + review_content + '\'' +
-                ", attach_title='" + attach_title + '\'' +
-                ", attach_url='" + attach_url + '\'' +
+                ", attachment_title='" + attachment_title + '\'' +
+                ", attachment_url='" + attachment_url + '\'' +
                 '}';
     }
 }

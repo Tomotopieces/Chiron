@@ -24,8 +24,8 @@ public class StudentHomeworkDao extends AbstractBaseDao<StudentHomework, Integer
 
     @Override
     public int insert(StudentHomework studentHomework) {
-        String sql = "INSERT INTO `T_student_homework`(`hw_id`,`s_id`,`status`,`title`,`describe`,`review_content`,`review_time`,`attach_title`,`attach_url`) VALUES(?,?,?,?,?,?,?,?)";
-        return update(sql, studentHomework.getHw_id(), studentHomework.getS_id(), studentHomework.getStatus(), studentHomework.getReview_content(), studentHomework.getReview_time(), studentHomework.getAttach_title(), studentHomework.getAttach_url());
+        String sql = "INSERT INTO `T_student_homework`(`hw_id`,`s_id`,`status`,`title`,`describe`,`review_content`,`review_time`,`attachment_title`,`attachment_url`) VALUES(?,?,?,?,?,?,?,?)";
+        return update(sql, studentHomework.getHw_id(), studentHomework.getS_id(), studentHomework.getStatus(), studentHomework.getReview_content(), studentHomework.getReview_time(), studentHomework.getAttachment_title(),studentHomework.getAttachment_url());
     }
 
     @Override
@@ -36,42 +36,74 @@ public class StudentHomeworkDao extends AbstractBaseDao<StudentHomework, Integer
 
 
     public int update(StudentHomework studentHomework) {
-        String sql = "UPDATE `T_student_homework` SET `hw_id`=?,`s_id`=?,`status`=?,`title`=?,`describe`=?,`review_content`=?,`review_time`=?,`attach_title`=?,`attach_url`=? WHERE id =?";
-        return update(sql, studentHomework.getHw_id(), studentHomework.getS_id(), studentHomework.getStatus(), studentHomework.getReview_content(), studentHomework.getReview_time(), studentHomework.getAttach_title(), studentHomework.getAttach_url(), studentHomework.getId());
+        String sql = "UPDATE `T_student_homework` SET `hw_id`=?,`s_id`=?,`status`=?,`title`=?,`describe`=?,`review_content`=?,`review_time`=?,`attachment_title`=?,`attachment_url`=? WHERE id =?";
+        return update(sql, studentHomework.getHw_id(), studentHomework.getS_id(), studentHomework.getStatus(), studentHomework.getReview_content(), studentHomework.getReview_time(), studentHomework.getAttachment_title(), studentHomework.getAttachment_url(), studentHomework.getId());
     }
 
     @Override
     public List<StudentHomework> queryAll() {
-        String sql = "SELECT `id`,`hw_id`,`s_id`,`status`,`title`,`describe`,`review_content`,`review_time`,`attach_title`,`attach_url` FROM `T_student_homework`";
+        String sql = "SELECT `id`,`hw_id`,`s_id`,`status`,`title`,`describe`,`review_content`,`review_time`,`attachment_title`,`attachment_url` FROM `T_student_homework`";
         return queryForList(StudentHomework.class, sql);
     }
 
     @Override
     public StudentHomework queryById(Integer id) {
-        String sql = "SELECT `id`,`hw_id`,`s_id`,`status`,`title`,`describe`,`review_content`,`review_time`,`attach_title`,`attach_url` FROM `T_student_homework` WHERE `id` = ?";
+        String sql = "SELECT `id`,`hw_id`,`s_id`,`status`,`title`,`describe`,`review_content`,`review_time`,`attachment_title`,`attachment_url` FROM `T_student_homework` WHERE `id` = ?";
         return queryForOne(StudentHomework.class, sql, id);
     }
 
     public List<StudentHomework> queryByStudentId(Integer s_id) {
-        String sql = "SELECT `id`,`hw_id`,`s_id`,`title`,`describe`,`status`,`review_content`,`review_time`,`attach_title`,`attach_url` FROM `T_student_homework` WHERE `s_id`=?";
+        String sql = "SELECT `id`,`hw_id`,`s_id`,`title`,`describe`,`status`,`review_content`,`review_time`,`attachment_title`,`attachment_url` FROM `T_student_homework` WHERE `s_id`=?";
         return queryForList(StudentHomework.class, sql, s_id);
     }
 
     public List<StudentHomework> queryByTeacherId(Integer teacherId) {
-        String sql = "SELECT `T_Student_homework`.`hw.id`,`T_Student_homework`.`s.id`,`T_Student_homework`.`title`,`T_Student_homework`.`describe`,`T_Student_homework`.`status`,`T_Student_homework`.`review_content`,`T_student_homework`.`review_time`,`T_Student_homework`.`attach_title`,`T_Student_homework`.`attach_url`,`T_User`.`name` FROM `T_student_homework` inner join `T_User` on `T_Student_homework`.`hw_id`=`T_User`.`id` WHERE `type`=1";
+        String sql = "SELECT `T_Student_homework`.`hw_id`,`T_Student_homework`.`s_id`,`T_Student_homework`.`title`,`T_Student_homework`.`describe`,`T_Student_homework`.`status`,`T_Student_homework`.`review_content`,`T_student_homework`.`review_time`,`T_Student_homework`.`attachment_title`,`T_Student_homework`.`attachment_url`,`T_User`.`name` FROM `T_student_homework` inner join `T_User` on `T_Student_homework`.`hw_id`=`T_User`.`id` WHERE `type`=1";
         return queryForList(StudentHomework.class, sql, teacherId);
     }
 
     @Override
     public List<StudentHomework> queryByPage(Integer pageNo, Integer pageSize) {
-        String sql = "SELECT `id`,`hw_id`,`s_id`,`status`,`title`,`describe`,`review_content`,`review_time`,`attach_title`,`attach_url` FROM `T_student_homework`  LIMIT ?,?";
+        String sql = "SELECT `id`,`hw_id`,`s_id`,`status`,`title`,`describe`,`review_content`,`review_time`,`attachment_title`,`attachment_url` FROM `T_student_homework`  LIMIT ?,?";
         return queryForList(StudentHomework.class, sql, (pageNo-1)*pageSize, pageSize);
+    }
+
+    /**
+     * 班级ID查询分页
+     * @param pageNo 页码
+     * @param pageSize 条数
+     * @return 所有数据
+     */
+    public List<StudentHomework> listByPageAndClassId(Integer pageNo,Integer pageSize){
+        String sql="SELECT `T_Student_homework`.`hw_id`,`T_Student_homework`.`s_id`,`T_Student_homework`.`title`,`T_Student_homework`.`describe`,`T_Student_homework`.`status`,`T_Student_homework`.`review_content`,`T_student_homework`.`review_time`,`T_Student_homework`.`attachment_title`,`T_Student_homework`.`attachment_url` FROM `T_student_homework` inner join `t_homework` on `T_Student_homework`.`hw_id`=`t_homework`.`id` WHERE  `class_id`=? LIMIT ?,?";
+        return queryForList(StudentHomework.class,sql,(pageNo-1)*pageSize,pageSize);
+    }
+
+    /**
+     * 教师ID查询分页
+     * @param pageNo 页码
+     * @param pageSize 条数
+     * @return 所有数据
+     */
+    public List<StudentHomework> listByPageAndTeacherId(Integer pageNo,Integer pageSize){
+        String sql="SELECT `T_Student_homework`.`hw_id`,`T_Student_homework`.`s_id`,`T_Student_homework`.`title`,`T_Student_homework`.`describe`,`T_Student_homework`.`status`,`T_Student_homework`.`review_content`,`T_student_homework`.`review_time`,`T_Student_homework`.`attachment_title`,`T_Student_homework`.`attachment_url` FROM `T_student_homework` inner join `t_homework` on `T_Student_homework`.`hw_id`=`t_homework`.`id` WHERE  `teacher_id`=? LIMIT ?,?";
+        return queryForList(StudentHomework.class,sql,(pageNo-1)*pageSize,pageSize);
     }
 
     @Override
     public Long countAll() {
         String sql = "SELECT COUNT(1) FROM `T_student_homework`";
         return queryForSingleValue(sql);
+    }
+
+    public Long countByClassId(Integer classId){
+        String sql="SELECT COUNT(1) FROM `T_student_homework` inner join `t_homework` on `T_Student_homework`.`hw_id`=`t_homework`.`id` WHERE `class_id`=?";
+        return queryForSingleValue(sql,classId);
+    }
+
+    public Long countByTeacherId(Integer teacherId){
+        String sql="SELECT COUNT(1) FROM `T_student_homework` inner join `t_homework` on `T_Student_homework`.`hw_id`=`t_homework`.`id` WHERE `teacher_id`=?";
+        return queryForSingleValue(sql,teacherId);
     }
 
 
