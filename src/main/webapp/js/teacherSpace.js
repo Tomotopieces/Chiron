@@ -37,12 +37,12 @@ $(() => {
 function generateDatasheetByActiveId() {
     switch ($('.active').attr('id')) {
         case 'assignHomeworkTab':
-            generateDatasheet('../../teacher.do', 'getAssignedHomeworkListByPage', fillNoticeSheet);
-            generatePageButtonGroup('../../teacher.do', 'getAssignedHomeworkCount', 'getAssignedHomeworkListByPage', fillNoticeSheet);
+            generateDatasheet('../../teacher.do', 'getAssignedHomeworkListByPage', fillAssignHomeworkSheet);
+            generatePageButtonGroup('../../teacher.do', 'getAssignedHomeworkCountByTeacherId', 'getAssignedHomeworkListByPage', fillAssignHomeworkSheet);
             return;
         case 'homeworkTab':
-            generateDatasheet('../../teacher.do', 'getSubmittedHomeworkListByPage', fillNoticeSheet);
-            generatePageButtonGroup('../../teacher.do', 'getSubmittedHomeworkCount', 'getSubmittedHomeworkListByPage', fillNoticeSheet);
+            generateDatasheet('../../teacher.do', 'getSubmittedHomeworkListByPage', fillHomeworkSheet);
+            generatePageButtonGroup('../../teacher.do', 'getSubmittedHomeworkCountByTeacherId', 'getSubmittedHomeworkListByPage', fillHomeworkSheet);
             return;
         case 'noticeTab':
             generateDatasheet('../../user.do', 'getNoticeListByPage', fillNoticeSheet);
@@ -175,7 +175,7 @@ function fillAssignHomeworkSheet(dataList) {
             '<div class="classId" style="display: none;">' + data.id + '</div>' +
             '<div class="col-md-3">' + data.title + '</div>' +
             '<div class="col-md-3">' + data.describe + '</div>' +
-            '<div class="col-md-3">' + data.attach_title + '</div>' +
+            '<div class="col-md-3">' + data.attachment_title + '</div>' +
             '<div class="col-md-3">' + data.end_time + '</div>' +
             '<br>' +
             '</li>';

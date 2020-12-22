@@ -128,8 +128,8 @@ public class StudentServlet extends AbstractBaseServlet {
         studentHomework.setStatus(false);
         studentHomework.setTitle(parameterMap.get(SUBMIT_HOMEWORK_TITLE));
         studentHomework.setDescribe(parameterMap.get(SUBMIT_HOMEWORK_DESCRIBE));
-        studentHomework.setAttach_title(filename);
-        studentHomework.setAttach_url(FileUtil.STUDENT_HOMEWORK_SAVE_PATH + filename);
+        studentHomework.setAttachment_title(filename);
+        studentHomework.setAttachment_url(FileUtil.STUDENT_HOMEWORK_SAVE_PATH + filename);
 
         try {
             FileUtil.upload(request, fileItem, FileUtil.STUDENT_HOMEWORK_SAVE_PATH + filename);

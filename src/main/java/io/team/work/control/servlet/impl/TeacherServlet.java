@@ -137,8 +137,8 @@ public class TeacherServlet extends AbstractBaseServlet {
         homework.setDescribe(parameterMap.get(ASSIGN_HOMEWORK_DESCRIBE));
         homework.setEnd_time(parameterMap.get(ASSIGN_HOMEWORK_END_TIME));
         homework.setClass_id(Integer.valueOf(parameterMap.get(ASSIGN_HOMEWORK_CLASS_ID)));
-        homework.setAttach_title(filename);
-        homework.setAttach_url(FileUtil.HOMEWORK_SAVE_PATH + filename);
+        homework.setAttachment_title(filename);
+        homework.setAttachment_url(FileUtil.HOMEWORK_SAVE_PATH + filename);
 
         try {
             FileUtil.upload(request, fileItem, FileUtil.HOMEWORK_SAVE_PATH + filename);

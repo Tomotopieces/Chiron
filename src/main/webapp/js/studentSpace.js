@@ -37,8 +37,9 @@ $(() => {
 function generateDatasheetByActiveId() {
     switch ($('.active').attr('id')) {
         case 'homeworkTab':
-            generateDatasheet('../../student.do', 'getHomeworkListByPage', fillStudentSheet);
-            generatePageButtonGroup('../../student.do', '', 'getHomeworkListByPage', fillStudentSheet);
+            generateDatasheet('../../student.do', 'getHomeworkListByPageAndStudentId', fillHomeworkSheet);
+            generateDatasheet('../../student.do', 'getSubmittedHomeworkListByPageAndStudentId', fillInsertHomeworkSheet);
+            generatePageButtonGroup('../../student.do', 'getHomeworkCountByStudentId', 'getHomeworkListByPageAndStudentId', fillHomeworkSheet);
             return;
         case 'noticeTab':
             generateDatasheet('../../user.do', 'getNoticeListByPage', fillNoticeSheet);
@@ -126,9 +127,9 @@ function bindDeleteButtonEvent(servlet, behavior) {
 }
 
 /**
- * 表内填充作业数据
+ * 表内填充已提交作业数据
  *
- * @param {Homework[]} dataList 留言数据表
+ * @param {Homework[]} dataList 已提交作业数据表
  */
 function fillHomeworkSheet(dataList) {
     $datasheet.empty(); // 清空现存数据
@@ -137,41 +138,67 @@ function fillHomeworkSheet(dataList) {
     // 表头
     let head =
         '<li class="datasheetHead">' +
-        '<div class="col-md-2">标题</div>' +
-        '<div class="col-md-8">留言内容</div>' +
-        '<div class="col-md-2">发布时间</div>' +
+        '<div class="col-md-1">发布教师</div>' +
+        '<div class="col-md-1">作业标题</div>' +
+        '<div class="col-md-1">作业描述</div>' +
+        '<div class="col-md-2">作业附件</div>' +
+        '<div class="col-md-1">结束时间</div>' +
+        '<div class="col-md-1">提交状态</div>' +
+        '<div class="col-md-2">提交附件</div>' +
+        '<div class="col-md-1">评阅状态</div>' +
+        '<div class="col-md-2">评阅内容</div>' +
         '<br>' +
         '</li>';
     $ul.append(head);
-
-    // '添加'行
-    let addRow =
-        '<li class="datasheetRow">' +
-        '<form id="addForm">' +
-        '<input type="hidden" name="behavior" value="leaveMessage">' +
-        '<div class="col-md-2"><input id="classNo" name="classNo" type="text" size="10" placeholder="标题"></div>' + // title
-        '<div class="col-md-8"><input id="className" name="className" type="text" size="10" placeholder="公告内容"></div>' + // content
-        '</form>' +
-        '<div class="col-md-2">' +
-        '<button id="addButton" type="button" class="operate btn btn-success">添加</button>' +
-        '</div>' +
-        '<br>' +
-        '</li>';
-    $ul.append(addRow);
-    bindAddButtonEvent();
 
     // 数据行
     for (let i = 0; i < dataList.length; i++) {
         let data = dataList[i];
         let row =
             '<li class="datasheetRow">' +
-            '<div class="classId" style="display: none;">' + data.id + '</div>' +
-            '<div class="col-md-2">' + data.title + '</div>' +
-            '<div class="col-md-8">' + data.content + '</div>' +
-            '<div class="col-md-2">' + data.create_time + '</div>' +
+            '<div class="homeworkId" style="display: none;">' + data.id + '</div>' +
+            '<div class="col-md-1">' + data.teacher_id + '</div>' +
+            '<div class="col-md-1">' + data.title + '</div>' +
+            '<div class="col-md-1">' + data.describe + '</div>' +
+            '<div class="col-md-2">' + data.attachment_title + '</div>' +
+            '<div class="col-md-1">' + data.end_time + '</div>' +
+            '<div class="submitStatus col-md-1">未提交</div>' +
+            '<div class="attachmentTitle col-md-2">未提交</div>' +
+            '<div class="reviewStatus col-md-1">未提交</div>' +
+            '<div class="reviewContent col-md-2">未提交</div>' +
             '<br>' +
             '</li>';
         $ul.append(row);
+    }
+    $datasheet.append($ul);
+}
+
+
+/**
+ * 表内填充插入作业数据
+ *
+ * @param {Homework[]} dataList 插入作业数据表
+ */
+function fillInsertHomeworkSheet(dataList) {
+
+    // 数据行
+    let $submitStatus = $('.submitStatus'),
+        $attachmentTitle = $('.attachmentTitle'),
+        $reviewStatus = $('.reviewStatus'),
+        $reviewContent = $('.reviewContent');
+    for (let j = 0; j < dataList.length; j++) {
+        let $homeworkId = $('.homeworkId');
+        let id = $homeworkId.text();
+        for (let i = 0; i < dataList.length; i++) {
+            let data = dataList[i];
+            if (id == data.id) {
+                $submitStatus.text('已提交');
+                $attachmentTitle.attr('href','#');
+                $reviewStatus.text('已评阅');
+                $reviewContent.text(data.review_content);
+            }
+
+        }
     }
 
     $datasheet.append($ul);
