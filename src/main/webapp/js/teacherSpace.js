@@ -120,52 +120,49 @@ function generateDatasheetByActiveId() {
 /**
  * 绑定 '添加' 按钮 事件
  */
-function bindAddButtonEvent(servlet) {
-    $('#addButton').on('click', () => {
-        $.ajax({
-            url: servlet,
-            data: $('#addForm').serialize(),
-            success: json => {
-                console.log(json);
-                let wrapper = JSON.parse(json);
-                let data = JSON.parse(wrapper.data);
-                if (wrapper.result) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: '添加成功',
-                        showConfirmButton: false,
-                        timer: 1500
-                    }).then(result => {
-                        generateDatasheetByActiveId();
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: data,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-            }
-        });
-    });
-}
+// function bindAddButtonEvent() {
+//     $('#addButton').on('click', () => {
+//         $.ajax({
+//             url: '../../teacher.do',
+//             data: $('#addForm').serialize(),
+//             success: json => {
+//                 console.log(json);
+//                 let wrapper = JSON.parse(json);
+//                 let data = JSON.parse(wrapper.data);
+//                 if (wrapper.result) {
+//                     Swal.fire({
+//                         icon: 'success',
+//                         title: '添加成功',
+//                         showConfirmButton: false,
+//                         timer: 1500
+//                     }).then(result => {
+//                         generateDatasheetByActiveId();
+//                     });
+//                 } else {
+//                     Swal.fire({
+//                         icon: 'error',
+//                         title: data,
+//                         showConfirmButton: false,
+//                         timer: 1500
+//                     });
+//                 }
+//             }
+//         });
+//     });
+// }
 
 /**
  * 绑定 '删除' 按钮 事件
- *
- * @param {string} servlet Servlet
- * @param {string} behavior 动作
  */
-function bindDeleteButtonEvent(servlet, behavior) {
+function bindDeleteButtonEvent() {
     $('.deleteButton').on('click', event => {
         $this = $(event.target);
         let id = $($this.parent().parent().children()[0]).text();
         $.post({
-            url: servlet,
+            url: '../../teacher.do',
             data: {
-                id: id,
-                behavior: behavior
+                homeworkId: id,
+                behavior: 'deleteHomework'
             },
             success: json => {
                 let wrapper = JSON.parse(json);
@@ -204,9 +201,10 @@ function fillAssignHomeworkSheet(dataList) {
     let head =
         '<li class="datasheetHead">' +
         '<div class="col-md-2">作业标题</div>' +
-        '<div class="col-md-3">作业描述</div>' +
-        '<div class="col-md-3">作业附件</div>' +
+        '<div class="col-md-2">作业描述</div>' +
         '<div class="col-md-2">结束时间</div>' +
+        '<div class="col-md-2">布置班级</div>' +
+        '<div class="col-md-2">提交附件</div>' +
         '<div class="col-md-2">操作</div>' +
         '<br>' +
         '</li>';
@@ -215,16 +213,17 @@ function fillAssignHomeworkSheet(dataList) {
     // '添加'行
     let addRow =
         '<li class="datasheetRow">' +
-        '<form id="addForm">' +
-        '<input type="hidden" name="behavior" value="addNotice">' +
+        '<form id="addForm" action="../../teacher.do" method="post">' +
+        '<input type="hidden" name="behavior" value="assignHomework">' +
         '<div class="col-md-2"><input id="title" name="title" type="text" size="10" placeholder="作业标题"></div>' + // title
-        '<div class="col-md-3"><input id="describe" name="describe" type="text" size="10" placeholder="作业描述"></div>' + // content
-        '<div class="col-md-3"><input id="endTime" name="endTime" type="text" size="10" placeholder="作业附件"></div>' +
-        '<div class="col-md-2"><input id="classId" name="classId" type="text" size="10" placeholder="布置班级"></div>' +
-        '</form>' +
+        '<div class="col-md-2"><input id="describe" name="describe" type="text" size="10" placeholder="作业描述"></div>' + // content
+        '<div class="col-md-2"><input id="endTime" name="endTime" type="text" size="10" placeholder="结束时间"></div>' +
+        '<div class="col-md-2"><input id="classId" name="classId" type="text" size="10" placeholder="班级ID"></div>' +
+        '<div class="col-md-2"><input id="file" name="file" type="file" size="10"></div>' +
         '<div class="col-md-2">' +
-        '<button id="addButton" type="button" class="operate btn btn-success">添加</button>' +
+        '<button id="addButton" type="submit" class="operate btn btn-success">添加</button>' +
         '</div>' +
+        '</form>' +
         '<br>' +
         '</li>';
     $ul.append(addRow);
@@ -236,9 +235,10 @@ function fillAssignHomeworkSheet(dataList) {
             '<li class="datasheetRow">' +
             '<div class="assignHomeworkId" style="display: none;">' + data.id + '</div>' +
             '<div class="col-md-2">' + data.title + '</div>' +
-            '<div class="col-md-3">' + data.describe + '</div>' +
-            '<div class="col-md-3">' + data.attachment_title + '</div>' +
+            '<div class="col-md-2">' + data.describe + '</div>' +
             '<div class="col-md-2">' + data.end_time + '</div>' +
+            '<div class="col-md-2">' + data.class_id + '</div>' +
+            '<div class="col-md-2"><a herf="#">' + data.attachment_title + '</a></div>' +
             '<div class="col-md-2">' +
             '<button type="button" class="deleteButton operate btn btn-danger">删除</button>' +
             '</div>' +
@@ -248,7 +248,7 @@ function fillAssignHomeworkSheet(dataList) {
     }
 
     $datasheet.append($ul);
-    bindAddButtonEvent('../../teacher.do'); // 绑定'添加'按钮事件
+    // bindAddButtonEvent('../../teacher.do'); // 绑定'添加'按钮事件
     bindDeleteButtonEvent('../../teacher.do', 'deleteHomework'); // 绑定'删除'按钮事件
 }
 
@@ -281,7 +281,7 @@ function fillHomeworkSheet(dataList) {
             '<div class="col-md-3">' + data.s_id + '</div>' +
             '<div class="col-md-3">' + data.title + '</div>' +
             '<div class="col-md-3">' + data.describe + '</div>' +
-            '<div class="col-md-3">' + data.attach_title + '</div>' +
+            '<div class="col-md-3"><a herf="#">' + data.attachment_title + '</a></div>' +
             '<br>' +
             '</li>';
         $ul.append(row);
@@ -344,22 +344,6 @@ function fillMessageSheet(dataList) {
         '<br>' +
         '</li>';
     $ul.append(head);
-
-    // '添加'行
-    let addRow =
-        '<li class="datasheetRow">' +
-        '<form id="addForm">' +
-        '<input type="hidden" name="behavior" value="leaveMessage">' +
-        '<div class="col-md-2"><input id="classNo" name="classNo" type="text" size="10" placeholder="标题"></div>' + // title
-        '<div class="col-md-8"><input id="className" name="className" type="text" size="10" placeholder="公告内容"></div>' + // content
-        '</form>' +
-        '<div class="col-md-2">' +
-        '<button id="addButton" type="button" class="operate btn btn-success">添加</button>' +
-        '</div>' +
-        '<br>' +
-        '</li>';
-    $ul.append(addRow);
-    bindAddButtonEvent();
 
     // 数据行
     for (let i = 0; i < dataList.length; i++) {

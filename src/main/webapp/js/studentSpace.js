@@ -219,10 +219,10 @@ function fillHomeworkSheet(dataList) {
                 '<div class="col-md-1">' + data.teacher_id + '</div>' +
                 '<div class="col-md-1">' + data.title + '</div>' +
                 '<div class="col-md-1">' + data.describe + '</div>' +
-                '<div class="col-md-2">' + data.attachment_title + '</div>' +
+                '<div class="col-md-2"><a herf="#">' + data.attachment_title + '</a></div>' +
                 '<div class="col-md-1">' + data.end_time + '</div>' +
                 '<div class="submitStatus col-md-1">未提交</div>' +
-                '<div class="attachmentTitle col-md-2">未提交</div>' +
+                '<div class="attachmentTitle col-md-2"><a data-target="#submitHomework" data-toggle="modal">未提交</a></div>' +
                 '<div class="reviewStatus col-md-1">未提交</div>' +
                 '<div class="reviewContent col-md-2">未提交</div>' +
                 '<br>' +
