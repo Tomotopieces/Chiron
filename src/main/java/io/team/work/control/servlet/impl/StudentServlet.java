@@ -106,7 +106,7 @@ public class StudentServlet extends AbstractBaseServlet {
      * <p>
      * 动作函数
      */
-    public void getSubmittedHomeworkCountByStudnetId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void getSubmittedHomeworkCountByStudentId(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.getWriter().write(ResponseDataWrapper.of(STUDENT_HOMEWORK_SERVICE.countByClassId(getStudentClassId(request))));
     }
 

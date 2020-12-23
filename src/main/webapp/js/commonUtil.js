@@ -134,10 +134,12 @@ function studentIdToName() {
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: '获取班级名失败'
+                        title: '获取学生名失败'
                     });
                 }
             }
         });
     });
 }
+
+

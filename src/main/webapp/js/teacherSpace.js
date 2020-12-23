@@ -27,6 +27,68 @@ $(() => {
         generateDatasheetByActiveId();
     });
 
+    // 判断旧密码与数据库是否一致
+    $('#oldPassword').on('blur', () => {
+        let $error = $('.error');
+        $.post({
+            url: '../../user.do',
+            data: {
+                behavior: 'passwordCheck',
+                oldPassword: $('#oldPassword').val()
+            },
+            success: json => {
+                let wrapper = JSON.parse(json);
+                let data = JSON.parse(wrapper.data);
+                if (wrapper.result) {
+                    if(data){
+                        $error.hide();
+                    }else{
+                        $error.show();
+                    }
+                }
+            }
+        });
+    });
+
+    // 判断新密码与确认密码是否一致
+    let $confirmPassword = $('#confirmPassword');
+    $confirmPassword.on('blur', () => {
+        let newPassword = $('#newPassword').val(),
+            confirmPassword = $confirmPassword.val(),
+            $passwordError = $('.passwordError');
+        if (newPassword == confirmPassword){
+            $passwordError.hide();
+        }else{
+            $passwordError.show();
+        }
+    });
+
+    // 修改密码
+    let $submit = $('.submit');
+    $submit.on('click', () => {
+        $.post({
+            url: '../../user.do',
+            data: {
+                behavior: 'resetPassword',
+                oldPassword: $('#oldPassword').val(),
+                newPassword: $('#newPassword').val()
+            },
+            success: json => {
+                console.log(json);
+                let wrapper = JSON.parse(json);
+                // let data = JSON.parse(wrapper.data);
+                if (wrapper.result) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '修改成功',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            }
+        })
+    });
+
     // 页面淡入效果
     $('#mainContainer').fadeIn('slow');
 });

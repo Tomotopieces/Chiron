@@ -5,19 +5,19 @@
     <title>欢迎使用Chiron喀戎在线作业管理</title>
 
     <!-- Bootstrap.css & jQuery.js & Bootstrap.js & SweetAlert2 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" rel="stylesheet">
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+    <script crossorigin="anonymous"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
+            src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <!-- 自定义 css & js -->
-    <link rel="stylesheet" href="../../css/common.css">
-    <link rel="stylesheet" href="../../css/sidebar.css">
-    <link rel="stylesheet" href="../../css/datasheet.css">
-    <link rel="stylesheet" href="../../css/space.css">
+    <link href="../../css/common.css" rel="stylesheet">
+    <link href="../../css/sidebar.css" rel="stylesheet">
+    <link href="../../css/datasheet.css" rel="stylesheet">
+    <link href="../../css/space.css" rel="stylesheet">
     <script src="../../js/sidebar.js"></script>
     <script src="../../js/datasheet.js"></script>
     <script src="../../js/commonUtil.js"></script>
@@ -40,15 +40,15 @@
                 <div class="collapse navbar-collapse" id="navbarItems">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false">
+                            <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown"
+                               href="#" role="button">
                                 <span id="currentUsername">教师</span>
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">修改密码</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">登出</a></li>
+                                <li><a data-target="#resetPassword" data-toggle="modal">修改密码</a></li>
+                                <li class="divider" role="separator"></li>
+                                <li><a href="../../logout.html">登出</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -59,224 +59,56 @@
 
     <!-- 侧边栏 -->
     <div class="sidebar">
-        <button id="assignHomeworkTab" class="tab glyphicon glyphicon-file active">布置作业</button>
-        <button id="studentHomeworkTab" class="tab glyphicon glyphicon-file">学生作业</button>
-        <button id="messageTab" class="tab glyphicon glyphicon-comment">留言信息</button>
-        <button id="noticeTab" class="tab glyphicon glyphicon-bullhorn">公告</button>
+        <button class="tab glyphicon glyphicon-file active" id="assignHomeworkTab">布置作业</button>
+        <button class="tab glyphicon glyphicon-file" id="studentHomeworkTab">学生作业</button>
+        <button class="tab glyphicon glyphicon-comment" id="messageTab">留言信息</button>
+        <button class="tab glyphicon glyphicon-bullhorn" id="noticeTab">公告</button>
     </div>
 
     <!-- 表格 -->
-    <div id="datasheet" class="datasheet col-md-10"></div>
+    <div class="datasheet col-md-10" id="datasheet"></div>
 
     <!-- 分页按钮组 -->
-    <div id="pageButtonGroup" class="btn-group" role="group">
-        <button id="previousPageButton" type="button" class="btn btn-default">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <div class="btn-group" id="pageButtonGroup" role="group">
+        <button class="btn btn-default" id="previousPageButton" type="button">
+            <span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span>
         </button>
-        <button id="nextPageButton" type="button" class="btn btn-default">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <button class="btn btn-default" id="nextPageButton" type="button">
+            <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span>
         </button>
     </div>
 </div> <!-- /mainContainer -->
 
+<!-- 修改密码 -->
+<div aria-labelledby="myModalLabel" class="modal fade" id="resetPassword" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">密码修改</h4>
+            </div>
+            <form>
+                <div class="oldPasswordFrame modal-body">
+                    旧密码：<input id="oldPassword" name="oldPassword" type="text" />
+                    <span class="error modal-body" style="color: red;display: none">密码错误</span>
+                </div>
 
+                <div class="modal-body">
+                    新密码：<input id="newPassword" name="newPassword" type="text" />
+                </div>
+                <div class="modal-body">
+                    确认密码：<input id="confirmPassword" type="text" />
+                    <span class="passwordError modal-body" style="color: red;display: none">两次密码输入密码不一致</span>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button class="submit btn btn-primary" type="button">确定</button>
+                <button class="btn btn-default" data-dismiss="modal" type="button">取消</button>
 
-<!--<div id="list" class="col-md-10">-->
-<!--    &lt;!&ndash;布置作业&ndash;&gt;-->
-<!--    <div id="assignHomeworkData">-->
-<!--        <h3>布置作业列表</h3>-->
-<!--        <ul id="assignHomeworkDataList" class="listColor">-->
-<!--            <li>-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-2">作业标题</div>-->
-<!--                    <div class="col-md-3">作业描述</div>-->
-<!--                    <div class="col-md-3">作业附件</div>-->
-<!--                    <div class="col-md-2">结束时间</div>-->
-<!--                    <div class="col-md-2">操作</div>-->
-<!--                </div>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--        <ul class="listColor">-->
-<!--            <li>-->
-<!--                <div class="col-md-1">-->
-<!--                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addHomework">布置作业</button>-->
-<!--                </div>-->
-<!--                <nav aria-label="page navigation" class="col-md-9">-->
-<!--                    <ul id="assignHomeworkPage" class="pagination">-->
-<!--                        <li>-->
-<!--                            <a href="#" aria-label="Previous">-->
-<!--                                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                </nav>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;布置作业&ndash;&gt;-->
-<!--    <div class="modal fade" id="addHomework" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">-->
-<!--        <div class="modal-dialog" role="document">-->
-<!--            <div class="modal-content">-->
-<!--                <div class="modal-header">-->
-<!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
-<!--                    <h4 class="modal-title">布置作业</h4>-->
-<!--                </div>-->
-<!--                <form>-->
-<!--                    <div class="modal-body">-->
-<!--                        作业标题：<input type="text" />-->
-<!--                    </div>-->
-<!--                    <div class="modal-body">-->
-<!--                        结束时间：<input type="text" />-->
-<!--                    </div>-->
-<!--                    <div class="modal-body">-->
-<!--                        <h5>作业布置班级：</h5>-->
-<!--                        <select style="width: 30%">-->
-<!--                            <option>班级1</option>-->
-<!--                            <option>班级2</option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                    <div class="modal-body">-->
-<!--                        <h5>作业描述：</h5>-->
-<!--                        <textarea class="addHomeworkData"></textarea>-->
-<!--                    </div>-->
-<!--                    <div>-->
-<!--                        <input type="file">-->
-<!--                    </div>-->
-<!--                </form>-->
-<!--                <div class="modal-footer">-->
-<!--                    <button type="button" class="btn btn-primary">确定</button>-->
-<!--                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>-->
-
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash;学生作业&ndash;&gt;-->
-<!--    <div id="studentHomeworkData">-->
-<!--        <h3>学生提交作业列表</h3>-->
-<!--        <ul id="studentHomeworkDataList" class="listColor">-->
-<!--            <li>-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-3">作业标题</div>-->
-<!--                    <div class="col-md-3">作业描述</div>-->
-<!--                    <div class="col-md-3">作业附件</div>-->
-<!--                    <div class="col-md-3">结束时间</div>-->
-<!--                </div>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--        <ul class="listColor">-->
-<!--            <li>-->
-<!--                <nav aria-label="page navigation" class="col-md-9 col-md-offset-1">-->
-<!--                    <ul id="studentHomeworkDataPage" class="pagination">-->
-<!--                        <li>-->
-<!--                            <a href="#" aria-label="Previous">-->
-<!--                                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>-->
-<!--                            </a>-->
-<!--                    </ul>-->
-<!--                </nav>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash;留言信息&ndash;&gt;-->
-<!--    <div id="messageDate">-->
-<!--        <h3>留言列表</h3>-->
-<!--        <ul id="messageDateList" class="listColor">-->
-<!--            <li>-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-2">标题</div>-->
-<!--                    <div class="col-md-8">留言内容</div>-->
-<!--                    <div class="col-md-2">发布时间</div>-->
-<!--                </div>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--        <ul class="listColor">-->
-<!--            <li>-->
-<!--                <div class="col-md-1">-->
-<!--                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addMessage">添加</button>-->
-<!--                </div>-->
-<!--                <nav aria-label="Page navigation" class="col-md-9">-->
-<!--                    <ul id="messagePage" class="pagination">-->
-<!--                        <li>-->
-<!--                            <a href="#" aria-label="Previous">-->
-<!--                                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                </nav>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--    &lt;!&ndash; 添加留言 &ndash;&gt;-->
-<!--    <div class="modal fade" id="addMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">-->
-<!--        <div class="modal-dialog" role="document">-->
-<!--            <div class="modal-content">-->
-<!--                <div class="modal-header">-->
-<!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
-<!--                    <h4 class="modal-title">添加留言</h4>-->
-<!--                </div>-->
-<!--                <form>-->
-<!--                    <div class="modal-body">-->
-<!--                        标题：<input type="text" />-->
-<!--                    </div>-->
-<!--                    <div class="modal-body">-->
-<!--                        <h5>留言内容：</h5>-->
-<!--                        <textarea class="addMessageData"></textarea>-->
-<!--                    </div>-->
-<!--                </form>-->
-
-<!--                <div class="modal-footer">-->
-<!--                    <button type="button" class="btn btn-primary">确定</button>-->
-<!--                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>-->
-
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash;公告&ndash;&gt;-->
-<!--    <div id="noticeDate">-->
-<!--        <h3>公告列表</h3>-->
-<!--        <ul id="noticeDateList" class="listColor">-->
-<!--            <li>-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-2">标题</div>-->
-<!--                    <div class="col-md-8">公告内容</div>-->
-<!--                    <div class="col-md-2">创建时间</div>-->
-<!--                </div>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--        <ul class="listColor">-->
-<!--            <li>-->
-<!--                <nav aria-label="page navigation" class="col-md-9 col-md-offset-1">-->
-<!--                    <ul id="noticePage" class="pagination">-->
-<!--                        <li>-->
-<!--                            <a href="#" aria-label="Previous">-->
-<!--                                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                </nav>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash;修改密码&ndash;&gt;-->
-<!--    <div id="resetPassword">-->
-<!--        <h3>修改密码</h3>-->
-<!--        <div>-->
-<!--            <form>-->
-<!--                账户名：<input id="username" name="username" type="text"><br>-->
-<!--                原密码：<input id="oldPassword" name="oldPassword" type="password"><br>-->
-<!--                新密码：<input id="newPassword" name="newPassword" type="password"><br>-->
-<!--                确认密码：<input id="rePassword" name="rePassword" type="password"><br>-->
-<!--            </form>-->
-<!--            <button type="button" class="btn btn-primary">修改</button><br>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

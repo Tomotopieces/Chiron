@@ -48,7 +48,7 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">修改密码</a></li>
+                                    <li><a data-toggle="modal" data-target="#resetPassword">修改密码</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="../../logout.html">登出</a></li>
                                 </ul>
@@ -81,6 +81,37 @@
             </button>
         </div>
     </div> <!-- /mainContainer -->
+
+    <!-- 修改密码 -->
+    <div class="modal fade" id="resetPassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">密码修改</h4>
+                </div>
+                <form>
+                    <div class="oldPasswordFrame modal-body">
+                        旧密码：<input id="oldPassword" name="oldPassword" type="text" />
+                        <span class="error modal-body" style="color: red;display: none">密码错误</span>
+                    </div>
+
+                    <div class="modal-body">
+                        新密码：<input id="newPassword" name="newPassword" type="text" />
+                    </div>
+                    <div class="modal-body">
+                        确认密码：<input id="confirmPassword" type="text" />
+                        <span class="passwordError modal-body" style="color: red;display: none">两次密码输入密码不一致</span>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="submit btn btn-primary">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
     </script>
