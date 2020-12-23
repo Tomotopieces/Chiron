@@ -36,7 +36,6 @@ function generateDatasheetByActiveId() {
     switch ($('.active').attr('id')) {
         case 'homeworkTab':
             generateDatasheet('../../student.do', 'getHomeworkListByPageAndStudentId', fillHomeworkSheet);
-            generateDatasheet('../../student.do', 'getSubmittedHomeworkListByPageAndStudentId', insertHomeworkSheet);
             generatePageButtonGroup('../../student.do', 'getHomeworkCountByStudentId', 'getHomeworkListByPageAndStudentId', fillHomeworkSheet);
             return;
         case 'noticeTab':
@@ -170,6 +169,7 @@ function fillHomeworkSheet(dataList) {
     }
 
     $datasheet.append($ul);
+    generateDatasheet('../../student.do', 'getSubmittedHomeworkListByPageAndStudentId', insertHomeworkSheet);
 }
 
 /**
@@ -178,26 +178,26 @@ function fillHomeworkSheet(dataList) {
  * @param {StudentHomework[]} dataList 插入作业数据表
  */
 function insertHomeworkSheet(dataList) {
-
     // 数据行
     let $homeworkId = $('.homeworkId');
 
-    for (let idRow of $homeworkId.children()) {
+    $homeworkId.each((index, idRow) => {
         let $datasheetRow = $($(idRow).parent());
-        let $submitStatus = $datasheetRow.find('.submitStatus'),
-            $attachmentTitle = $datasheetRow.find('.attachmentTitle'),
-            $reviewStatus = $datasheetRow.find('.reviewStatus'),
-            $reviewContent = $datasheetRow.find('.reviewContent');
+        let $submitStatus = $datasheetRow.children('.submitStatus'),
+            $attachmentTitle = $datasheetRow.children('.attachmentTitle'),
+            $reviewStatus = $datasheetRow.children('.reviewStatus'),
+            $reviewContent = $datasheetRow.children('.reviewContent');
         for (let i = 0; i < dataList.length; i++){
             let data = dataList[i];
-            if ($(idRow).text() == data.id){
+            if ($(idRow).text() == data.hw_id){
                 $submitStatus.text('已提交');
                 $attachmentTitle.attr('href','#');
                 $reviewStatus.text('已评阅');
                 $reviewContent.text(data.review_content);
+                break;
             }
         }
-    }
+    });
 }
 
 /**
