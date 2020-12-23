@@ -86,6 +86,10 @@ public class CommonUtil {
 
         public static final String REMOVE_USER_ID = "id";
 
+        // 查找用户
+
+        public static final String GET_USER_USER_ID = "id";
+
         // 分页获取班级
 
         public static final String GET_CLASS_BY_PAGE_PAGE_NO = "pageNo";
@@ -156,7 +160,7 @@ public class CommonUtil {
         public static final String MESSAGE_ILLEGAL_USERNAME = "非法用户名";
         public static final String MESSAGE_WRONG_USERNAME_OR_PASSWORD = "账户或密码错误";
         public static final String MESSAGE_FILE_UPLOAD_FAILED = "文件上传失败";
-//        public static final String MESSAGE_USER_NOT_LOGGED_IN = "用户未登录";
+        //        public static final String MESSAGE_USER_NOT_LOGGED_IN = "用户未登录";
         public static final String ADD_DATA_EMPTY_VALUE = "请输入所有的信息";
     }
 

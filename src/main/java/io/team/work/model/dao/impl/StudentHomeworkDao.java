@@ -92,6 +92,19 @@ public class StudentHomeworkDao extends AbstractBaseDao<StudentHomework, Integer
         return queryForList(StudentHomework.class, sql, teacherId, (pageNo - 1) * pageSize, pageSize);
     }
 
+    /**
+     * 通过学生id分页获取学生提交作业
+     *
+     * @param studentId 学生id
+     * @param pageNo    页码
+     * @param pageSize  每页条数
+     * @return 学生提交作业表
+     */
+    public List<StudentHomework> listByPageAndStudentId(Integer studentId, Integer pageNo, Integer pageSize) {
+        String sql = "SELECT `hw_id`, `s_id`, `title`, `describe`, `status`, `review_content`, `review_time`, `attachment_title`, `attachment_url` FROM `T_student_homework` WHERE  `s_id`=? LIMIT ?,?";
+        return queryForList(StudentHomework.class, sql, studentId, (pageNo - 1) * pageSize, pageSize);
+    }
+
     @Override
     public Long countAll() {
         String sql = "SELECT COUNT(1) FROM `T_student_homework`";
@@ -107,7 +120,6 @@ public class StudentHomeworkDao extends AbstractBaseDao<StudentHomework, Integer
         String sql = "SELECT COUNT(1) FROM `T_student_homework` inner join `t_homework` on `T_Student_homework`.`hw_id`=`t_homework`.`id` WHERE `teacher_id`=?";
         return queryForSingleValue(sql, teacherId);
     }
-
 
     private static class Instance {
         public static final StudentHomeworkDao INSTANCE = new StudentHomeworkDao();

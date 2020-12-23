@@ -34,6 +34,7 @@ import static io.team.work.util.DateTimeUtil.DATE_TIME_FORMAT;
 @WebServlet("/user.do")
 public class UserServlet extends AbstractBaseServlet {
     private static final UserService USER_SERVICE = UserService.getInstance();
+    private static final ClazzService CLAZZ_SERVICE = ClazzService.getInstance();
     private static final MessageService MESSAGE_SERVICE = MessageService.getInstance();
     private static final NoticeService NOTICE_SERVICE = NoticeService.getInstance();
     private static final HomeworkService HOMEWORK_SERVICE = HomeworkService.getInstance();
@@ -207,5 +208,27 @@ public class UserServlet extends AbstractBaseServlet {
         } else {
             response.getWriter().write(ResponseDataWrapper.of(false, "You wanna download what?"));
         }
+    }
+
+    /**
+     * 通过班级id获取班级名
+     * <p>
+     * 动作函数
+     */
+    public void getClassNameById(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().write(
+                ResponseDataWrapper.of(
+                        CLAZZ_SERVICE.getById(Integer.valueOf(request.getParameter(GET_CLASS_CLASS_ID))).getClassName()));
+    }
+
+    /**
+     * 通过用户id获取用户真实姓名
+     * <p>
+     * 动作函数
+     */
+    public void getUserNameById(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().write(
+                ResponseDataWrapper.of(
+                        USER_SERVICE.getById(Integer.valueOf(request.getParameter(GET_USER_USER_ID))).getName()));
     }
 }

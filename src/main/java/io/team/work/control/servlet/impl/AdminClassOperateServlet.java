@@ -77,17 +77,6 @@ public class AdminClassOperateServlet extends AbstractBaseServlet {
     }
 
     /**
-     * 通过id获取班级名
-     * <p>
-     * 动作函数
-     */
-    public void getClassNameById(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.getWriter().write(
-                ResponseDataWrapper.of(
-                        CLAZZ_SERVICE.getById(Integer.valueOf(request.getParameter(GET_CLASS_CLASS_ID))).getClassName()));
-    }
-
-    /**
      * 获取班级总数
      * <p>
      * 动作函数

@@ -73,6 +73,10 @@ public class StudentHomeworkService extends AbstractBaseService<StudentHomework,
         return studentHomeworkDao.listByPageAndTeacherId(teacherId, pageNo, pageSize);
     }
 
+    public List<StudentHomework> listByPageAndStudentId(Integer pageNo, Integer pageSize, Integer studentId) {
+        return studentHomeworkDao.listByPageAndStudentId(studentId, pageNo, pageSize);
+    }
+
     /**
      * 根据班级ID查找记录，并记录共有多少条
      *

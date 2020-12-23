@@ -36,7 +36,7 @@ function generateDatasheetByActiveId() {
     switch ($('.active').attr('id')) {
         case 'homeworkTab':
             generateDatasheet('../../student.do', 'getHomeworkListByPageAndStudentId', fillHomeworkSheet);
-            // generateDatasheet('../../student.do', 'getSubmittedHomeworkListByPageAndStudentId', insertHomeworkSheet);
+            generateDatasheet('../../student.do', 'getSubmittedHomeworkListByPageAndStudentId', insertHomeworkSheet);
             generatePageButtonGroup('../../student.do', 'getHomeworkCountByStudentId', 'getHomeworkListByPageAndStudentId', fillHomeworkSheet);
             return;
         case 'noticeTab':

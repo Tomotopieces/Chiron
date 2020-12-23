@@ -98,7 +98,7 @@ public class StudentServlet extends AbstractBaseServlet {
 
         response.getWriter().write(
                 ResponseDataWrapper.of(
-                        STUDENT_HOMEWORK_SERVICE.listByPageAndClassId(pageNo, pageSize, getStudentClassId(request))));
+                        STUDENT_HOMEWORK_SERVICE.listByPageAndStudentId(pageNo, pageSize, getStudentId(request))));
     }
 
     /**
